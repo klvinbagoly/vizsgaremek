@@ -72,3 +72,17 @@ Adminisztrációs rendszer legyen (sablon használható)
 | --- | --- | --- | --- |
 | Felhasználóként | szeretnék látni egy rövid leírást a műfajról | hogy megismerjem jobban az adott műfajt. | Műfaj leírása |
 | Adminként | szeretném szerkeszteni a műfaj leírását | hogy a felhasználó jobban képet kapjon a műfajról | Módosítás gomb (admin bejelentkezés esetén), amely átirányít a műfaj szerkesztése oldalra. |
+
+## _A projekt egyéb adatai_
+
+#### Prioritás: 
+> **magas**
+
+#### Megvalósítási idő: 
+> **34 nap**
+
+#### Továbbfejlesztési lehetőségek:
+
+- Rákeresés, szűrés lehetősége
+- Adatok rendezése mezők szerint
+- Regisztráció lehetősége
