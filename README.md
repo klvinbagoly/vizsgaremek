@@ -79,7 +79,7 @@ Adminisztrációs rendszer legyen (sablon használható)
 > **magas**
 
 #### Megvalósítási idő: 
-> **34 nap**
+> **34 nap** *(2022. május 24-2022. június 27.)*
 
 #### Továbbfejlesztési lehetőségek:
 
