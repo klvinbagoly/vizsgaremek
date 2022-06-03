@@ -11,6 +11,9 @@ import { HeaderComponent } from './common/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+
+
 import { HomeComponent } from './pages/home/home.component';
 import { AllArtistsComponent } from './pages/all-artists/all-artists.component';
 import { ArtistComponent } from './pages/artist/artist.component';
@@ -36,7 +39,8 @@ import { TagComponent } from './pages/tag/tag.component';
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
-    DataTableModule
+    DataTableModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

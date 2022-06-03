@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxDataTableComponent } from './ngx-data-table/ngx-data-table.component';
 
+import { MatTableModule } from '@angular/material/table';
+
+
 
 
 @NgModule({
@@ -9,7 +12,8 @@ import { NgxDataTableComponent } from './ngx-data-table/ngx-data-table.component
     NgxDataTableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatTableModule
   ],
   exports: [
     NgxDataTableComponent
