@@ -8,6 +8,7 @@ import { BaseServiceService } from './base-service.service';
 })
 export class ArtistService extends BaseServiceService<Artist> {
 
+  override endString: string = 'artist'
   constructor(
     protected override http: HttpClient
   ) {

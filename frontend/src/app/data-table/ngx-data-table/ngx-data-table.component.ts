@@ -14,6 +14,7 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   @Input() dataArray!: Observable<any[]>
   dataSource!: CdkTableDataSourceInput<T>
+  keys: string[] = []
 
   ngOnInit(): void {
     this.dataArray.subscribe({
@@ -25,6 +26,7 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   generateTable(data: any[]) {
     this.dataSource = data
+    this.keys = Object.keys(data[0])
   }
 
 }
