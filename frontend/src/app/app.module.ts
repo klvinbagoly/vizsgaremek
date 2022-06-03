@@ -1,3 +1,4 @@
+import { DataTableModule } from './data-table/data-table.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -34,7 +35,8 @@ import { TagComponent } from './pages/tag/tag.component';
     HttpClientModule,
     MatIconModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    DataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

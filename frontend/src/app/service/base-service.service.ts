@@ -12,7 +12,7 @@ export class BaseServiceService<T extends { id: number | string, [key: string]: 
   endString: string = ''
 
   constructor(
-    private http: HttpClient
+    protected http: HttpClient
   ) { }
 
   getAll(): Observable<T[]> {
