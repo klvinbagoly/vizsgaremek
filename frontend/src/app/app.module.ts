@@ -12,6 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 import { HomeComponent } from './pages/home/home.component';
@@ -19,6 +21,7 @@ import { AllArtistsComponent } from './pages/all-artists/all-artists.component';
 import { ArtistComponent } from './pages/artist/artist.component';
 import { AlbumComponent } from './pages/album/album.component';
 import { TagComponent } from './pages/tag/tag.component';
+import { CardComponent } from './common/card/card.component';
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import { TagComponent } from './pages/tag/tag.component';
     AllArtistsComponent,
     ArtistComponent,
     AlbumComponent,
-    TagComponent
+    TagComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { TagComponent } from './pages/tag/tag.component';
     MatToolbarModule,
     MatButtonModule,
     DataTableModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
