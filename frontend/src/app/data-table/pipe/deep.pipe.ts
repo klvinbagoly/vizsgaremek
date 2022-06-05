@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DeepPipe implements PipeTransform {
 
   transform(value: any): string {
+    if (typeof value === 'undefined') return ''
     if (typeof value !== 'object') return value.toString()
     const values = Object.values(value)
     values.forEach((value, index) => {
