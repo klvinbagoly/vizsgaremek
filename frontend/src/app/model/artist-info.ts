@@ -12,7 +12,7 @@ export class ArtistInfo {
   ontour: string = '';
   stats: Stats = new Stats();
   similar: Similar = new Similar();
-  ArtistTags: ArtistTags = new ArtistTags();
+  tags: ArtistTags = new ArtistTags();
   bio: Bio = new Bio();
 }
 

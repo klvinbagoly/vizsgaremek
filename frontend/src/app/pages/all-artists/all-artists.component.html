@@ -1,1 +1,3 @@
-<ngx-data-table [dataArray]="artists$"></ngx-data-table>
+<div *ngIf="artists$ | async as list" >
+  <ngx-data-table [dataArray]="list" title="artist"></ngx-data-table>
+</div>

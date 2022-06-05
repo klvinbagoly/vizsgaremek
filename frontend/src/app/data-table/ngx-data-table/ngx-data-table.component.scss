@@ -1,6 +1,6 @@
 @use '../../../assets/scss/_colors' as *;
 
-td[ng-reflect-router-link^="/artist"] {
+td[ng-reflect-router-link^="/artist"], td[ng-reflect-router-link^="/album"] {
   cursor: pointer;
   font-weight: bold;
 

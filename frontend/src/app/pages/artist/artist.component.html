@@ -1,3 +1,36 @@
-<p>artist works!</p>
-{{ artist | json }}
-{{ topAlbums | json }}
+<div class="container" *ngIf="artist; else notFound">
+  <h1> <small class="text-muted">Artist name:</small>
+    {{ artist.name }}
+    <sub class="small">
+      <a class="outer-link" target="_blank" [href]="artist.url">(link)</a>
+    </sub>
+  </h1>
+  <h2 class="inline">Tags associated with this artist:</h2>
+  <ul class="inline">
+    <li class="inline" *ngFor="let tag of artist.tags.tag">
+      <a class="btn btn-link" [routerLink]="'/tag/' + tag.name">{{ tag.name }}</a>
+      <sub>
+        <a class="outer-link" target="_blank" [href]="tag.url">(link)</a>
+      </sub>
+    </li>
+  </ul>
+  <h2>Similar artists:</h2>
+  <ul class="inline">
+    <li class="inline" *ngFor="let artist of artist.similar.artist">
+      <a [routerLink]="'/artist/' + artist.name">{{ artist.name }}</a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #notFound>
+  <h1>Artist info not found in database.</h1>
+</ng-template>
+
+<div *ngIf="topAlbums; else noAlbums">
+  <h2 class="h1 table-caption" *ngIf="artist">Top albums of {{ artist.name }}</h2>
+  <ngx-data-table [dataArray]="topAlbums" title="album"></ngx-data-table>
+</div>
+
+<ng-template #noAlbums>
+  <h1>Sorry, there are no albums with this artist in our database.</h1>
+</ng-template>

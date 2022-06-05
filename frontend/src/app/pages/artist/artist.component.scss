@@ -1,0 +1,20 @@
+.inline {
+  @media screen and (min-width: 500px){
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+
+.outer-link {
+  vertical-align: sub;
+  text-decoration: none;
+}
+
+sub.small {
+  font-size: 0.5em;
+}
+
+.table-caption {
+  margin: 2em;
+  text-align: center;
+}

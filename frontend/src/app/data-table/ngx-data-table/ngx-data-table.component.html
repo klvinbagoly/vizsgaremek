@@ -2,9 +2,9 @@
   <ng-container *ngFor="let key of keys" [matColumnDef]="key">
     <th mat-header-cell *matHeaderCellDef> {{key}} </th>
     <td mat-cell *matCellDef="let item" [title]="item[key] | deep" 
-    [routerLink]="key === 'name' ? '/artist/' + item[key] : '/all-artists'">
+    [routerLink]="key === 'name' ? '/' + title + '/' + item[key] : './' ">
        {{item[key] | deep | textoverflow:60}} 
-    </td>
+  </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="keys"></tr>
