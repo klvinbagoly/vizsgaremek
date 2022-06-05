@@ -13,7 +13,7 @@ export class AlbumComponent implements OnInit {
 
   album!: AlbumInfo | undefined
 
-  columns: string[] = ['rank', 'name', 'duration']
+  columns: string[] = ['rank', 'name', 'duration', 'artist']
   tracks: AlbumTrack[] | undefined
 
   constructor(
