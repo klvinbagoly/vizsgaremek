@@ -3,6 +3,7 @@ import { Tag } from "./artist-tag";
 import { Image } from "./image";
 
 export class ArtistInfo {
+  id: number = 0;
   name: string = '';
   mbid: string = '';
   url: string = '';

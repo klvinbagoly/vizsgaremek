@@ -1,6 +1,7 @@
 import { Image } from "./image";
 
 export class Album {
+  id: number = 0;
   name: string = '';
   playcount: number = 0;
   mbid: string = '';
