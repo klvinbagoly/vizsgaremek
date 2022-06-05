@@ -1,0 +1,17 @@
+@use '../../../assets/scss/colors' as *;
+
+.home__card {
+  height: 100%;
+  margin: 20px 0;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 10px $table-border-color;
+  }
+
+  & .footer {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+  }
+}

@@ -1,17 +1,29 @@
 <p>
-  <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>
-      <a routerLink="/">Home Page</a>
-    </span>
-    <span>
-      <a routerLink="/all-artists">All artists</a>
-    </span>
+  <mat-toolbar class="justify-content-between" color="primary">
+    <div>
+      <button routerLink="/" mat-icon-button class="example-icon" aria-label="Home page">
+        <mat-icon>home</mat-icon>
+      </button>
+      <span>
+        <a mat-button class="toolbar-link" routerLink="/">Home Page</a>
+      </span>
+      <button routerLink="/all-artists" mat-icon-button class="example-icon" aria-label="All artists">
+        <mat-icon>
+            queue_music
+        </mat-icon>
+      </button>
+      <span>
+        <a mat-button class="toolbar-link" routerLink="/all-artists">All artists</a>
+      </span>
+    </div>
     
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    <div>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>person</mat-icon>
+      </button>
+      <span>
+        <a mat-button class="toolbar-link" routerLink="/all-artists">Login</a>
+      </span>
+    </div>
   </mat-toolbar>
 </p>

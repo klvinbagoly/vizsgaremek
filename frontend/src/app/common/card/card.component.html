@@ -1,9 +1,16 @@
-<mat-card>
+<mat-card class="home__card" [routerLink]="['/', 'artist', artist.name]">
   <mat-card-title>{{ artist.name }}</mat-card-title>
-  <mat-card-subtitle>Playcount: {{ artist.playcount }}</mat-card-subtitle>
-  <mat-card-subtitle><a [href]="artist.url" target="_blank">{{ artist.url }}</a></mat-card-subtitle>
-  <mat-card-actions align="end">
-    <button mat-button>Like</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
+  <mat-card-subtitle>Playcount: {{ artist.stats.playcount | number }}</mat-card-subtitle>
+  <mat-card-subtitle>Listeners: {{ artist.stats.listeners | number }}</mat-card-subtitle>
+  <mat-card-content>
+    <span *ngIf="artist.tags.tag" class="inline mb-3">
+      <span *ngFor="let tag of artist.tags.tag | slice:0:3" class="inline mat-body-strong">
+        {{ tag.name }}
+      </span>
+    </span>
+    <p class="long-info">{{ artist.bio.summary | textoverflow:100 }}</p>
+  </mat-card-content>
+  <mat-card-footer class="footer" align="end">
+    <a [href]="artist.url" target="_blank">See more...</a>
+  </mat-card-footer>
 </mat-card>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Artist } from 'src/app/model/artist';
-import { ArtistService } from 'src/app/service/artist.service';
+import { ArtistInfo } from 'src/app/model/artist-info';
+import { ArtistInfoService } from 'src/app/service/artist-info.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,10 @@ import { ArtistService } from 'src/app/service/artist.service';
 })
 export class HomeComponent implements OnInit {
 
-  artists$: Observable<Artist[]> = this.artistService.getAll()
+  artists$: Observable<ArtistInfo[]> = this.artistService.getAll()
 
   constructor(
-    private artistService: ArtistService
+    private artistService: ArtistInfoService
   ) { }
 
   ngOnInit(): void {
