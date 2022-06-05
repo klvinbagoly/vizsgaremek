@@ -1,5 +1,6 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { Component, Input, OnInit } from '@angular/core';
+import { AlbumInfoService } from 'src/app/service/album-info.service';
 
 @Component({
   selector: 'ngx-data-table',
@@ -8,12 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NgxDataTableComponent<T> implements OnInit {
 
-  constructor() { }
+  constructor(
+    private albumService: AlbumInfoService
+  ) { }
 
   @Input() title!: string
   @Input() dataArray!: any[]
   dataSource!: CdkTableDataSourceInput<T>
   keys: string[] = []
+
+  availableAlbums: string[] = []
 
   ngOnInit(): void {
     this.generateTable(this.dataArray)
@@ -21,6 +26,11 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   ngOnChanges(): void {
     this.generateTable(this.dataArray)
+    if (this.title === 'album') {
+      this.albumService.getAll().subscribe(albums => {
+        this.availableAlbums = albums.map(album => album.name)
+      })
+    }
   }
 
   generateTable(data: any[]) {
