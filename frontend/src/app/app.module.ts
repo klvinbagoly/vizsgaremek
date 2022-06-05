@@ -26,7 +26,8 @@ import { TextoverflowPipe } from './pipe/textoverflow.pipe';
 import { DeepPipe } from './pipe/deep.pipe';
 import { registerLocaleData } from '@angular/common';
 import localeHU from '@angular/common/locales/hu';
-import { DurationPipe } from './pipe/duration.pipe'
+import { DurationPipe } from './pipe/duration.pipe';
+import { SortPipe } from './pipe/sort.pipe'
 registerLocaleData(localeHU)
 
 
@@ -42,7 +43,8 @@ registerLocaleData(localeHU)
     CardComponent,
     TextoverflowPipe,
     DeepPipe,
-    DurationPipe
+    DurationPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
