@@ -1,0 +1,22 @@
+@use '../../../assets/scss/_colors' as *;
+
+td[ng-reflect-router-link^="/artist"] {
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $name-hover-color;
+  }
+}
+
+td.mat-cell.cdk-cell {
+  padding: 10px;
+  border: 1px solid $table-border-color;
+}
+
+th.mat-header-cell.cdk-header-cell {
+  text-align: center;
+  font-size: 1rem;
+  text-transform: capitalize;
+  border-right: 1px solid $table-border-color;
+}

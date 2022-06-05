@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DeepPipe } from './pipe/deep.pipe';
 import { TextoverflowPipe } from './pipe/textoverflow.pipe';
 import { LinkPipe } from './pipe/link.pipe';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -20,6 +21,7 @@ import { LinkPipe } from './pipe/link.pipe';
   imports: [
     CommonModule,
     MatTableModule,
+    RouterModule
   ],
   exports: [
     NgxDataTableComponent

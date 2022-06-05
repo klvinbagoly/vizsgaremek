@@ -12,6 +12,8 @@ export class AllArtistsComponent implements OnInit {
 
   artists$: Observable<Artist[]> = this.artistService.getAll()
 
+  admin: boolean = false
+
   constructor(
     private artistService: ArtistService
   ) { }
