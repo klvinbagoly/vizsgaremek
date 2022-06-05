@@ -20,6 +20,13 @@
       <a [routerLink]="'/artist/' + artist.name">{{ artist.name }}</a>
     </li>
   </ul>
+  
+  <details>
+    <summary class="h6">Bio
+      <small class="text-muted">(Published: {{ artist.bio.published }})</small>
+    </summary>
+    <p class="long-info" [innerHTML]="artist.bio.content"></p>
+  </details>
 </div>
 
 <ng-template #notFound>

@@ -1,5 +1,5 @@
 import { DataTableModule } from './data-table/data-table.module';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 
@@ -24,6 +24,10 @@ import { TagComponent } from './pages/tag/tag.component';
 import { CardComponent } from './common/card/card.component';
 import { TextoverflowPipe } from './pipe/textoverflow.pipe';
 import { DeepPipe } from './pipe/deep.pipe';
+import { registerLocaleData } from '@angular/common';
+import localeHU from '@angular/common/locales/hu';
+import { DurationPipe } from './pipe/duration.pipe'
+registerLocaleData(localeHU)
 
 
 @NgModule({
@@ -37,7 +41,8 @@ import { DeepPipe } from './pipe/deep.pipe';
     TagComponent,
     CardComponent,
     TextoverflowPipe,
-    DeepPipe
+    DeepPipe,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,12 @@ import { DeepPipe } from './pipe/deep.pipe';
     MatTableModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'hu-HU'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

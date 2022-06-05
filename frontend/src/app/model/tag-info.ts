@@ -7,6 +7,7 @@ export class TagInfo {
 }
 
 export class Wiki {
+  published?: string = '';
   summary: string = '';
   content: string = '';
 }

@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'tag/:id',
     component: TagComponent
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

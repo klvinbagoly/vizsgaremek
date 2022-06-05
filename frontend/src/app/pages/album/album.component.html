@@ -1,1 +1,80 @@
-<p>album works!</p>
+<div *ngIf="album; else noAlbum" class="container">
+
+  <h1>
+    <small class="text-muted">Album name:</small>
+    {{ album.name }}
+    <sub class="small">
+      <a class="outer-link" target="_blank" [href]="album.url">(link)</a>
+    </sub>
+  </h1>
+  <h2>
+    <small class="text-muted">Artist:</small>
+    <a class="artist-name" [routerLink]="['/', 'artist', album.artist]">{{ album.artist }}</a>
+  </h2>
+  <h2>
+    <small class="text-muted">Listeners:</small>
+    {{ album.listeners | number }}
+  </h2>
+  <h2>
+    <small class="text-muted">Playcount:</small>
+    {{ album.playcount | number }}
+  </h2>
+
+  <h2 class="inline">
+    Tags associated with this album:
+  </h2>
+  <ul class="inline">
+    <li class="inline" *ngFor="let tag of album.tags.tag">
+      <a class="btn btn-link" [routerLink]="'/tag/' + tag.name">{{ tag.name }}</a>
+      <sub>
+        <a class="outer-link" target="_blank" [href]="tag.url">(link)</a>
+      </sub>
+    </li>
+  </ul>
+
+  <div *ngIf="album.wiki">
+    <details>
+      <summary class="h6">Album info
+        <small class="text-muted">(Published: {{ album.wiki.published }})</small>
+      </summary>
+      <p class="long-info" [innerHTML]="album.wiki.content"></p>
+    </details>
+  </div>
+
+  <div *ngIf="tracks">
+    <h2 class="table-caption">Tracklist:</h2>
+  
+    <table mat-table [dataSource]="tracks">
+      <ng-container matColumnDef="rank">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let track">{{ track['@attr'].rank }}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let track">{{ track.name }}
+          <sub class="small">
+            <a target="_blank" [href]="track.url">(link)</a>
+          </sub>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef>Duration</th>
+        <td mat-cell *matCellDef="let track">{{ track.duration | duration }}</td>
+      </ng-container>
+      <ng-container matColumnDef="artist">
+        <th mat-header-cell *matHeaderCellDef>Artist</th>
+        <td mat-cell *matCellDef="let track">{{ track.artist.name }}
+          <sub class="small">
+            <a target="_blank" [href]="track.artist.url">(link)</a>
+          </sub>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+  </div>
+</div>
+<ng-template #noAlbum>
+  <h1>No album info to show.</h1>
+</ng-template>
