@@ -34,7 +34,6 @@ export class AlbumComponent implements OnInit {
         this.tracks = [this.album?.tracks.track]
       }
       else this.tracks = this.album?.tracks.track
-      console.log(this.album)
     })
   }
 

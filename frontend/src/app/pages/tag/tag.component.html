@@ -1,1 +1,20 @@
-<p>tag works!</p>
+<div *ngIf="tag; else noTag" class="container">
+  <h1>
+    <small class="text-muted">Tag:</small>
+    {{ tag.name | titlecase }}
+  </h1>
+  <h2>
+    <small class="text-muted">Total:</small>
+    {{ tag.total | number }}
+  </h2>
+  <h2>
+    <small class="text-muted">Reach:</small>
+    {{ tag.reach | number }}
+  </h2>
+  <h2>Summary:</h2>
+  <p class="long-info" [innerHTML]="tag.wiki.content"></p>
+
+</div>
+<ng-template #noTag>
+  <h1>No tag info to show.</h1>
+</ng-template>

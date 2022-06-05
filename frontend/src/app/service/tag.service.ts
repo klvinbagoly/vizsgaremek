@@ -8,7 +8,7 @@ import { BaseServiceService } from './base-service.service';
 })
 export class TagService extends BaseServiceService<TagInfo> {
 
-  override endString: string = 'tag'
+  override endString: string = 'tags'
   constructor(
     protected override http: HttpClient
   ) {
