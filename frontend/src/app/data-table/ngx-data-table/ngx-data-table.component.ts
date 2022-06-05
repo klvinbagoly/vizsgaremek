@@ -1,7 +1,5 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-data-table',
@@ -18,6 +16,10 @@ export class NgxDataTableComponent<T> implements OnInit {
   keys: string[] = []
 
   ngOnInit(): void {
+    this.generateTable(this.dataArray)
+  }
+
+  ngOnChanges(): void {
     this.generateTable(this.dataArray)
   }
 
