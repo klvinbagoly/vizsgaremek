@@ -22,6 +22,8 @@ import { ArtistComponent } from './pages/artist/artist.component';
 import { AlbumComponent } from './pages/album/album.component';
 import { TagComponent } from './pages/tag/tag.component';
 import { CardComponent } from './common/card/card.component';
+import { TextoverflowPipe } from './pipe/textoverflow.pipe';
+import { DeepPipe } from './pipe/deep.pipe';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { CardComponent } from './common/card/card.component';
     ArtistComponent,
     AlbumComponent,
     TagComponent,
-    CardComponent
+    CardComponent,
+    TextoverflowPipe,
+    DeepPipe
   ],
   imports: [
     BrowserModule,

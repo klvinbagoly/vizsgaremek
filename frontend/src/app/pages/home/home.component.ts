@@ -11,6 +11,7 @@ import { ArtistService } from 'src/app/service/artist.service';
 export class HomeComponent implements OnInit {
 
   artists$: Observable<Artist[]> = this.artistService.getAll()
+
   constructor(
     private artistService: ArtistService
   ) { }
