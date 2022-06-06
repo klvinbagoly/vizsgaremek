@@ -4,6 +4,12 @@
     <sub class="small">
       <a class="outer-link" target="_blank" [href]="artist.url">(link)</a>
     </sub>
+    <div *ngIf="admin" class="p-3">
+      <button mat-raised-button color="primary">
+        <mat-icon>edit</mat-icon>
+        Edit artist info
+      </button>
+    </div>
   </h1>
   <h2 class="inline">Tags associated with this artist:</h2>
   <ul class="inline">
@@ -13,6 +19,11 @@
         <a class="outer-link" target="_blank" [href]="tag.url">(link)</a>
       </sub>
     </li>
+    <li class="inline" *ngIf="admin">
+      <button mat-raised-button color="accent" title="add tag">
+        <mat-icon>add</mat-icon>
+      </button>
+   </li>
   </ul>
   <h2>Similar artists:</h2>
   <ul class="inline">
@@ -31,13 +42,31 @@
 
 <ng-template #notFound>
   <h1>Artist info not found in database.</h1>
+  <div *ngIf="admin" class="p-3">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon>
+      Add artist info
+    </button>
+  </div>
 </ng-template>
 
 <div *ngIf="topAlbums; else noAlbums">
+  <div *ngIf="admin" class="p-3">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon>
+      Add new album
+    </button>
+  </div>
   <h2 class="h1 table-caption" *ngIf="artist">Top albums of {{ artist.name }}</h2>
   <ngx-data-table [dataArray]="topAlbums" title="album"></ngx-data-table>
 </div>
 
 <ng-template #noAlbums>
   <h1>Sorry, there are no albums with this artist in our database.</h1>
+  <div *ngIf="admin" class="p-3">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon>
+      Add album for this artist
+    </button>
+  </div>
 </ng-template>

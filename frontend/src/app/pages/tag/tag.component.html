@@ -1,4 +1,10 @@
 <div *ngIf="tag; else noTag" class="container">
+  <div *ngIf="admin" class="p-3">
+    <button mat-raised-button color="primary">
+      <mat-icon>edit</mat-icon>
+      Edit tag
+    </button>
+  </div>
   <h1>
     <small class="text-muted">Tag:</small>
     {{ tag.name | titlecase }}
@@ -17,4 +23,10 @@
 </div>
 <ng-template #noTag>
   <h1>No tag info to show.</h1>
+  <div *ngIf="admin" class="p-3">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon>
+      Add tag info
+    </button>
+  </div>
 </ng-template>

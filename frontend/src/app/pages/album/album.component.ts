@@ -11,6 +11,7 @@ import { AlbumInfoService } from 'src/app/service/album-info.service';
 })
 export class AlbumComponent implements OnInit {
 
+  admin: boolean = true
   album!: AlbumInfo | undefined
 
   columns: string[] = ['rank', 'name', 'duration', 'artist']
@@ -23,6 +24,7 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => this.findAlbum(params['id']))
+    if (this.admin) this.columns.push('actions')
   }
 
   findAlbum(name: string) {

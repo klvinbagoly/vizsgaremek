@@ -12,6 +12,8 @@ import { ArtistInfoService } from 'src/app/service/artist-info.service';
 })
 export class ArtistComponent implements OnInit {
 
+  admin: boolean = true
+
   artist!: ArtistInfo | undefined
   topAlbums!: Album[] | undefined
 

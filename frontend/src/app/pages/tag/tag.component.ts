@@ -10,7 +10,9 @@ import { TagService } from 'src/app/service/tag.service';
 })
 export class TagComponent implements OnInit {
 
+  admin: boolean = true
   tag: TagInfo | undefined
+
   constructor(
     private tagService: TagService,
     private activeRoute: ActivatedRoute

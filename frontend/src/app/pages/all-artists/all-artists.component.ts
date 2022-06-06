@@ -12,7 +12,7 @@ export class AllArtistsComponent implements OnInit {
 
   artists$: Observable<Artist[]> = this.artistService.getAll()
 
-  admin: boolean = false
+  admin: boolean = true
 
   constructor(
     private artistService: ArtistService

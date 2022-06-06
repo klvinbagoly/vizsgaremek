@@ -9,6 +9,8 @@ import { AlbumInfoService } from 'src/app/service/album-info.service';
 })
 export class NgxDataTableComponent<T> implements OnInit {
 
+  admin: boolean = true;
+
   constructor(
     private albumService: AlbumInfoService
   ) { }
@@ -17,6 +19,7 @@ export class NgxDataTableComponent<T> implements OnInit {
   @Input() dataArray!: any[]
   dataSource!: CdkTableDataSourceInput<T>
   keys: string[] = []
+  columns: string[] = []
 
   availableAlbums: string[] = []
 
@@ -36,6 +39,8 @@ export class NgxDataTableComponent<T> implements OnInit {
   generateTable(data: any[]) {
     this.dataSource = data
     this.keys = Object.keys(data[0])
+    this.columns = [...this.keys]
+    if (this.admin) this.columns.push('actions')
   }
 
 }

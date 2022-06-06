@@ -1,3 +1,9 @@
+<div *ngIf="admin" class="p-3">
+  <button mat-raised-button color="accent">
+    <mat-icon>add</mat-icon>
+    Add new artist
+  </button>
+</div>
 <h1 class="table-caption">All artists</h1>
 <div *ngIf="artists$ | async as list" >
   <ngx-data-table [dataArray]="list" title="artist"></ngx-data-table>
