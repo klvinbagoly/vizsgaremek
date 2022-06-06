@@ -4,7 +4,7 @@ import { ArtistEditorComponent } from './form/artist-editor/artist-editor.compon
 import { AlbumEditorComponent } from './form/album-editor/album-editor.component';
 import { TagEditorComponent } from './form/tag-editor/tag-editor.component';
 import { FormInputComponent } from './form/form-input/form-input.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +18,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
   ],
   exports: [
-    ReactiveFormsModule,
-    FormInputComponent,
-    ArtistEditorComponent
+    ArtistEditorComponent,
+    AlbumEditorComponent,
+    TagEditorComponent,
   ]
 })
 export class FormDialogModule { }

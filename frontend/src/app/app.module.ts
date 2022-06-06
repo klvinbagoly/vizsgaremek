@@ -3,6 +3,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormDialogModule } from './form-dialog/form-dialog.module';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +51,6 @@ registerLocaleData(localeHU)
     DeepPipe,
     DurationPipe,
     SortPipe,
-    FormInputComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,8 @@ registerLocaleData(localeHU)
     MatCardModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FormDialogModule
   ],
   providers: [
     {
