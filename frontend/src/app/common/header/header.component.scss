@@ -1,10 +1,11 @@
 @use '../../../assets/scss/colors' as *;
 
-mat-toolbar {
+mat-toolbar.header {
   box-shadow: 0 0 10px #bbb;
   position: fixed;
   top: 0;
   z-index: 1000;
+  width: 100vw;
 
   & a.toolbar-link {
     color: #fff;
