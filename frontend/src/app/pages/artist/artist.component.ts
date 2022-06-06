@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Album } from 'src/app/model/album';
 import { ArtistInfo } from 'src/app/model/artist-info';
 import { AlbumService } from 'src/app/service/album.service';
@@ -20,7 +22,8 @@ export class ArtistComponent implements OnInit {
   constructor(
     private artistInfoService: ArtistInfoService,
     private albumService: AlbumService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +37,12 @@ export class ArtistComponent implements OnInit {
     this.albumService.getAll().subscribe(data => {
       const albums = data.find(album => album['@attr'].artist === name)
       this.topAlbums = albums?.album
+    })
+  }
+
+  onEdit(data: ArtistInfo = new ArtistInfo()) {
+    const dialogRef = this.dialog.open(ArtistEditorComponent, {
+      data: data
     })
   }
 

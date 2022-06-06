@@ -1,5 +1,9 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
+import { Album } from 'src/app/model/album';
+import { Artist } from 'src/app/model/artist';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
 
 @Component({
@@ -12,7 +16,8 @@ export class NgxDataTableComponent<T> implements OnInit {
   admin: boolean = true;
 
   constructor(
-    private albumService: AlbumInfoService
+    private albumService: AlbumInfoService,
+    public dialog: MatDialog
   ) { }
 
   @Input() title!: string
@@ -41,6 +46,24 @@ export class NgxDataTableComponent<T> implements OnInit {
     this.keys = Object.keys(data[0])
     this.columns = [...this.keys]
     if (this.admin) this.columns.push('actions')
+  }
+
+  onEdit(data: any) {
+    if (this.title === 'artist') {
+      this.editArtist(data)
+    } else {
+      this.editAlbum(data)
+    }
+  }
+
+  editArtist(artist: Artist) {
+    const dialogRef = this.dialog.open(ArtistEditorComponent, {
+      data: new Artist(artist)
+    })
+  }
+
+  editAlbum(album: Album) {
+
   }
 
 }

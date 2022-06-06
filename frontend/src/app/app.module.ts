@@ -33,7 +33,6 @@ import { JsonPipe, registerLocaleData } from '@angular/common';
 import localeHU from '@angular/common/locales/hu';
 import { DurationPipe } from './pipe/duration.pipe';
 import { SortPipe } from './pipe/sort.pipe';
-import { FormInputComponent } from './form-dialog/form/form-input/form-input.component';
 registerLocaleData(localeHU)
 
 
