@@ -1,5 +1,4 @@
-<!-- <div class="form-group" [formGroup]="form">
-
+<div class="form-group" [formGroup]="form">
   <label [attr.for]="question.key">{{ question.label }}</label>
   <div [ngSwitch]="question.controlType">
     <input class="form-control" *ngSwitchCase="'input'" [type]="question['type']" [id]="question.key"
@@ -15,4 +14,4 @@
      rows="question['rows']">{{ question.value }}</textarea>
   </div>
   <div class="error-message" *ngIf="!IsValid">{{question.label | titlecase}} is required.</div>
-</div> -->
+</div>

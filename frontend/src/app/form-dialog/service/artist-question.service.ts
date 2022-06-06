@@ -35,16 +35,16 @@ export class ArtistQuestionService {
     }
 
     const images = artist?.image || [{ url: '', size: '' }]
-    const imageGroup: Array<{ url: InputQuestion, size: SelectQuestion }> =
-      images.map(image => ({
-        url: {
+    const imageGroup: Array<Array<Question<any>>> =
+      images.map(image => ([
+        {
           value: image.url || '',
           key: 'url',
           label: 'Image url',
           type: 'text',
           controlType: 'input'
         },
-        size: {
+        {
           value: image.size || '',
           key: 'size',
           label: 'Size',
@@ -57,11 +57,14 @@ export class ArtistQuestionService {
             { key: 'mega', value: 'mega' },
           ]
         }
-      }))
+      ]))
 
-    const streamable: InputQuestion = {
-      controlType: 'input',
-      type: 'checkbox',
+    const streamable: SelectQuestion = {
+      controlType: 'select',
+      options: [
+        { key: '0', value: '0' },
+        { key: '1', value: '1' },
+      ],
       value: artist?.streamable || '',
       key: 'streamable',
       label: 'Streamable'

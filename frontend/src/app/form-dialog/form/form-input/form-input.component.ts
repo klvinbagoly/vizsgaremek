@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Question } from '../../model/question';
 
 @Component({
@@ -10,7 +10,7 @@ import { Question } from '../../model/question';
 export class FormInputComponent implements OnInit {
 
   @Input() question!: Question<any>
-  @Input() form!: FormControl
+  @Input() form!: FormGroup
   constructor() { }
 
   ngOnInit(): void {

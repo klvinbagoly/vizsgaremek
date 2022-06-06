@@ -1,7 +1,13 @@
-<form >
-  question
+<form [formGroup]="form">
   <div *ngFor="let question of questions">
-    question
-    <app-form-input *ngIf="question.key !== 'image'"></app-form-input>
+    <app-form-input *ngIf="question.key !== 'image'" [form]="form" [question]="question"></app-form-input>
+    <fieldset *ngIf="question.key === 'image'">
+      <legend>Images</legend>
+      <div class="input-group" *ngFor="let row of question.value; let i = index">
+        <div *ngFor="let question of row">
+          <app-form-input *ngIf="formImageArray[i]"   [form]="formImageArray[i]" [question]="question"></app-form-input>
+        
+        </div></div>
+    </fieldset>
   </div>
 </form>
