@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { TagEditorComponent } from 'src/app/form-dialog/form/tag-editor/tag-editor.component';
 import { TagInfo } from 'src/app/model/tag-info';
 import { TagService } from 'src/app/service/tag.service';
 
@@ -15,7 +17,8 @@ export class TagComponent implements OnInit {
 
   constructor(
     private tagService: TagService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,14 @@ export class TagComponent implements OnInit {
   findTag(name: string): void {
     this.tagService.getAll().subscribe(tags => {
       this.tag = tags.find(tag => tag.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+    })
+  }
+
+  editTag() {
+    const dialogRef = this.dialog.open(TagEditorComponent, {
+      data: {
+        tag: this.tag || new TagInfo()
+      }
     })
   }
 

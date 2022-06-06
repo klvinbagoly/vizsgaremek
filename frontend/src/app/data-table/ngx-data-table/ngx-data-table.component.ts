@@ -1,6 +1,7 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/album-editor.component';
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Album } from 'src/app/model/album';
 import { Artist } from 'src/app/model/artist';
@@ -63,7 +64,9 @@ export class NgxDataTableComponent<T> implements OnInit {
   }
 
   editAlbum(album: Album) {
-
+    const dialogRef = this.dialog.open(AlbumEditorComponent, {
+      data: new Album(album)
+    })
   }
 
 }

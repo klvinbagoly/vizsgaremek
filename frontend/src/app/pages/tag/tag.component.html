@@ -1,6 +1,6 @@
 <div *ngIf="tag; else noTag" class="container">
   <div *ngIf="admin" class="p-3">
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="editTag()">
       <mat-icon>edit</mat-icon>
       Edit tag
     </button>
@@ -24,7 +24,7 @@
 <ng-template #noTag>
   <h1>No tag info to show.</h1>
   <div *ngIf="admin" class="p-3">
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="editTag()">
       <mat-icon>add</mat-icon>
       Add tag info
     </button>

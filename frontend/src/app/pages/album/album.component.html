@@ -7,7 +7,7 @@
       <a class="outer-link" target="_blank" [href]="album.url">(link)</a>
     </sub>
     <div *ngIf="admin" class="p-3">
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" (click)="onEdit(album)">
         <mat-icon>edit</mat-icon>
         Edit album info
       </button>
@@ -37,7 +37,7 @@
       </sub>
     </li>
     <li class="inline" *ngIf="admin">
-       <button mat-raised-button color="accent" title="add tag">
+       <button mat-raised-button color="accent" title="add tag" (click)="addTag()">
          <mat-icon>add</mat-icon>
        </button>
     </li>
@@ -109,7 +109,7 @@
 <ng-template #noAlbum>
   <h1>No album info to show.</h1>
   <div *ngIf="admin" class="p-3">
-    <button mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="onEdit()">
       <mat-icon>add</mat-icon>
       Add album info
     </button>

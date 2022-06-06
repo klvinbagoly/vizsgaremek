@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/album-editor.component';
+import { TagEditorComponent } from 'src/app/form-dialog/form/tag-editor/tag-editor.component';
 import { AlbumInfo } from 'src/app/model/album-info';
 import { AlbumTrack } from 'src/app/model/album-track';
+import { TagInfo } from 'src/app/model/tag-info';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
 
 @Component({
@@ -19,7 +23,8 @@ export class AlbumComponent implements OnInit {
 
   constructor(
     private albumInfoService: AlbumInfoService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +41,21 @@ export class AlbumComponent implements OnInit {
         this.tracks = [this.album?.tracks.track]
       }
       else this.tracks = this.album?.tracks.track
+    })
+  }
+
+  onEdit(album: AlbumInfo = new AlbumInfo()) {
+    const dialogRef = this.dialog.open(AlbumEditorComponent, {
+      data: album
+    })
+  }
+
+  addTag() {
+    const dialogRef = this.dialog.open(TagEditorComponent, {
+      data: {
+        album: this.album,
+        tag: new TagInfo()
+      }
     })
   }
 
