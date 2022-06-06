@@ -1,7 +1,9 @@
 import { DataTableModule } from './data-table/data-table.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 
@@ -24,10 +28,11 @@ import { TagComponent } from './pages/tag/tag.component';
 import { CardComponent } from './common/card/card.component';
 import { TextoverflowPipe } from './pipe/textoverflow.pipe';
 import { DeepPipe } from './pipe/deep.pipe';
-import { registerLocaleData } from '@angular/common';
+import { JsonPipe, registerLocaleData } from '@angular/common';
 import localeHU from '@angular/common/locales/hu';
 import { DurationPipe } from './pipe/duration.pipe';
-import { SortPipe } from './pipe/sort.pipe'
+import { SortPipe } from './pipe/sort.pipe';
+import { FormInputComponent } from './form-dialog/form/form-input/form-input.component';
 registerLocaleData(localeHU)
 
 
@@ -44,7 +49,8 @@ registerLocaleData(localeHU)
     TextoverflowPipe,
     DeepPipe,
     DurationPipe,
-    SortPipe
+    SortPipe,
+    FormInputComponent
   ],
   imports: [
     BrowserModule,
@@ -56,13 +62,17 @@ registerLocaleData(localeHU)
     MatButtonModule,
     DataTableModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'hu-HU'
-    }
+    },
+    { provide: JsonPipe }
   ],
   bootstrap: [AppComponent]
 })

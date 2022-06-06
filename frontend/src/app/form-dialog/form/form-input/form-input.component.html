@@ -1,0 +1,18 @@
+<!-- <div class="form-group" [formGroup]="form">
+
+  <label [attr.for]="question.key">{{ question.label }}</label>
+  <div [ngSwitch]="question.controlType">
+    <input class="form-control" *ngSwitchCase="'input'" [type]="question['type']" [id]="question.key"
+      [formControlName]="question.key" [value]="question.value">
+    <select class="form-control" *ngSwitchCase="'select'" [id]="question.key" [formControlName]="question.key">
+      <option *ngFor="let option of question['options']" [value]="option.key">{{option.value}}</option>
+    </select>
+    <textarea
+     *ngSwitchCase="'textarea'"
+     [formControlName]="question.key" 
+     id="question.key" 
+     cols="question['cols']" 
+     rows="question['rows']">{{ question.value }}</textarea>
+  </div>
+  <div class="error-message" *ngIf="!IsValid">{{question.label | titlecase}} is required.</div>
+</div> -->

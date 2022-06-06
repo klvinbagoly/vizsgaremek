@@ -1,1 +1,7 @@
-<p>artist-editor works!</p>
+<form [attr.formGroup]="form">
+  question
+  <div *ngFor="let question of questions">
+    question
+    <!-- <app-form-input *ngIf="question.key !== 'image'"></app-form-input> -->
+  </div>
+</form>

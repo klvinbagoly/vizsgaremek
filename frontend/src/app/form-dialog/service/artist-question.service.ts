@@ -89,11 +89,11 @@ export class ArtistQuestionService {
       validator: [Validators.pattern(/^[0-9a-z\-]{36}$/)]
     }
 
-    return this.qService.toFormGroup([
+    return [
       name, url, playcount, listeners, mbid, streamable, {
         key: 'image', value: imageGroup
       }
-    ])
+    ]
 
   }
 
