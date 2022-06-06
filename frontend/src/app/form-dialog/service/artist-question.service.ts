@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Artist } from 'src/app/model/artist';
+import { Image } from 'src/app/model/image';
 import { InputQuestion } from '../model/input-question';
 import { Question } from '../model/question';
 import { SelectQuestion } from '../model/select-question';
@@ -35,29 +36,7 @@ export class ArtistQuestionService {
     }
 
     const images = artist?.image || [{ url: '', size: '' }]
-    const imageGroup: Array<Array<Question<any>>> =
-      images.map(image => ([
-        {
-          value: image.url || '',
-          key: 'url',
-          label: 'Image url',
-          type: 'text',
-          controlType: 'input'
-        },
-        {
-          value: image.size || '',
-          key: 'size',
-          label: 'Size',
-          controlType: 'select',
-          options: [
-            { key: 'small', value: 'small' },
-            { key: 'medium', value: 'medium' },
-            { key: 'large', value: 'large' },
-            { key: 'extralarge', value: 'extralarge' },
-            { key: 'mega', value: 'mega' },
-          ]
-        }
-      ]))
+    const imageGroup: Array<Array<Question<any>>> = this.createImageGroup(images)
 
     const streamable: SelectQuestion = {
       controlType: 'select',
@@ -98,6 +77,31 @@ export class ArtistQuestionService {
       }
     ]
 
+  }
+
+  createImageGroup(images: any[]) {
+    return images.map(image => ([
+      {
+        value: image.url || '',
+        key: 'url',
+        label: 'Image url',
+        type: 'text',
+        controlType: 'input'
+      },
+      {
+        value: image.size || '',
+        key: 'size',
+        label: 'Size',
+        controlType: 'select',
+        options: [
+          { key: 'small', value: 'small' },
+          { key: 'medium', value: 'medium' },
+          { key: 'large', value: 'large' },
+          { key: 'extralarge', value: 'extralarge' },
+          { key: 'mega', value: 'mega' },
+        ]
+      }
+    ]))
   }
 
 

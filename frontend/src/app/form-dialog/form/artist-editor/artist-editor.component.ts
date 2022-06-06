@@ -8,6 +8,7 @@ import { ArtistService } from 'src/app/service/artist.service';
 import { InputQuestion } from '../../model/input-question';
 import { Question } from '../../model/question';
 import { SelectQuestion } from '../../model/select-question';
+import { ArtistInfoQuestionService } from '../../service/artist-info-question.service';
 import { ArtistQuestionService } from '../../service/artist-question.service';
 import { QuestionControlService } from '../../service/question-control.service';
 
@@ -21,12 +22,19 @@ export class ArtistEditorComponent implements OnInit {
   artist!: Artist | undefined
   artistInfo!: ArtistInfo | undefined
   questions: any[] = this.artistQuestionService.getQuestions(this.artist)
+  questionsInfo: any[] = this.artistInfoQuestionService.getQuestions(this.artistInfo)
   form: FormGroup = this.qcService.toFormGroup(this.questions)
+  formInfo: FormGroup = this.qcService.toFormGroup(this.questionsInfo)
   formImageArray: Array<FormGroup> = []
+  formSimilarArray: Array<FormGroup> = []
+  formTagsArray: Array<FormGroup> = []
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Artist | ArtistInfo,
     private artistQuestionService: ArtistQuestionService,
+    private artistInfoQuestionService: ArtistInfoQuestionService,
+
     private qcService: QuestionControlService,
     private artistService: ArtistService,
     private artistInfoService: ArtistInfoService
@@ -66,7 +74,26 @@ export class ArtistEditorComponent implements OnInit {
       const actualGroup = formGroup instanceof FormGroup ? formGroup : new FormGroup({ url: new FormControl(''), size: new FormControl('') })
       this.formImageArray[i] = actualGroup
     }
-    console.log(this.formImageArray)
+
+    this.questionsInfo = this.artistInfoQuestionService.getQuestions(this.artistInfo)
+    this.formInfo = this.qcService.toFormGroup(this.questionsInfo)
+
+    const similar = this.formInfo.get('similar')
+    const similarLength = this.questionsInfo.find(question => question.key === 'similar').value.length
+    for (let i = 0; i < similarLength; i++) {
+      const formGroup = similar?.get([i])
+      const actualGroup = formGroup instanceof FormGroup ? formGroup : new FormGroup({ url: new FormControl(''), size: new FormControl('') })
+      this.formSimilarArray[i] = actualGroup
+    }
+
+    const tags = this.formInfo.get('tags')
+    const tagsLength = this.questionsInfo.find(question => question.key === 'tags').value.length
+    for (let i = 0; i < tagsLength; i++) {
+      const formGroup = tags?.get([i])
+      const actualGroup = formGroup instanceof FormGroup ? formGroup : new FormGroup({ url: new FormControl(''), size: new FormControl('') })
+      this.formTagsArray[i] = actualGroup
+    }
+    console.log(this.questionsInfo)
   }
 
 }

@@ -10,8 +10,8 @@
      *ngSwitchCase="'textarea'"
      [formControlName]="question.key" 
      id="question.key" 
-     cols="question['cols']" 
-     rows="question['rows']">{{ question.value }}</textarea>
+     [cols]="question['cols']" 
+     [rows]="question['rows']">{{ question.value }}</textarea>
   </div>
   <div class="error-message" *ngIf="!IsValid">{{question.label | titlecase}} is required.</div>
 </div>
