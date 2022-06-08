@@ -18,8 +18,8 @@ export class Question<T> {
     validator?: ValidatorFn[] | null,
     controlType?: string,
   }) {
-    for (var k in options) {
-      this[k] = options[k]
+    for (let key in options) {
+      this[key] = options[key]
     }
   }
 }

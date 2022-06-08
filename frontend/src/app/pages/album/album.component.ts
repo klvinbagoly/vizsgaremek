@@ -36,7 +36,7 @@ export class AlbumComponent implements OnInit {
     this.albumInfoService.getAll().subscribe(data => {
       this.album = data.find(album => album.name === name)
 
-      // hogy 1 track esetén is megjelenjen
+      // Single tracks are stored as object, converting to array
       if (this.album?.tracks.track && !Array.isArray(this.album?.tracks.track)) {
         this.tracks = [this.album?.tracks.track]
       }
