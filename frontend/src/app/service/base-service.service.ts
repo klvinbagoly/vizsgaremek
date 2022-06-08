@@ -24,19 +24,19 @@ export class BaseServiceService<T extends { id: number | string, [key: string]: 
   }
 
   create(entity: T): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}/${this.endString}`, entity);
+    return this.http.post<T>(`${this.apiUrl}${this.endString}`, entity);
   }
 
   update(entity: T): Observable<T> {
     return this.http.patch<T>(
-      `${this.apiUrl}/${this.endString}/${entity.id}`,
+      `${this.apiUrl}${this.endString}/${entity.id}`,
       entity
     );
   }
 
   delete(entity: T): Observable<T> {
     return this.http.delete<T>(
-      `${this.apiUrl}/${this.endString}/${entity.id}`
+      `${this.apiUrl}${this.endString}/${entity.id}`
     );
   }
 }

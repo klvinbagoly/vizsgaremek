@@ -26,7 +26,10 @@ export class AllArtistsComponent implements OnInit {
 
   addArtist() {
     const dialogRef = this.dialog.open(ArtistEditorComponent, {
-      data: new Artist()
+      data: {
+        artist: new Artist(),
+        new: true
+      }
     })
 
     dialogRef.afterClosed().subscribe(data => {

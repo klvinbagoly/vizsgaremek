@@ -19,8 +19,8 @@ import { QuestionControlService } from '../../service/question-control.service';
 })
 export class ArtistEditorComponent implements OnInit {
 
-  artist!: Artist | undefined
-  artistInfo!: ArtistInfo | undefined
+  artist!: Artist
+  artistInfo!: ArtistInfo
   questions: any[] = this.artistQuestionService.getQuestions(this.artist)
   questionsInfo: any[] = this.artistInfoQuestionService.getQuestions(this.artistInfo)
   form: FormGroup = this.qcService.toFormGroup(this.questions)
@@ -31,7 +31,7 @@ export class ArtistEditorComponent implements OnInit {
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Artist | ArtistInfo,
+    @Inject(MAT_DIALOG_DATA) public data: { artist: Artist | ArtistInfo, new: boolean },
     private artistQuestionService: ArtistQuestionService,
     private artistInfoQuestionService: ArtistInfoQuestionService,
 
@@ -41,11 +41,11 @@ export class ArtistEditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.data instanceof Artist) {
-      this.artist = this.data
+    if (this.data.artist instanceof Artist) {
+      this.artist = this.data.artist
       this.findArtistInfo(this.artist.name)
     } else {
-      this.artistInfo = this.data
+      this.artistInfo = this.data.artist
       this.findArtist(this.artistInfo.name)
     }
   }
@@ -97,12 +97,6 @@ export class ArtistEditorComponent implements OnInit {
   }
 
   addImage() {
-    // const image = this.form.get('image')
-    // if (image instanceof FormArray) {
-    //   image.push(new FormGroup({
-    //     url: new FormControl(''), size: new FormControl('')
-    //   }))
-    // }
     this.formImageArray.push(new FormGroup({
       url: new FormControl(''), size: new FormControl('')
     }))
@@ -143,15 +137,32 @@ export class ArtistEditorComponent implements OnInit {
   }
 
   saveArtist() {
-    console.log(this.form.value)
-    console.log(this.formInfo.value)
-    console.log(this.artist)
-    console.log(this.artistInfo)
-    console.log(this.formImageArray.map(formControl => formControl.value))
-    console.log(this.formSimilarArray.map(formControl => formControl.value))
-    console.log(this.formTagsArray.map(formControl => formControl.value))
+    this.artist = this.form.value
+    this.artist.image = this.formImageArray.map(formControl => formControl.value)
 
+    this.artistInfo.name = this.artist.name
+    this.artistInfo.url = this.artist.url
+    this.artistInfo.image = this.artist.image
+    this.artistInfo.streamable = this.artist.streamable
+    this.artistInfo.mbid = this.artist.mbid
+    this.artistInfo.stats = {
+      listeners: this.artist.listeners,
+      playcount: this.artist.playcount
+    }
+    this.artistInfo.ontour = this.formInfo.value.ontour
+    this.artistInfo.bio.content = this.formInfo.value.bio
+    this.artistInfo.bio.published = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date())
 
+    this.artistInfo.similar.artist = this.formSimilarArray.map(formControl => formControl.value)
+    this.artistInfo.tags.tag = this.formTagsArray.map(formControl => formControl.value)
+
+    if (this.data.new) {
+      this.artistService.create(this.artist).subscribe(data => console.log(data))
+      this.artistInfoService.create(this.artistInfo).subscribe(data => console.log(data))
+    } else {
+      this.artistService.update(this.artist).subscribe(data => console.log(data))
+      this.artistInfoService.update(this.artistInfo).subscribe(data => console.log(data))
+    }
   }
 
 }

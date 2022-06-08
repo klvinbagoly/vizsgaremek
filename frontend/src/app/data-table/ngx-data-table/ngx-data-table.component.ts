@@ -59,13 +59,19 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   editArtist(artist: Artist) {
     const dialogRef = this.dialog.open(ArtistEditorComponent, {
-      data: new Artist(artist)
+      data: {
+        artist: new Artist(artist),
+        new: false
+      }
     })
   }
 
   editAlbum(album: Album) {
     const dialogRef = this.dialog.open(AlbumEditorComponent, {
-      data: new Album(album)
+      data: {
+        album: new Album(album),
+        new: false
+      }
     })
   }
 
