@@ -2,35 +2,71 @@
   <form [formGroup]="form">
     <div *ngFor="let question of questions">
       <app-form-input *ngIf="question.key !== 'image'" [form]="form" [question]="question"></app-form-input>
-      <fieldset *ngIf="question.key === 'image'">
-        <legend>Images</legend>
+      <fieldset class="pt-3" *ngIf="question.key === 'image'">
+        <mat-divider></mat-divider>
+        <legend>
+          Images
+          <button mat-mini-fab class="ms-3" color="accent">
+            <mat-icon>add</mat-icon>
+          </button>
+        </legend>
         <div class="input-group" *ngFor="let row of question.value; let i = index">
           <div *ngFor="let question of row">
-            <app-form-input *ngIf="formImageArray[i]"   [form]="formImageArray[i]" [question]="question"></app-form-input>
-          
-          </div></div>
+            <app-form-input *ngIf="formImageArray[i]"   
+            [form]="formImageArray[i]" 
+            [question]="question">
+            </app-form-input>
+          </div>
+          <button mat-mini-fab class="align-self-end" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </fieldset>
     </div>
   </form>
+  <mat-divider></mat-divider>
   <form [formGroup]="formInfo">
     <h2>Additional Info</h2>
     <app-form-input [form]="formInfo" [question]="questionsInfo[0]"></app-form-input>
     <app-form-input [form]="formInfo" [question]="questionsInfo[1]"></app-form-input>
 
-    <fieldset>
-      <legend>Similar artists</legend>
+    <fieldset class="mt-3">
+      <mat-divider></mat-divider>
+      <legend>
+        Similar artists 
+        <button mat-mini-fab class="ms-3" color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </legend>
       <div class="input-group" *ngFor="let row of questionsInfo[2].value; let i = index">
         <div *ngFor="let question of row">
           <app-form-input *ngIf="formSimilarArray[i]"   [form]="formSimilarArray[i]" [question]="question"></app-form-input>
-        
-        </div></div>
+        </div>
+        <button mat-mini-fab class="align-self-end" color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </fieldset>
-    <fieldset>
-      <legend>Tags</legend>
+    <fieldset class="mt-3">
+      <mat-divider></mat-divider>
+      <legend>
+        Tags
+        <button mat-mini-fab class="ms-3" color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </legend>
       <div class="input-group" *ngFor="let row of questionsInfo[3].value; let i = index">
         <div *ngFor="let question of row">
           <app-form-input *ngIf="formTagsArray[i]"   [form]="formTagsArray[i]" [question]="question"></app-form-input>
-        </div></div>
+        </div>
+        <button mat-mini-fab class="align-self-end" color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </fieldset>
   </form>
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Save Changes</button>
+</mat-dialog-actions>
