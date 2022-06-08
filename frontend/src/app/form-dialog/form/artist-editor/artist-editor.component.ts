@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Artist } from 'src/app/model/artist';
 import { ArtistInfo } from 'src/app/model/artist-info';
@@ -94,6 +94,64 @@ export class ArtistEditorComponent implements OnInit {
       this.formTagsArray[i] = actualGroup
     }
     console.log(this.questionsInfo)
+  }
+
+  addImage() {
+    // const image = this.form.get('image')
+    // if (image instanceof FormArray) {
+    //   image.push(new FormGroup({
+    //     url: new FormControl(''), size: new FormControl('')
+    //   }))
+    // }
+    this.formImageArray.push(new FormGroup({
+      url: new FormControl(''), size: new FormControl('')
+    }))
+    this.questions[6].value.push(this.artistQuestionService.createImageGroup([{}]).flat())
+  }
+
+  deleteImage(index: number) {
+    this.formImageArray.splice(index, 1)
+    this.questions[6].value.splice(index, 1)
+  }
+
+  addSimilar() {
+    this.formSimilarArray.push(new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      url: new FormControl('')
+    }))
+    this.questionsInfo[2].value.push(this.artistInfoQuestionService.createSimilarGroup([{
+      image: []
+    }]).flat())
+  }
+
+  deleteSimilar(index: number) {
+    this.formSimilarArray.splice(index, 1)
+    this.questionsInfo[2].value.splice(index, 1)
+  }
+
+  addTag() {
+    this.formTagsArray.push(new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      url: new FormControl('')
+    }))
+    this.questionsInfo[3].value.push(this.artistInfoQuestionService.createTagGroup([{}]).flat())
+  }
+
+  deleteTag(index: number) {
+    this.formTagsArray.splice(index, 1)
+    this.questionsInfo[3].value.splice(index, 1)
+  }
+
+  saveArtist() {
+    console.log(this.form.value)
+    console.log(this.formInfo.value)
+    console.log(this.artist)
+    console.log(this.artistInfo)
+    console.log(this.formImageArray.map(formControl => formControl.value))
+    console.log(this.formSimilarArray.map(formControl => formControl.value))
+    console.log(this.formTagsArray.map(formControl => formControl.value))
+
+
   }
 
 }

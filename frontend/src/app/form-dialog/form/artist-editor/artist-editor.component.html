@@ -6,7 +6,7 @@
         <mat-divider></mat-divider>
         <legend>
           Images
-          <button mat-mini-fab class="ms-3" color="accent">
+          <button mat-mini-fab class="ms-3" color="accent" (click)="addImage()">
             <mat-icon>add</mat-icon>
           </button>
         </legend>
@@ -17,7 +17,7 @@
             [question]="question">
             </app-form-input>
           </div>
-          <button mat-mini-fab class="align-self-end" color="warn">
+          <button mat-mini-fab class="align-self-end" color="warn" (click)="deleteImage(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -34,7 +34,7 @@
       <mat-divider></mat-divider>
       <legend>
         Similar artists 
-        <button mat-mini-fab class="ms-3" color="accent">
+        <button mat-mini-fab class="ms-3" color="accent" (click)="addSimilar()">
           <mat-icon>add</mat-icon>
         </button>
       </legend>
@@ -42,7 +42,7 @@
         <div *ngFor="let question of row">
           <app-form-input *ngIf="formSimilarArray[i]"   [form]="formSimilarArray[i]" [question]="question"></app-form-input>
         </div>
-        <button mat-mini-fab class="align-self-end" color="warn">
+        <button mat-mini-fab class="align-self-end" color="warn" (click)="deleteSimilar(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -51,7 +51,7 @@
       <mat-divider></mat-divider>
       <legend>
         Tags
-        <button mat-mini-fab class="ms-3" color="accent">
+        <button mat-mini-fab class="ms-3" color="accent" (click)="addTag()">
           <mat-icon>add</mat-icon>
         </button>
       </legend>
@@ -59,7 +59,7 @@
         <div *ngFor="let question of row">
           <app-form-input *ngIf="formTagsArray[i]"   [form]="formTagsArray[i]" [question]="question"></app-form-input>
         </div>
-        <button mat-mini-fab class="align-self-end" color="warn">
+        <button mat-mini-fab class="align-self-end" color="warn" (click)="deleteTag(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -68,5 +68,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Save Changes</button>
+  <button [disabled]="!form.valid" mat-raised-button [mat-dialog-close]="form.value" color="primary" (click)="saveArtist()">Save Changes</button>
 </mat-dialog-actions>

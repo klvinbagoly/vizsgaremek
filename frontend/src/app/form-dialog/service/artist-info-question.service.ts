@@ -28,7 +28,33 @@ export class ArtistInfoQuestionService {
     }
 
     const similarArtists = artist.similar.artist || []
-    const similarControls = similarArtists.map(artist => [
+    const similarControls = this.createSimilarGroup(similarArtists)
+
+
+    const tags = artist.tags.tag || []
+    const tagControls = this.createTagGroup(tags)
+
+    const bio: TextareaQuestion = {
+      controlType: 'textarea',
+      rows: 10,
+      cols: 100,
+      value: artist.bio.content,
+      key: 'bio',
+      label: 'Bio'
+    }
+
+    return [
+      ontour,
+      bio,
+      { key: 'similar', value: similarControls },
+      { key: 'tags', value: tagControls },
+
+    ]
+
+  }
+
+  createSimilarGroup(similar: any[]) {
+    return similar.map(artist => [
       {
         value: artist?.name || '',
         key: 'name',
@@ -50,9 +76,10 @@ export class ArtistInfoQuestionService {
       }
 
     ])
+  }
 
-    const tags = artist.tags.tag || []
-    const tagControls = tags.map(tag => [
+  createTagGroup(tags: any[]) {
+    return tags.map(tag => [
       {
         value: tag?.name || '',
         key: 'name',
@@ -69,23 +96,5 @@ export class ArtistInfoQuestionService {
         controlType: 'input'
       }
     ])
-
-    const bio: TextareaQuestion = {
-      controlType: 'textarea',
-      rows: 10,
-      cols: 100,
-      value: artist.bio.content,
-      key: 'bio',
-      label: 'Bio'
-    }
-
-    return [
-      ontour,
-      bio,
-      { key: 'similar', value: similarControls },
-      { key: 'tags', value: tagControls },
-
-    ]
-
   }
 }
