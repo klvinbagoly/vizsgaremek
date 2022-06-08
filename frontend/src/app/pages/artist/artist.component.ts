@@ -45,13 +45,19 @@ export class ArtistComponent implements OnInit {
 
   onEdit(data: ArtistInfo = new ArtistInfo()) {
     const dialogRef = this.dialog.open(ArtistEditorComponent, {
-      data: data
+      data: {
+        artist: data,
+        new: this.artist ? false : true
+      }
     })
   }
 
   addAlbum() {
     const dialogRef = this.dialog.open(AlbumEditorComponent, {
-      data: new Album({})
+      data: {
+        album: new Album({}),
+        new: true
+      }
     })
   }
 
