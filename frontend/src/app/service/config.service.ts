@@ -58,7 +58,7 @@ export class ConfigService {
       title: 'Image', key: 'image', type: 'array'
     },
     {
-      title: 'Actions', key: '', type: 'actions'
+      title: 'Actions', key: 'a', type: 'actions'
     },
   ]
   constructor() { }
