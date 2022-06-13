@@ -1,8 +1,6 @@
-const Artist = require('../../models/artist.model')
+const Tag = require('../../models/tag.model')
 const express = require('express')
-const controller = require('../base/controller')(Artist)
-
-
+const controller = require('../base/controller')(Tag)
 
 const router = express.Router()
 

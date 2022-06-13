@@ -27,6 +27,10 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 
 app.use('/artist', require('./controller/artist/artist.router'))
+app.use('/artistInfo', require('./controller/artist-info/artist-info.router'))
+app.use('/albums', require('./controller/top-albums/top-albums.router'))
+app.use('/albumInfo', require('./controller/album-info/album-info.router'))
+app.use('/tags', require('./controller/tag/tag.router'))
 
 
 

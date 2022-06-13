@@ -5,5 +5,8 @@ module.exports = (model) => ({
   },
   findOne(id) {
     return model.findById(id)
+  },
+  findByName(name) {
+    return model.findOne({ name: name })
   }
 })

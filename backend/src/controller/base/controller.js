@@ -10,6 +10,10 @@ module.exports = (model) => {
     async findOne(req, res, next) {
       const data = await service.findOne(req.params.id)
       res.json(data)
+    },
+    async findByName(req, res, next) {
+      const data = await service.findByName(req.params.name)
+      res.json(data)
     }
   }
 }

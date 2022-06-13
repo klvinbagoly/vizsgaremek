@@ -48,7 +48,12 @@ const AlbumInfoSchema = mongoose.Schema({
   },
   listeners: String,
   playcount: String,
-  url: String
+  url: String,
+  wiki: {
+    published: String,
+    summary: String,
+    content: String
+  }
 }, {
   timestamps: true
 })

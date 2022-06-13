@@ -1,8 +1,6 @@
-const Artist = require('../../models/artist.model')
+const AlbumInfo = require('../../models/albumInfo.model')
 const express = require('express')
-const controller = require('../base/controller')(Artist)
-
-
+const controller = require('../base/controller')(AlbumInfo)
 
 const router = express.Router()
 
