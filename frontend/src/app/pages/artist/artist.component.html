@@ -23,7 +23,7 @@
       <button mat-raised-button color="accent" title="add tag" (click)="addTag()">
         <mat-icon>add</mat-icon>
       </button>
-   </li>
+    </li>
   </ul>
   <h2>Similar artists:</h2>
   <ul class="inline">
@@ -31,9 +31,9 @@
       <a [routerLink]="'/artist/' + artist.name">{{ artist.name }}</a>
     </li>
   </ul>
-  
+
   <details>
-    <summary class="h6">Bio
+    <summary class="h4">Bio
       <small class="text-muted">(Published: {{ artist.bio.published }})</small>
     </summary>
     <p class="long-info" [innerHTML]="artist.bio.content"></p>

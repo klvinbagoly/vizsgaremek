@@ -37,15 +37,15 @@
       </sub>
     </li>
     <li class="inline" *ngIf="admin">
-       <button mat-raised-button color="accent" title="add tag" (click)="addTag()">
-         <mat-icon>add</mat-icon>
-       </button>
+      <button mat-raised-button color="accent" title="add tag" (click)="addTag()">
+        <mat-icon>add</mat-icon>
+      </button>
     </li>
   </ul>
 
   <div *ngIf="album.wiki">
     <details>
-      <summary class="h6">Album info
+      <summary class="h4">Album info
         <small class="text-muted">(Published: {{ album.wiki.published }})</small>
       </summary>
       <p class="long-info" [innerHTML]="album.wiki.content"></p>
@@ -60,7 +60,7 @@
       </button>
     </div>
     <h2 class="table-caption">Tracklist:</h2>
-  
+
     <table mat-table [dataSource]="tracks">
       <ng-container matColumnDef="rank">
         <th mat-header-cell *matHeaderCellDef>#</th>
@@ -100,7 +100,7 @@
           </div>
         </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns"></tr>
     </table>

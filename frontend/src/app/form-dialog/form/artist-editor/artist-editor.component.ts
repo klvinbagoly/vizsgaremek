@@ -157,6 +157,11 @@ export class ArtistEditorComponent implements OnInit {
     this.artistInfo.tags.tag = this.formTagsArray.map(formControl => formControl.value)
 
     if (this.data.new) {
+      this.artist.id = Math.round(Math.random() * 2 ** 50).toString(16)
+      this.artistInfo.id = this.artist.id
+    }
+
+    if (this.data.new) {
       this.artistService.create(this.artist).subscribe(data => console.log(data))
       this.artistInfoService.create(this.artistInfo).subscribe(data => console.log(data))
     } else {

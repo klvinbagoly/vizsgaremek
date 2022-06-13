@@ -4,6 +4,7 @@ import { AlbumInfo } from 'src/app/model/album-info';
 import { Album } from 'src/app/model/album';
 import { AlbumService } from 'src/app/service/album.service';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
+import { ArtistInfo } from 'src/app/model/artist-info';
 
 @Component({
   selector: 'app-album-editor',
@@ -12,21 +13,25 @@ import { AlbumInfoService } from 'src/app/service/album-info.service';
 })
 export class AlbumEditorComponent implements OnInit {
 
-  album: Album | undefined
-  albumInfo: AlbumInfo | undefined
+  album!: Album
+  albumInfo!: AlbumInfo
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Album | AlbumInfo,
+    @Inject(MAT_DIALOG_DATA) public data: {
+      album: Album | AlbumInfo,
+      new: boolean,
+      artist?: ArtistInfo
+    },
     private albumService: AlbumService,
     private albumInfoService: AlbumInfoService
   ) { }
 
   ngOnInit(): void {
-    if (this.data instanceof Album) {
-      this.album = this.data
+    if (this.data.album instanceof Album) {
+      this.album = this.data.album
       this.findAlbumInfo(this.album.name)
     } else {
-      this.albumInfo = this.data
+      this.albumInfo = this.data.album
       this.findAlbum(this.albumInfo.name)
     }
   }
@@ -39,7 +44,7 @@ export class AlbumEditorComponent implements OnInit {
 
   findAlbum(name: string) {
     this.albumService.getAll().subscribe(albums => {
-      this.album = albums.flatMap(albums => albums.album).find(album => album.name === name)
+      this.album = albums.flatMap(albums => albums.album).find(album => album.name === name) || new Album({})
     })
   }
 
