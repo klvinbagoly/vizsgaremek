@@ -58,7 +58,7 @@
     </button>
   </div>
   <h2 class="h1 table-caption" *ngIf="artist">Top albums of {{ artist.name }}</h2>
-  <ngx-data-table [dataArray]="topAlbums" title="album"></ngx-data-table>
+  <ngx-data-table [dataArray]="topAlbums" type="album"></ngx-data-table>
 </div>
 
 <ng-template #noAlbums>

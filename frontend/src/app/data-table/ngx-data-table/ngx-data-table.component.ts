@@ -6,6 +6,7 @@ import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/ar
 import { Album } from 'src/app/model/album';
 import { Artist } from 'src/app/model/artist';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
+import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
 
 @Component({
   selector: 'ngx-data-table',
@@ -18,14 +19,16 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   constructor(
     private albumService: AlbumInfoService,
+    private config: ConfigService,
     public dialog: MatDialog
   ) { }
 
-  @Input() title!: string
+  @Input() type!: string // artist or album
   @Input() dataArray!: any[]
   dataSource!: CdkTableDataSourceInput<T>
   keys: string[] = []
-  columns: string[] = []
+  columns: INgxTableColumn[] = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
+  displayedColumns: string[] = this.columns.map(column => column.key)
 
   availableAlbums: string[] = []
 
@@ -35,7 +38,7 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   ngOnChanges(): void {
     this.generateTable(this.dataArray)
-    if (this.title === 'album') {
+    if (this.type === 'album') {
       this.albumService.getAll().subscribe(albums => {
         this.availableAlbums = albums.map(album => album.name)
       })
@@ -45,12 +48,12 @@ export class NgxDataTableComponent<T> implements OnInit {
   generateTable(data: any[]) {
     this.dataSource = data
     this.keys = Object.keys(data[0])
-    this.columns = [...this.keys]
-    if (this.admin) this.columns.push('actions')
+    // this.columns = [...this.keys]
+    // if (this.admin) this.columns.push('actions')
   }
 
   onEdit(data: any) {
-    if (this.title === 'artist') {
+    if (this.type === 'artist') {
       this.editArtist(data)
     } else {
       this.editAlbum(data)
