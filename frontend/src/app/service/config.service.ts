@@ -43,7 +43,7 @@ export class ConfigService {
       title: 'Title', key: 'name', type: 'inner-link'
     },
     {
-      title: 'Artist', key: 'artist', type: 'object'
+      title: 'Artist', key: 'artist', type: 'artist'
     },
     {
       title: 'Playcount', key: 'playcount', type: 'number'
