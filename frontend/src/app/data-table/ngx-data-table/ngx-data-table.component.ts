@@ -1,6 +1,9 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/album-editor.component';
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Album } from 'src/app/model/album';
@@ -15,7 +18,7 @@ import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
 })
 export class NgxDataTableComponent<T> implements OnInit {
 
-  admin: boolean = false;
+  admin: boolean = true;
 
   constructor(
     private albumService: AlbumInfoService,
@@ -25,34 +28,37 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   @Input() type!: string // artist or album
   @Input() dataArray!: any[]
-  dataSource!: CdkTableDataSourceInput<T>
-  keys: string[] = []
+  dataSource: MatTableDataSource<T> = new MatTableDataSource<T>()
+  pageSizes: number[] = [5, 10, 25, 100]
+  dataSubscription!: Subscription
   columns!: INgxTableColumn[]
   displayedColumns!: string[]
+  currentFilterKey: string = 'name'
 
   availableAlbums: string[] = []
+
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
 
   ngOnInit(): void {
     this.columns = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
     this.displayedColumns = this.columns.map(column => column.key)
-    this.generateTable(this.dataArray)
-    console.log(this.columns)
+    this.dataSource.filterPredicate = (data: { [key: string]: any }, filter: string) => {
+      return String(data[this.currentFilterKey]).toLowerCase().includes(filter.toLowerCase())
+    }
   }
 
   ngOnChanges(): void {
     this.generateTable(this.dataArray)
     if (this.type === 'album') {
-      this.albumService.getAll().subscribe(albums => {
+      this.dataSubscription = this.albumService.getAll().subscribe(albums => {
         this.availableAlbums = albums.map(album => album.name)
       })
     }
   }
 
   generateTable(data: any[]) {
-    this.dataSource = data
-    this.keys = Object.keys(data[0])
-    // this.columns = [...this.keys]
-    // if (this.admin) this.columns.push('actions')
+    this.dataSource.data = data
+    this.dataSource.paginator = this.paginator
   }
 
   onEdit(data: any) {
@@ -79,6 +85,15 @@ export class NgxDataTableComponent<T> implements OnInit {
         new: false
       }
     })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
+  }
+
+  ngOnDestroy(): void {
+    this.dataSubscription?.unsubscribe()
   }
 
 }
