@@ -28,13 +28,13 @@ export class AlbumComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(params => this.findAlbum(params['id']))
+    this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
     if (this.admin) this.columns.push('actions')
   }
 
   findAlbum(name: string) {
-    this.albumInfoService.getAll().subscribe(data => {
-      this.album = data.find(album => album.name === name)
+    this.albumInfoService.getOneByName(name).subscribe(data => {
+      this.album = data
 
       // Single tracks are stored as object, converting to array
       if (this.album?.tracks.track && !Array.isArray(this.album?.tracks.track)) {

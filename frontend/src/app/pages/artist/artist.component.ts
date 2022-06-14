@@ -30,16 +30,15 @@ export class ArtistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(params => this.findArtist(params['id']))
+    this.activeRoute.params.subscribe(params => this.findArtist(params['name']))
   }
 
   findArtist(name: string) {
-    this.artistInfoService.getAll().subscribe(data => {
-      this.artist = data.find(artist => artist.name === name)
+    this.artistInfoService.getOneByName(name).subscribe(data => {
+      this.artist = data
     })
-    this.albumService.getAll().subscribe(data => {
-      const albums = data.find(album => album['@attr'].artist === name)
-      this.topAlbums = albums?.album
+    this.albumService.getTopAlbumsByArtist(name).subscribe(data => {
+      this.topAlbums = data.album
     })
   }
 

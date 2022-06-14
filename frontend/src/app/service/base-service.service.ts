@@ -23,6 +23,10 @@ export class BaseServiceService<T extends { id: number | string, [key: string]: 
     return this.http.get<T>(`${this.apiUrl}${this.endString}/${id}`)
   }
 
+  getOneByName(name: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}${this.endString}/name/${name}`)
+  }
+
   create(entity: T): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}${this.endString}`, entity);
   }

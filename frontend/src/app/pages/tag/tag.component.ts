@@ -22,12 +22,12 @@ export class TagComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(params => this.findTag(params['id']))
+    this.activeRoute.params.subscribe(params => this.findTag(params['name']))
   }
 
   findTag(name: string): void {
-    this.tagService.getAll().subscribe(tags => {
-      this.tag = tags.find(tag => tag.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+    this.tagService.getOneByName(name).subscribe(tag => {
+      this.tag = tag
     })
   }
 

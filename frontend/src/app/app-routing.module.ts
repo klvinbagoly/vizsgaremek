@@ -16,15 +16,15 @@ const routes: Routes = [
     component: AllArtistsComponent
   },
   {
-    path: 'artist/:id',
+    path: 'artist/:name',
     component: ArtistComponent
   },
   {
-    path: 'album/:id',
+    path: 'album/:name',
     component: AlbumComponent
   },
   {
-    path: 'tag/:id',
+    path: 'tag/:name',
     component: TagComponent
   },
   {

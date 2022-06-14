@@ -51,15 +51,15 @@ export class ArtistEditorComponent implements OnInit {
   }
 
   findArtistInfo(name: string) {
-    this.artistInfoService.getAll().subscribe(artists => {
-      this.artistInfo = artists.find(artist => artist.name === name) || new ArtistInfo()
+    this.artistInfoService.getOneByName(name).subscribe(artist => {
+      this.artistInfo = artist || new ArtistInfo()
       this.createQuestions()
     })
   }
 
   findArtist(name: string) {
-    this.artistService.getAll().subscribe(artists => {
-      this.artist = artists.find(artist => artist.name === name) || new Artist({})
+    this.artistService.getOneByName(name).subscribe(artist => {
+      this.artist = artist || new Artist({})
       this.createQuestions()
     })
   }
