@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 
 import { NgxDataTableComponent } from './ngx-data-table/ngx-data-table.component';
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule
   ],
   exports: [
     NgxDataTableComponent

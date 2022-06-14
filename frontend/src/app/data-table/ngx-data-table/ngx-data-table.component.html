@@ -1,13 +1,14 @@
-<mat-label>Field</mat-label>
-<mat-select [(ngModel)]="currentFilterKey">
-  <mat-option value="name">name</mat-option>
-  <mat-option value="mbid">mbid</mat-option>
-</mat-select>
-
-
-<mat-label>Filter</mat-label>
-<input matInput type="text" (keyup)="applyFilter($event)" placeholder="type a phrase">
-
+<mat-form-field class="search-field" appearance="fill">
+  <mat-label>Search by:</mat-label>
+  <mat-select [(ngModel)]="currentFilterKey">
+    <mat-option value="name">{{ type === 'artist' ? 'name' : 'title' }}</mat-option>
+    <mat-option value="mbid">mbid</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="search-field" appearance="fill">
+  <mat-label>Search {{ type }}</mat-label>
+  <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search...">
+</mat-form-field>
 
 <table mat-table [dataSource]="dataSource">
   <ng-container *ngFor="let col of columns" [ngSwitch]="col.type" [matColumnDef]="col.key">
@@ -47,4 +48,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
 </table>
-<mat-paginator class="mat-elevation-z8" [pageSizeOptions]="pageSizes" showFirstLastButtons></mat-paginator>
+<mat-paginator class="mat-elevation-z8" [pageSize]="10" [pageSizeOptions]="pageSizes" showFirstLastButtons>
+</mat-paginator>

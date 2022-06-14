@@ -28,5 +28,10 @@ th.mat-header-cell.cdk-header-cell {
   &:hover {
     text-decoration: underline;
     color: $link-color;
+    cursor: help;
   }
+}
+
+.search-field {
+  margin-left: 3rem;
 }
