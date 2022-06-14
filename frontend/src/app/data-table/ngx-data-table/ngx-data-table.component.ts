@@ -34,7 +34,7 @@ export class NgxDataTableComponent<T> implements OnInit {
 
   ngOnInit(): void {
     this.generateTable(this.dataArray)
-    console.log(this.columns, this.displayedColumns)
+    console.log(this.columns)
   }
 
   ngOnChanges(): void {
