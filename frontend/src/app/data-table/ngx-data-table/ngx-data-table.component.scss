@@ -1,6 +1,6 @@
 @use '../../../assets/scss/_colors' as *;
 
-td[ng-reflect-router-link^="/artist"], td[ng-reflect-router-link^="/album"] {
+.inner-link {
   cursor: pointer;
   font-weight: bold;
 
@@ -19,4 +19,14 @@ th.mat-header-cell.cdk-header-cell {
   font-size: 1rem;
   text-transform: capitalize;
   border-right: 1px solid $table-border-color;
+}
+
+.mbid {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-color;
+  }
 }

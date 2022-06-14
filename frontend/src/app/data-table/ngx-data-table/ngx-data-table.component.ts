@@ -15,7 +15,7 @@ import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
 })
 export class NgxDataTableComponent<T> implements OnInit {
 
-  admin: boolean = true;
+  admin: boolean = false;
 
   constructor(
     private albumService: AlbumInfoService,
@@ -27,12 +27,14 @@ export class NgxDataTableComponent<T> implements OnInit {
   @Input() dataArray!: any[]
   dataSource!: CdkTableDataSourceInput<T>
   keys: string[] = []
-  columns: INgxTableColumn[] = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
-  displayedColumns: string[] = this.columns.map(column => column.key)
+  columns!: INgxTableColumn[]
+  displayedColumns!: string[]
 
   availableAlbums: string[] = []
 
   ngOnInit(): void {
+    this.columns = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
+    this.displayedColumns = this.columns.map(column => column.key)
     this.generateTable(this.dataArray)
     console.log(this.columns)
   }

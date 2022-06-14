@@ -5,69 +5,35 @@
       [routerLink]="col.key === 'name' && !(type === 'album' && !availableAlbums.includes(item[col.key])) ? '/' + type + '/' + item[col.key] : './' ">
       {{item[col.key] | deep | textoverflow:60}}
     </td> -->
-    <div *ngSwitchCase="'number'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] | number }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'inner-link'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item"
+    <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.type">
+      <div *ngSwitchCase="'mbid'">
+        <a href="https://musicbrainz.org/doc/MusicBrainz_Identifier" target="_blank" class="mbid">Mbid</a>
+      </div>
+      <div *ngSwitchDefault>{{ col.title }}</div>
+    </th>
+    <td mat-cell *matCellDef="let item" [ngSwitch]="col.type"
+      [class.inner-link]="col.type === 'inner-link' && type === 'artist' || availableAlbums.includes(item[col.key])">
+      <div *ngSwitchCase="'number'">{{item[col.key] | number }}</div>
+      <div *ngSwitchCase="'inner-link'"
         [routerLink]="type === 'artist' || availableAlbums.includes(item[col.key]) ? '/' + type + '/' + item[col.key] : './' ">
         {{item[col.key] }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'outer-link'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'mbid'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'boolean'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'array'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] | deep }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'object'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        {{item[col.key] | deep }}
-      </td>
-    </div>
-    <div *ngSwitchCase="'actions'">
-      <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-      <td mat-cell *matCellDef="let item">
-        actions
-      </td>
-    </div>
-  </ng-container>
-  <!-- <ng-container *ngIf="admin" matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef aria-label="row actions">Actions</th>
-    <td mat-cell *matCellDef="let item">
-      <div class="btn-group">
-        <button title="Edit" mat-raised-button color="primary" aria-label="edit" (click)="onEdit(item)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button title="Delete" mat-raised-button color="warn" aria-label="delete" (click)="0">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
       </div>
+      <div *ngSwitchCase="'outer-link'" [innerHTML]="item[col.key] | link"></div>
+      <div *ngSwitchCase="'boolean'" [textContent]="item[col.key] == '0' ? 'No': 'Yes'"></div>
+      <div *ngSwitchCase="'actions'">
+        <div *ngIf="admin; else noAdmin" class="btn-group">
+          <button title="Edit" mat-raised-button color="primary" aria-label="edit" (click)="onEdit(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button title="Delete" mat-raised-button color="warn" aria-label="delete" (click)="0">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+        <ng-template #noAdmin>(only admins)</ng-template>
+      </div>
+      <div *ngSwitchDefault [title]="item[col.key] | deep">{{item[col.key] | deep | textoverflow:60 }}</div>
     </td>
-  </ng-container> -->
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
