@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+const login = require('./auth/login')
+
 const app = express()
 
 if (!config.has('database')) {
@@ -25,6 +27,8 @@ mongoose.connect(`mongodb+srv://${username}:${password}@${host}`, {
 app.use(cors())
 app.use(express.static('public'))
 app.use(bodyParser.json())
+
+app.post('/login', login.login)
 
 app.use('/artist', require('./controller/artist/artist.router'))
 app.use('/artistInfo', require('./controller/artist-info/artist-info.router'))
