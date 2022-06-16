@@ -33,6 +33,7 @@ import { JsonPipe, registerLocaleData } from '@angular/common';
 import localeHU from '@angular/common/locales/hu';
 import { DurationPipe } from './pipe/duration.pipe';
 import { SortPipe } from './pipe/sort.pipe';
+import { LoginComponent } from './pages/login/login.component';
 registerLocaleData(localeHU)
 
 
@@ -50,6 +51,7 @@ registerLocaleData(localeHU)
     DeepPipe,
     DurationPipe,
     SortPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

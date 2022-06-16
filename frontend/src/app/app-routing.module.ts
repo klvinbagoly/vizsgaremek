@@ -4,6 +4,7 @@ import { AlbumComponent } from './pages/album/album.component';
 import { AllArtistsComponent } from './pages/all-artists/all-artists.component';
 import { ArtistComponent } from './pages/artist/artist.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 import { TagComponent } from './pages/tag/tag.component';
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'tag/:name',
     component: TagComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '**',
