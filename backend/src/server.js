@@ -29,6 +29,8 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 
 app.post('/login', login.login)
+app.post('/refresh', login.refresh)
+app.post('/logout', login.logout)
 
 app.use('/artist', require('./controller/artist/artist.router'))
 app.use('/artistInfo', require('./controller/artist-info/artist-info.router'))

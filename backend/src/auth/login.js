@@ -27,3 +27,37 @@ exports.login = async (req, res, next) => {
     accessToken, refreshToken, user: { ...user._doc, password: '' }
   })
 }
+
+exports.refresh = (req, res, next) => {
+  const { refreshToken } = req.body
+
+  if (!refreshToken) return res.sendStatus(401)
+
+  if (!refreshTokenArray.includes(refreshToken)) {
+    return res.sendStatus(403)
+  }
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403)
+
+    const { email, password } = user
+    const accessToken = jwt.sign(
+      { email, password },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: process.env.TOKEN_EXPIRY }
+    )
+    return res.json({ accessToken })
+  })
+}
+
+exports.logout = (req, res, next) => {
+  const { refreshToken } = req.body
+  if (!refreshTokenArray.includes(refreshToken)) {
+    return res.sendStatus(403)
+  }
+
+  const index = refreshTokenArray.indexOf(refreshToken)
+  refreshTokenArray.splice(index, 1)
+
+  return res.sendStatus(200)
+}
