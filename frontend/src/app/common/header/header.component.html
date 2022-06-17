@@ -9,20 +9,28 @@
       </span>
       <button routerLink="/all-artists" mat-icon-button class="example-icon" aria-label="All artists">
         <mat-icon>
-            queue_music
+          queue_music
         </mat-icon>
       </button>
       <span class="d-none d-sm-inline">
         <a mat-button class="toolbar-link" routerLink="/all-artists">All artists</a>
       </span>
     </div>
-    
-    <div>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+
+    <div *ngIf="!(user | async)">
+      <button mat-icon-button aria-label="Login" routerLink="/login">
         <mat-icon>person</mat-icon>
       </button>
       <span>
-        <a mat-button class="toolbar-link" routerLink="/all-artists">Login</a>
+        <a mat-button class="toolbar-link" routerLink="/login">Login</a>
+      </span>
+    </div>
+    <div *ngIf="user | async">
+      <button mat-icon-button aria-label="Logout" (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+      <span>
+        <button mat-button class="toolbar-link" (click)="onLogout()">Logout</button>
       </span>
     </div>
   </mat-toolbar>

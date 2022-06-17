@@ -64,8 +64,8 @@ export class AuthService {
 
   logout() {
     const refreshToken = this.lastRefreshToken.getValue()
-    this.http.post(this.logoutUrl, { refreshToken }).subscribe(
-      response => {
+    this.http.post(this.logoutUrl, { refreshToken }).subscribe({
+      next: response => {
         console.log(response)
         this.lastUser.next(null)
         this.lastAccessToken.next('')
@@ -73,8 +73,12 @@ export class AuthService {
         sessionStorage.removeItem('user')
         sessionStorage.removeItem('token')
         this.router.navigate(['/login'])
+      },
+      error: err => {
+        console.error(err)
+        this.router.navigate(['/login'])
       }
-    )
+    })
 
 
   }

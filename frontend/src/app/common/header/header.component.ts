@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -10,9 +11,17 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user = this.auth.lastUser
+
+  constructor(
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onLogout() {
+    this.auth.logout()
   }
 
 }
