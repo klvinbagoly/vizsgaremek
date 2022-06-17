@@ -9,6 +9,7 @@ import { ArtistInfo } from 'src/app/model/artist-info';
 import { TagInfo } from 'src/app/model/tag-info';
 import { AlbumService } from 'src/app/service/album.service';
 import { ArtistInfoService } from 'src/app/service/artist-info.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-artist',
@@ -17,7 +18,7 @@ import { ArtistInfoService } from 'src/app/service/artist-info.service';
 })
 export class ArtistComponent implements OnInit {
 
-  admin: boolean = true
+  admin: boolean = false
 
   artist!: ArtistInfo | undefined
   topAlbums!: Album[] | undefined
@@ -26,11 +27,17 @@ export class ArtistComponent implements OnInit {
     private artistInfoService: ArtistInfoService,
     private albumService: AlbumService,
     private activeRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => this.findArtist(params['name']))
+    this.auth.lastUser.subscribe((user) => {
+      if (user && user.role === 3) {
+        this.admin = true
+      } else this.admin = false
+    })
   }
 
   findArtist(name: string) {

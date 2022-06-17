@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { TagEditorComponent } from 'src/app/form-dialog/form/tag-editor/tag-editor.component';
 import { TagInfo } from 'src/app/model/tag-info';
+import { AuthService } from 'src/app/service/auth.service';
 import { TagService } from 'src/app/service/tag.service';
 
 @Component({
@@ -18,11 +19,17 @@ export class TagComponent implements OnInit {
   constructor(
     private tagService: TagService,
     private activeRoute: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => this.findTag(params['name']))
+    this.auth.lastUser.subscribe((user) => {
+      if (user && user.role === 3) {
+        this.admin = true
+      } else this.admin = false
+    })
   }
 
   findTag(name: string): void {

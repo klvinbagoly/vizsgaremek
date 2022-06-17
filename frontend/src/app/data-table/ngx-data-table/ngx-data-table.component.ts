@@ -9,6 +9,7 @@ import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/ar
 import { Album } from 'src/app/model/album';
 import { Artist } from 'src/app/model/artist';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
 
 @Component({
@@ -18,12 +19,13 @@ import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
 })
 export class NgxDataTableComponent<T> implements OnInit {
 
-  admin: boolean = true;
+  admin: boolean = false;
 
   constructor(
     private albumService: AlbumInfoService,
     private config: ConfigService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: AuthService
   ) { }
 
   @Input() type!: string // artist or album
@@ -45,6 +47,11 @@ export class NgxDataTableComponent<T> implements OnInit {
     this.dataSource.filterPredicate = (data: { [key: string]: any }, filter: string) => {
       return String(data[this.currentFilterKey]).toLowerCase().includes(filter.toLowerCase())
     }
+    this.auth.lastUser.subscribe((user) => {
+      if (user && user.role === 3) {
+        this.admin = true
+      } else this.admin = false
+    })
   }
 
   ngOnChanges(): void {

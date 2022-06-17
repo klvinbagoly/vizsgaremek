@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Artist } from 'src/app/model/artist';
 import { ArtistService } from 'src/app/service/artist.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-all-artists',
@@ -14,14 +15,20 @@ export class AllArtistsComponent implements OnInit {
 
   artists$: Observable<Artist[]> = this.artistService.getAll()
 
-  admin: boolean = true
+  admin: boolean = false
 
   constructor(
     private artistService: ArtistService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.auth.lastUser.subscribe((user) => {
+      if (user && user.role === 3) {
+        this.admin = true
+      } else this.admin = false
+    })
   }
 
   addArtist() {

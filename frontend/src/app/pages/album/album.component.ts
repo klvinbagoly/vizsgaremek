@@ -7,6 +7,7 @@ import { AlbumInfo } from 'src/app/model/album-info';
 import { AlbumTrack } from 'src/app/model/album-track';
 import { TagInfo } from 'src/app/model/tag-info';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-album',
@@ -15,7 +16,7 @@ import { AlbumInfoService } from 'src/app/service/album-info.service';
 })
 export class AlbumComponent implements OnInit {
 
-  admin: boolean = true
+  admin: boolean = false
   album!: AlbumInfo | undefined
 
   columns: string[] = ['rank', 'name', 'duration', 'artist']
@@ -24,11 +25,17 @@ export class AlbumComponent implements OnInit {
   constructor(
     private albumInfoService: AlbumInfoService,
     private activeRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
+    this.auth.lastUser.subscribe((user) => {
+      if (user && user.role === 3) {
+        this.admin = true
+      } else this.admin = false
+    })
     if (this.admin) this.columns.push('actions')
   }
 
