@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   })
 
   hidePassword = true
+  errorMessage = ''
 
   constructor(
     private auth: AuthService,
@@ -41,6 +42,12 @@ export class LoginComponent implements OnInit {
       next: () => this.router.navigate(['/']),
       error: err => {
         console.error(err)
+        if (err.status === 401) {
+          this.errorMessage = 'Invalid password!'
+        }
+        if (err.status === 404) {
+          this.errorMessage = 'User not found.'
+        }
       }
     })
   }
