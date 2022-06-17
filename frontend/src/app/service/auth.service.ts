@@ -42,17 +42,24 @@ export class AuthService {
     if (token) {
       this.lastAccessToken.next(token)
     }
+    const refresh = sessionStorage.getItem('refresh')
+    if (refresh) {
+      this.lastRefreshToken.next(refresh)
+      setTimeout(() => this.refresh(), 60000)
+    }
   }
 
   login(user: ILoginRequest) {
     return this.http.post<IAuthResponse>(this.loginUrl, user)
       .pipe(switchMap(response => {
         if (response.accessToken) {
+          setTimeout(() => this.refresh(), 60000)
           this.lastUser.next(response.user)
           this.lastAccessToken.next(response.accessToken)
           this.lastRefreshToken.next(response.refreshToken)
           sessionStorage.setItem('user', JSON.stringify(response.user))
           sessionStorage.setItem('token', response.accessToken)
+          sessionStorage.setItem('refresh', response.refreshToken)
           return of(response.user)
         } else {
           this.lastUser.next(null)
@@ -72,6 +79,7 @@ export class AuthService {
         this.lastRefreshToken.next('')
         sessionStorage.removeItem('user')
         sessionStorage.removeItem('token')
+        sessionStorage.removeItem('refresh')
         this.router.navigate(['/login'])
       },
       error: err => {
@@ -84,6 +92,8 @@ export class AuthService {
   }
 
   refresh() {
+    setTimeout(() => this.refresh(), 60000)
+    console.log(this, this.lastRefreshToken)
     const refreshToken = this.lastRefreshToken.getValue()
     this.http.post<{ accessToken: string }>(this.refreshUrl, { refreshToken })
       .subscribe({

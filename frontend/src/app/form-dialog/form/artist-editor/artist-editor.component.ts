@@ -19,8 +19,8 @@ import { QuestionControlService } from '../../service/question-control.service';
 })
 export class ArtistEditorComponent implements OnInit {
 
-  artist!: Artist
-  artistInfo!: ArtistInfo
+  artist: Artist = new Artist()
+  artistInfo: ArtistInfo = new ArtistInfo()
   questions: any[] = this.artistQuestionService.getQuestions(this.artist)
   questionsInfo: any[] = this.artistInfoQuestionService.getQuestions(this.artistInfo)
   form: FormGroup = this.qcService.toFormGroup(this.questions)
@@ -41,12 +41,14 @@ export class ArtistEditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.data.artist instanceof Artist) {
-      this.artist = this.data.artist
-      this.findArtistInfo(this.artist.name)
-    } else {
-      this.artistInfo = this.data.artist
-      this.findArtist(this.artistInfo.name)
+    if (!this.data.new) {
+      if (this.data.artist instanceof Artist) {
+        this.artist = this.data.artist
+        this.findArtistInfo(this.artist.name)
+      } else {
+        this.artistInfo = this.data.artist
+        this.findArtist(this.artistInfo.name)
+      }
     }
   }
 

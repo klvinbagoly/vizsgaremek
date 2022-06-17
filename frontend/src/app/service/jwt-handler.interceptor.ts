@@ -17,11 +17,6 @@ export class JwtHandlerInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const accessToken = this.auth.lastAccessToken.getValue()
-    const refreshToken = this.auth.lastRefreshToken.getValue()
-    if (refreshToken) {
-      // this.auth.refresh()
-    }
-    console.log(accessToken)
     if (accessToken) {
       request = request.clone({
         setHeaders: {
