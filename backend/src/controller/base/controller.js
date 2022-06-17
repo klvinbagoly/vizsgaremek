@@ -14,6 +14,33 @@ module.exports = (model) => {
     async findByName(req, res, next) {
       const data = await service.findByName(req.params.name)
       res.json(data)
+    },
+    async create(req, res, next) {
+      try {
+        const newData = await service.create(req.body)
+        res.status(201)
+        res.json(newData)
+      } catch (err) {
+        res.status(501)
+        res.json({ hasError: true, error: err.message })
+      }
+    },
+    async update(req, res, next) {
+      try {
+        const newData = await service.update(req.params.id, req.body)
+        res.json(newData)
+      } catch (err) {
+        res.status(501)
+        res.json({ hasError: true, error: err.message })
+      }
+    },
+    async delete(req, res, next) {
+      try {
+        await service.delete(req.params.id)
+      } catch (err) {
+        res.status(501)
+        res.json({ hasError: true, error: err.message })
+      }
     }
   }
 }
