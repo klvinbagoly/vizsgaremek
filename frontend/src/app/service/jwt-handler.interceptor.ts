@@ -19,8 +19,9 @@ export class JwtHandlerInterceptor implements HttpInterceptor {
     const accessToken = this.auth.lastAccessToken.getValue()
     const refreshToken = this.auth.lastRefreshToken.getValue()
     if (refreshToken) {
-      this.auth.refresh()
+      // this.auth.refresh()
     }
+    console.log(accessToken)
     if (accessToken) {
       request = request.clone({
         setHeaders: {

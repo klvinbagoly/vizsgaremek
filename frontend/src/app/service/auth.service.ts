@@ -38,6 +38,10 @@ export class AuthService {
     if (user) {
       this.lastUser.next(JSON.parse(user))
     }
+    const token = sessionStorage.getItem('token')
+    if (token) {
+      this.lastAccessToken.next(token)
+    }
   }
 
   login(user: ILoginRequest) {
@@ -48,6 +52,7 @@ export class AuthService {
           this.lastAccessToken.next(response.accessToken)
           this.lastRefreshToken.next(response.refreshToken)
           sessionStorage.setItem('user', JSON.stringify(response.user))
+          sessionStorage.setItem('token', response.accessToken)
           return of(response.user)
         } else {
           this.lastUser.next(null)
@@ -66,6 +71,7 @@ export class AuthService {
         this.lastAccessToken.next('')
         this.lastRefreshToken.next('')
         sessionStorage.removeItem('user')
+        sessionStorage.removeItem('token')
         this.router.navigate(['/login'])
       }
     )
@@ -80,6 +86,7 @@ export class AuthService {
         next: response => {
           if (response.accessToken) {
             this.lastAccessToken.next(response.accessToken)
+            sessionStorage.setItem('token', response.accessToken)
           }
         }
       })

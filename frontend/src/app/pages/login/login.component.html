@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-md-3">
+      <mat-card class="px-3 py-3">
+        <mat-card-title class="my-3">Login</mat-card-title>
+        <form [formGroup]="form" class="d-flex flex-column" (ngSubmit)="onLogin()">
+          <mat-form-field appearance="fill">
+            <mat-label>Email address</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="form.controls['email'].invalid">{{validateEmail()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="form.controls['password'].invalid">Minimum 5 characters.</mat-error>
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-stroked-button [disabled]="form.invalid">Login</button>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>
