@@ -6,27 +6,33 @@ import { ArtistComponent } from './pages/artist/artist.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TagComponent } from './pages/tag/tag.component';
+import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'all-artists',
-    component: AllArtistsComponent
+    component: AllArtistsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'artist/:name',
-    component: ArtistComponent
+    component: ArtistComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'album/:name',
-    component: AlbumComponent
+    component: AlbumComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'tag/:name',
-    component: TagComponent
+    component: TagComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
