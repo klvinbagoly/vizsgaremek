@@ -9,13 +9,11 @@ export class DeepPipe implements PipeTransform {
     if (typeof value === 'undefined') return ''
     if (typeof value !== 'object') return value.toString()
     const values = Object.values(value)
-    values.forEach((value, index) => {
+    return values.map(value => {
       if (typeof value === 'object') {
-        values[index] = this.transform(value)
-      }
-    })
-
-    return values.join(', ')
+        return this.transform(value)
+      } else return value
+    }).join(', ')
   }
 
 }

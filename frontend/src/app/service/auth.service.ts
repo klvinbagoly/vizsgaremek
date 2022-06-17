@@ -93,7 +93,6 @@ export class AuthService {
 
   refresh() {
     setTimeout(() => this.refresh(), 60000)
-    console.log(this, this.lastRefreshToken)
     const refreshToken = this.lastRefreshToken.getValue()
     this.http.post<{ accessToken: string }>(this.refreshUrl, { refreshToken })
       .subscribe({
