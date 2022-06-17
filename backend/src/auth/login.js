@@ -52,12 +52,13 @@ exports.refresh = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
   const { refreshToken } = req.body
-  if (!refreshTokenArray.includes(refreshToken)) {
-    return res.sendStatus(403)
-  }
+  console.log(refreshTokenArray, refreshToken)
+  // if (!refreshTokenArray.includes(refreshToken)) {
+  //   return res.sendStatus(403)
+  // }
 
   const index = refreshTokenArray.indexOf(refreshToken)
   refreshTokenArray.splice(index, 1)
 
-  return res.sendStatus(200)
+  return res.json({ success: true })
 }
