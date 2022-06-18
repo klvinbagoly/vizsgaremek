@@ -82,7 +82,8 @@ export class ArtistComponent implements OnInit {
     const dialogRef = this.dialog.open(TagEditorComponent, {
       data: {
         artist: this.artist,
-        tag: new TagInfo()
+        tag: new TagInfo(),
+        new: true
       }
     })
   }

@@ -65,7 +65,8 @@ export class AlbumComponent implements OnInit {
     const dialogRef = this.dialog.open(TagEditorComponent, {
       data: {
         album: this.album,
-        tag: new TagInfo()
+        tag: new TagInfo(),
+        new: true
       }
     })
   }

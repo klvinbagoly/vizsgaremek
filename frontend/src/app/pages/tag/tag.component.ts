@@ -41,7 +41,8 @@ export class TagComponent implements OnInit {
   editTag() {
     const dialogRef = this.dialog.open(TagEditorComponent, {
       data: {
-        tag: this.tag || new TagInfo()
+        tag: this.tag || new TagInfo(),
+        new: false
       }
     })
   }
