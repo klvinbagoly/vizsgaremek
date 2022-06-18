@@ -4,7 +4,7 @@ info:
   title: DiskHub server API
   description: An API where you can get and create information about musical artists, albums, genres, and more.
 servers:
-  url: http://localhost:3000
+  - url: http://localhost:3000
 paths:
   /artist:
     get:
@@ -303,6 +303,12 @@ paths:
       description: Adds a new tag to the artist with specified id
       security:
         - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -448,6 +454,12 @@ paths:
       description: Adds one album to the toplist with specified id
       security:
         - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -472,6 +484,12 @@ paths:
       description: Returns top albums list by specified artist
       security:
         - bearerAuth: []
+      parameters:
+        - name: artist
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Returns top albums successfully
@@ -671,7 +689,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    /albumInfo/name/{name}:
+  /albumInfo/name/{name}:
     get:
       description: Returns one album by name (deeper information)
       security:
@@ -700,6 +718,12 @@ paths:
       description: Adds a new tag to the album with specified id
       security:
         - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -874,11 +898,11 @@ paths:
           application/json:
             schema:
               type: object
-                items:
-                  email:
-                    type: string
-                  password:
-                    type: string
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
       responses:
         '200':
           description: Login successful
@@ -886,7 +910,7 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
+                properties:
                   accessToken:
                     type: string
         '404':
@@ -910,9 +934,9 @@ paths:
           application/json:
             schema:
               type: object
-                items:
-                  refreshToken:
-                    type: string
+              properties:
+                refreshToken:
+                  type: string
       responses:
         '200':
           description: Refresh successful
@@ -920,7 +944,7 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
+                properties:
                   accessToken:
                     type: string
         '403':
@@ -944,9 +968,9 @@ paths:
           application/json:
             schema:
               type: object
-                items:
-                  refreshToken:
-                    type: string
+              properties:
+                refreshToken:
+                  type: string
       responses:
         '200':
           description: Logout successful
@@ -954,7 +978,7 @@ paths:
             application/json:
               schema:
                 type: object
-                items:
+                properties:
                   success:
                     type: boolean
 components:
@@ -984,10 +1008,12 @@ components:
         image:
           type: array
           items:
-            url:
-              type: string
-            size:
-              type: string
+            type: object
+            properties:
+              url:
+                type: string
+              size:
+                type: string
     ArtistInfo:
       type: object
       required:
@@ -1000,57 +1026,65 @@ components:
         image:
           type: array
           items:
-            url:
-              type: string
-            size:
-              type: string
+            type: object
+            properties:
+              url:
+                type: string
+              size:
+                type: string
         streamable:
           type: string
         ontour:
           type: string
         stats:
           type: object
-          items:
+          properties:
             listeners:
               type: string
             playcount:
               type: string
         similar:
           type: object
-          items:
+          properties:
             artist:
               type: array
               items:
-                name:
-                  type: string
-                url:
-                  type: string
-                image:
-                  type: array
-                  items:
-                    url:
-                      type: string
-                    size:
-                      type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
+                  image:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        size:
+                          type: string
         tags:
           type: object
-          items:
+          properties:
             tag:
               type: array
               items:
-                name:
-                  type: string
-                url:
-                  type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
         bio:
           type: object
-          items:
+          properties:
             links:
               type: object
-              items:
+              properties:
                 link:
                   type: object
-                  items:
+                  properties:
                     rel:
                       type: string
                     href:
@@ -1072,7 +1106,7 @@ components:
             $ref: '#/components/schemas/Album'
         '@attr':
           type: object
-          items:
+          properties:
             artist:
               type: string
             page:
@@ -1099,13 +1133,15 @@ components:
         image:
           type: array
           items:
-            url:
-              type: string
-            size:
-              type: string
+            type: object
+            properties:
+              url:
+                type: string
+              size:
+                type: string
         artist:
           type: object
-          items:
+          properties:
             name:
               type: string
             mbid:
@@ -1133,31 +1169,35 @@ components:
         image:
           type: array
           items:
-            url:
-              type: string
-            size:
-              type: string
+            type: object
+            properties:
+              url:
+                type: string
+              size:
+                type: string
         tags:
           type: object
-          items:
+          properties:
             tag:
               type: array
               items:
-                name:
-                  type: string
-                url:
-                  type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
         tracks:
           type: object
-          items:
+          properties:
             track:
               type: array
               items:
                 type: object
-                items:
+                properties:
                   streamable:
                     type: object
-                    items:
+                    properties:
                       fulltrack:
                         type: string
                   duration:
@@ -1168,12 +1208,12 @@ components:
                     type: string
                   '@attr':
                     type: object
-                    items:
+                    properties:
                       rank:
                         type: string
                   artist:
                     type: object
-                    items:
+                    properties:
                       url:
                         type: string
                       name:
@@ -1182,7 +1222,7 @@ components:
                         type: string
         wiki:
           type: object
-          items:
+          properties:
             published:
               type: string
             content:
@@ -1204,14 +1244,14 @@ components:
           type: string
         wiki:
           type: object
-          items:
+          properties:
             summary:
               type: string
             content:
               type: string
     Error:
       type: object
-      items:
+      properties:
         hasError:
           type: boolean
         message:
