@@ -1,1 +1,30 @@
-<p>tag-editor works!</p>
+<mat-dialog-content>
+  <div *ngIf="!editMode" class="d-flex flex-column">
+    <h1 mat-dialog-title>Search tag</h1>
+    <mat-form-field>
+
+      <input type="search" matInput [(ngModel)]="search" (input)="onSearch()">
+    </mat-form-field>
+    <mat-form-field *ngIf="search" appearance="fill">
+      <mat-label>Choose:</mat-label>
+      <mat-select #selectTag (selectionChange)="onSelect($event)">
+        <mat-option *ngFor="let tag of shownTags" [value]="tag">{{ tag }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="editMode = true">Create new tag</button>
+  </div>
+  <form *ngIf="editMode" [formGroup]="form">
+    <div *ngFor="let question of questions">
+      <app-form-input [form]="form" [question]="question"></app-form-input>
+    </div>
+    <button *ngIf="data.new" mat-raised-button color="accent" (click)="editMode = false">Back to search</button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button *ngIf="editMode" [disabled]="!form.valid" mat-raised-button
+    [mat-dialog-close]="{ formValue: form.value, _id: tagInfo._id }" color="primary" (click)="saveTag()">Save
+    Changes</button>
+  <button *ngIf="!editMode" [disabled]="!tagList.includes(search)" mat-raised-button
+    [mat-dialog-close]="{ tag: search, _id: tagInfo._id }" color="primary" (click)="addTag()">Add tag</button>
+</mat-dialog-actions>

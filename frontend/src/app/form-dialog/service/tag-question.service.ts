@@ -15,7 +15,7 @@ export class TagQuestionService {
     const name: InputQuestion = {
       value: tag?.name || '',
       key: 'name',
-      label: 'Artist name:',
+      label: 'Tag name:',
       type: 'text',
       controlType: 'input',
       validator: [Validators.required]
