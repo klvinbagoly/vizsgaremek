@@ -124,7 +124,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Artist updated successfully
+          description: Artist deleted successfully
           content:
             application/json:
               schema:
@@ -356,7 +356,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /albums:
     get:
-      description: Returns a list of top albums list by artists
+      description: Returns a list of top albums lists by artists
       security:
         - bearerAuth: []
       tags:
