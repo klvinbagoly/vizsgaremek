@@ -38,9 +38,9 @@ export class BaseServiceService<T extends { _id?: string, [key: string]: any }> 
     );
   }
 
-  delete(entity: T): Observable<T> {
+  delete(id: string): Observable<T> {
     return this.http.delete<T>(
-      `${this.apiUrl}${this.endString}/${entity._id}`
+      `${this.apiUrl}${this.endString}/${id}`
     );
   }
 }

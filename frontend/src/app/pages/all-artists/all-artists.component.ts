@@ -44,5 +44,11 @@ export class AllArtistsComponent implements OnInit {
     })
   }
 
+  onDelete(id: string) {
+    this.artistService.delete(id).subscribe(() => {
+      this.artists$ = this.artistService.getAll()
+    })
+  }
+
 
 }

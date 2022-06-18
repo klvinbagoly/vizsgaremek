@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <h1 mat-dialog-title>
+    <mat-icon color="warn">report</mat-icon>
+    {{ data.title }}
+  </h1>
+  <p>Are you sure to delete from database?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="warn">Delete</button>
+</mat-dialog-actions>

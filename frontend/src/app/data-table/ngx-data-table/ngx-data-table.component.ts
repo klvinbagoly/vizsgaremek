@@ -1,9 +1,10 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { ConfirmDeleteComponent } from 'src/app/common/confirm-delete/confirm-delete.component';
 import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/album-editor.component';
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Album } from 'src/app/model/album';
@@ -42,6 +43,8 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatTable) table!: MatTable<T>
+
+  @Output() deleteEvent: EventEmitter<string> = new EventEmitter()
 
   ngOnInit(): void {
     this.columns = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
@@ -107,6 +110,19 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
         this.table.renderRows()
         this.changeDetectorRef.detectChanges()
         console.log(this.dataSource.data) // dataSource has changed, but no changes are made in the table.
+      }
+    })
+  }
+
+  onDelete(item: T) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        title: `Delete ${this.type}: ${item.name}`
+      }
+    })
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.deleteEvent.emit(item._id)
       }
     })
   }
