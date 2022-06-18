@@ -12,4 +12,7 @@ router.post('/', controller.create)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
 
+router.post('/:id', topAlbumController.addOneAlbum)
+router.put('/:id/update', topAlbumController.updateOneAlbum)
+
 module.exports = router
