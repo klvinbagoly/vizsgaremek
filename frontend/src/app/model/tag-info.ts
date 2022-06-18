@@ -1,5 +1,5 @@
 export class TagInfo {
-  id: number = 0;
+  _id?: string = '';
   name: string = '';
   total: number = 0;
   reach: number = 0;

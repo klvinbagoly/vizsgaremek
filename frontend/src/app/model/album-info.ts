@@ -4,7 +4,7 @@ import { Image } from "./image";
 import { Wiki } from "./tag-info";
 
 export class AlbumInfo {
-  id: number = 0;
+  _id?: string = '';
   artist: string = '';
   mbid: string = '';
   tags: AlbumTags = new AlbumTags();

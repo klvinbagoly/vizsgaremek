@@ -49,7 +49,7 @@ export class ArtistEditorComponent implements OnInit {
         this.artistInfo = this.data.artist
         this.findArtist(this.artistInfo.name)
       }
-    }
+    } else this.createQuestions()
   }
 
   findArtistInfo(name: string) {
@@ -95,7 +95,6 @@ export class ArtistEditorComponent implements OnInit {
       const actualGroup = formGroup instanceof FormGroup ? formGroup : new FormGroup({ url: new FormControl(''), size: new FormControl('') })
       this.formTagsArray[i] = actualGroup
     }
-    console.log(this.questionsInfo)
   }
 
   addImage() {
@@ -139,7 +138,7 @@ export class ArtistEditorComponent implements OnInit {
   }
 
   saveArtist() {
-    this.artist = this.form.value
+    this.artist = { ...this.form.value, _id: this.artist._id }
     this.artist.image = this.formImageArray.map(formControl => formControl.value)
 
     this.artistInfo.name = this.artist.name
@@ -159,9 +158,10 @@ export class ArtistEditorComponent implements OnInit {
     this.artistInfo.tags.tag = this.formTagsArray.map(formControl => formControl.value)
 
     if (this.data.new) {
-      this.artist.id = Math.round(Math.random() * 2 ** 50).toString(16)
-      this.artistInfo.id = this.artist.id
+      delete this.artist._id
+      delete this.artistInfo._id
     }
+
 
     if (this.data.new) {
       this.artistService.create(this.artist).subscribe(data => console.log(data))

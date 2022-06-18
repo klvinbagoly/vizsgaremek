@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class BaseServiceService<T extends { id: number | string, [key: string]: any }> {
+export class BaseServiceService<T extends { _id?: string, [key: string]: any }> {
 
   apiUrl = environment.apiUrl
   endString: string = ''
@@ -32,15 +32,15 @@ export class BaseServiceService<T extends { id: number | string, [key: string]: 
   }
 
   update(entity: T): Observable<T> {
-    return this.http.patch<T>(
-      `${this.apiUrl}${this.endString}/${entity.id}`,
+    return this.http.put<T>(
+      `${this.apiUrl}${this.endString}/${entity._id}`,
       entity
     );
   }
 
   delete(entity: T): Observable<T> {
     return this.http.delete<T>(
-      `${this.apiUrl}${this.endString}/${entity.id}`
+      `${this.apiUrl}${this.endString}/${entity._id}`
     );
   }
 }

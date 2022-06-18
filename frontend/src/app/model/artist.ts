@@ -2,7 +2,7 @@ import { Image } from "./image";
 
 export class Artist {
   [key: string]: any;
-  id: string = '';
+  _id?: string = '';
   name: string = '';
   playcount: string = '';
   listeners: string = '';

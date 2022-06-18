@@ -2,7 +2,7 @@ import { Image } from "./image";
 
 export class Album {
   [key: string]: any;
-  id: number = 0;
+  _id?: string = '';
   name: string = '';
   playcount: number = 0;
   mbid: string = '';

@@ -1,7 +1,7 @@
 import { Album } from "./album";
 
 export class TopAlbums {
-  id: number = 0;
+  _id?: string = '';
   album: Album[] = [];
   '@attr': Attr = new Attr()
 }

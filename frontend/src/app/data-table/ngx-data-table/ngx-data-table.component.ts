@@ -1,8 +1,8 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/album-editor.component';
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
@@ -17,7 +17,7 @@ import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
   templateUrl: './ngx-data-table.component.html',
   styleUrls: ['./ngx-data-table.component.scss']
 })
-export class NgxDataTableComponent<T> implements OnInit {
+export class NgxDataTableComponent<T extends { _id: string, name: string }> implements OnInit {
 
   admin: boolean = false;
 
@@ -25,7 +25,8 @@ export class NgxDataTableComponent<T> implements OnInit {
     private albumService: AlbumInfoService,
     private config: ConfigService,
     public dialog: MatDialog,
-    private auth: AuthService
+    private auth: AuthService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   @Input() type!: string // artist or album
@@ -40,6 +41,7 @@ export class NgxDataTableComponent<T> implements OnInit {
   availableAlbums: string[] = []
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
+  @ViewChild(MatTable) table!: MatTable<T>
 
   ngOnInit(): void {
     this.columns = this.type === 'artist' ? this.config.artistColumns : this.config.albumColumns
@@ -83,6 +85,7 @@ export class NgxDataTableComponent<T> implements OnInit {
         new: false
       }
     })
+    this.saveChanges(dialogRef)
   }
 
   editAlbum(album: Album) {
@@ -90,6 +93,20 @@ export class NgxDataTableComponent<T> implements OnInit {
       data: {
         album: new Album(album),
         new: false
+      }
+    })
+    this.saveChanges(dialogRef)
+  }
+
+  saveChanges(dialogRef: MatDialogRef<any>) {
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        const index = this.dataSource.data.findIndex(item => item._id === response._id)
+        console.log(this.dataSource.data[index])
+        this.dataSource.data[index] = { ...this.dataSource.data[index + 1] }
+        this.table.renderRows()
+        this.changeDetectorRef.detectChanges()
+        console.log(this.dataSource.data) // dataSource has changed, but no changes are made in the table.
       }
     })
   }
