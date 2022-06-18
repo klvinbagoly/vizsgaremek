@@ -14,5 +14,6 @@ router.delete('/:id', controller.delete)
 
 router.post('/:id', topAlbumController.addOneAlbum)
 router.put('/:id/update', topAlbumController.updateOneAlbum)
+router.delete('/:id/:albumid', topAlbumController.deleteOneAlbum)
 
 module.exports = router

@@ -27,3 +27,13 @@ exports.addOneAlbum = async (req, res, next) => {
     res.json({ hasError: true, error: err.message })
   }
 }
+
+exports.deleteOneAlbum = async (req, res, next) => {
+  try {
+    const response = await topAlbumsService.deleteOneAlbum(req.params.id, req.params.albumid)
+    res.json(response)
+  } catch (err) {
+    res.status(501)
+    res.json({ hasError: true, error: err.message })
+  }
+}

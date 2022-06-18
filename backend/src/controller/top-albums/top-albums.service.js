@@ -11,3 +11,8 @@ exports.addOneAlbum = (id, data) => TopAlbums.updateOne(
   { _id: id },
   { $push: { album: data } }
 )
+
+exports.deleteOneAlbum = (id, albumid) => TopAlbums.updateOne(
+  { _id: id },
+  { $pull: { album: { _id: albumid } } }
+)
