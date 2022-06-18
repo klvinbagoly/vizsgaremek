@@ -87,4 +87,11 @@ export class ArtistComponent implements OnInit {
     })
   }
 
+  onDeleteAlbum(albumid: string) {
+    this.albumService.deleteOneAlbum(this.topAlbumsId, albumid).subscribe(() => {
+      this.albumService.getTopAlbumsByArtist(this.activeRoute.snapshot.params['name'])
+        .subscribe(albums => this.topAlbums = albums.album)
+    })
+  }
+
 }

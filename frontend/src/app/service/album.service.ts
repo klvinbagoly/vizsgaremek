@@ -28,4 +28,8 @@ export class AlbumService extends BaseServiceService<TopAlbums> {
   updateOneAlbum(id: string, album: Album) {
     return this.http.put(`${this.apiUrl}${this.endString}/${id}/update`, album)
   }
+
+  deleteOneAlbum(id: string, albumid: string) {
+    return this.http.delete(`${this.apiUrl}${this.endString}/${id}/${albumid}`)
+  }
 }
