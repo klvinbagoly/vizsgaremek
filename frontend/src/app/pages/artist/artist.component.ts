@@ -45,7 +45,7 @@ export class ArtistComponent implements OnInit {
       this.artist = data
     })
     this.albumService.getTopAlbumsByArtist(name).subscribe(data => {
-      this.topAlbums = data.album
+      if (data) this.topAlbums = data.album
     })
   }
 
@@ -61,7 +61,7 @@ export class ArtistComponent implements OnInit {
   addAlbum() {
     const dialogRef = this.dialog.open(AlbumEditorComponent, {
       data: {
-        artist: this.artist,
+        artist: this.artist?.name,
         album: new Album({}),
         new: true
       }

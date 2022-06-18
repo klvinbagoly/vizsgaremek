@@ -13,39 +13,43 @@ import { ArtistInfo } from 'src/app/model/artist-info';
 })
 export class AlbumEditorComponent implements OnInit {
 
-  album!: Album
-  albumInfo!: AlbumInfo
+  album: Album = new Album()
+  albumInfo: AlbumInfo = new AlbumInfo()
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {
       album: Album | AlbumInfo,
       new: boolean,
-      artist?: ArtistInfo
+      artist?: string
     },
     private albumService: AlbumService,
     private albumInfoService: AlbumInfoService
   ) { }
 
   ngOnInit(): void {
-    if (this.data.album instanceof Album) {
-      this.album = this.data.album
-      this.findAlbumInfo(this.album.name)
-    } else {
-      this.albumInfo = this.data.album
-      this.findAlbum(this.albumInfo.name)
+    if (!this.data.new) {
+      if (this.data.album instanceof Album) {
+        this.album = this.data.album
+        this.findAlbumInfo(this.album.name)
+      } else {
+        this.albumInfo = this.data.album
+        this.findAlbum(this.albumInfo.name)
+      }
     }
   }
 
   findAlbumInfo(name: string) {
-    this.albumInfoService.getAll().subscribe(albums => {
-      this.albumInfo = albums.find(album => album.name === name) || new AlbumInfo()
+    this.albumInfoService.getOneByName(name).subscribe(album => {
+      this.albumInfo = album || new AlbumInfo()
     })
   }
 
   findAlbum(name: string) {
-    this.albumService.getAll().subscribe(albums => {
-      this.album = albums.flatMap(albums => albums.album).find(album => album.name === name) || new Album({})
-    })
+    if (this.data.artist) {
+      this.albumService.getTopAlbumsByArtist(this.data.artist).subscribe(albums => {
+        this.album = albums.album.find(album => album.name === name) || new Album({})
+      })
+    }
   }
 
 }

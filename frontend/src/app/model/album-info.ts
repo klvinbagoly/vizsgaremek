@@ -4,6 +4,7 @@ import { Image } from "./image";
 import { Wiki } from "./tag-info";
 
 export class AlbumInfo {
+  [key: string]: any;
   _id?: string = '';
   artist: string = '';
   mbid: string = '';
@@ -15,6 +16,12 @@ export class AlbumInfo {
   url: string = '';
   tracks: Tracks = new Tracks();
   wiki?: Wiki = new Wiki();
+
+  constructor(options: { [key: string]: any } = {}) {
+    for (let key in options) {
+      this[key] = options[key]
+    }
+  }
 }
 
 export class AlbumTags {

@@ -10,7 +10,7 @@ export class Album {
   artist: AlbumArtist = new AlbumArtist();
   image: Image[] = [];
 
-  constructor(options: { [key: string]: any }) {
+  constructor(options: { [key: string]: any } = {}) {
     for (let key in options) {
       this[key] = options[key]
     }

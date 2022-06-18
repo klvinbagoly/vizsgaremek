@@ -53,7 +53,11 @@ export class AlbumComponent implements OnInit {
 
   onEdit(album: AlbumInfo = new AlbumInfo()) {
     const dialogRef = this.dialog.open(AlbumEditorComponent, {
-      data: album
+      data: {
+        album: new AlbumInfo(album),
+        new: false,
+        artist: album.artist
+      }
     })
   }
 
