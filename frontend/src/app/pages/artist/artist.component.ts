@@ -22,6 +22,7 @@ export class ArtistComponent implements OnInit {
 
   artist!: ArtistInfo | undefined
   topAlbums!: Album[] | undefined
+  topAlbumsId: string = ''
 
   constructor(
     private artistInfoService: ArtistInfoService,
@@ -45,7 +46,10 @@ export class ArtistComponent implements OnInit {
       this.artist = data
     })
     this.albumService.getTopAlbumsByArtist(name).subscribe(data => {
-      if (data) this.topAlbums = data.album
+      if (data) {
+        this.topAlbums = data.album
+        this.topAlbumsId = data._id || ''
+      }
     })
   }
 
@@ -63,7 +67,8 @@ export class ArtistComponent implements OnInit {
       data: {
         artist: this.artist?.name,
         album: new Album({}),
-        new: true
+        new: true,
+        top_id: this.topAlbumsId
       }
     })
   }

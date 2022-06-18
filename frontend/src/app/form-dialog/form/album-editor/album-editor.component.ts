@@ -32,7 +32,8 @@ export class AlbumEditorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {
       album: Album | AlbumInfo,
       new: boolean,
-      artist?: string
+      artist?: string,
+      top_id?: string
     },
     private albumService: AlbumService,
     private albumInfoService: AlbumInfoService,
@@ -66,6 +67,7 @@ export class AlbumEditorComponent implements OnInit {
     if (this.data.artist) {
       this.albumService.getTopAlbumsByArtist(this.data.artist).subscribe(albums => {
         this.album = albums.album.find(album => album.name === name) || new Album({})
+        this.data.top_id = albums._id
         this.createQuestions()
       })
     } else this.createQuestions()

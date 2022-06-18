@@ -32,6 +32,7 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
 
   @Input() type!: string // artist or album
   @Input() dataArray!: any[]
+  @Input() topAlbumsId: string = ''
   dataSource: MatTableDataSource<T> = new MatTableDataSource<T>()
   pageSizes: number[] = [5, 10, 25, 100]
   dataSubscription!: Subscription
@@ -95,7 +96,8 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
     const dialogRef = this.dialog.open(AlbumEditorComponent, {
       data: {
         album: new Album(album),
-        new: false
+        new: false,
+        top_id: this.topAlbumsId
       }
     })
     this.saveChanges(dialogRef)

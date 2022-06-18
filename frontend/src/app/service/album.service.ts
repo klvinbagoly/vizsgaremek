@@ -20,4 +20,12 @@ export class AlbumService extends BaseServiceService<TopAlbums> {
   getTopAlbumsByArtist(artist: string): Observable<TopAlbums> {
     return this.http.get<TopAlbums>(`${this.apiUrl}${this.endString}/artist/${artist}`)
   }
+
+  addOneAlbum(id: string, album: Album) {
+    return this.http.post(`${this.apiUrl}${this.endString}/${id}`, album)
+  }
+
+  updateOneAlbum(id: string, album: Album) {
+    return this.http.put(`${this.apiUrl}${this.endString}/${id}/update`, album)
+  }
 }
