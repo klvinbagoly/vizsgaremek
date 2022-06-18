@@ -8,6 +8,7 @@ const TagSchema = mongoose.Schema({
   },
   total: Number,
   reach: Number,
+  url: String,
   wiki: {
     summary: String,
     content: String

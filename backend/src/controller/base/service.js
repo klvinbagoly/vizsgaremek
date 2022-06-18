@@ -23,5 +23,8 @@ module.exports = (model) => ({
   },
   delete(id) {
     return model.findByIdAndRemove(id)
+  },
+  addTag(id, tag) {
+    return model.findByIdAndUpdate(id, { $push: { 'tags.tag': tag } })
   }
 })

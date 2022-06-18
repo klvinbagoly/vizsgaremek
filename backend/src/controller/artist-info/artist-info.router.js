@@ -11,4 +11,6 @@ router.post('/', controller.create)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
 
+router.post('/:id/tag', controller.addTag)
+
 module.exports = router

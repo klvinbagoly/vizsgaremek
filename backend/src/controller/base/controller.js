@@ -36,7 +36,17 @@ module.exports = (model) => {
     },
     async delete(req, res, next) {
       try {
-        await service.delete(req.params.id)
+        const response = await service.delete(req.params.id)
+        res.json(response)
+      } catch (err) {
+        res.status(501)
+        res.json({ hasError: true, error: err.message })
+      }
+    },
+    async addTag(req, res, next) {
+      try {
+        const response = await service.addTag(req.params.id, req.body)
+        res.json(response)
       } catch (err) {
         res.status(501)
         res.json({ hasError: true, error: err.message })
