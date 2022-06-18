@@ -11,6 +11,8 @@ paths:
       description: Returns a list of artists
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       responses:
         '200':
           description: Returns list of artists successfully
@@ -30,6 +32,8 @@ paths:
       description: Creates a new artist
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       requestBody:
         required: true
         content:
@@ -54,6 +58,8 @@ paths:
       description: Return one artist by _id
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       parameters:
         - name: id
           in: path
@@ -77,6 +83,8 @@ paths:
       description: Update one artist by _id
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       parameters:
         - name: id
           in: path
@@ -106,6 +114,8 @@ paths:
       description: Delete one artist by _id
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       parameters:
         - name: id
           in: path
@@ -133,6 +143,8 @@ paths:
       description: Returns one artist by name
       security:
         - bearerAuth: []
+      tags:
+        - Artists
       parameters:
         - name: name
           in: path
@@ -157,6 +169,8 @@ paths:
       description: Returns a list of artists with deeper information
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       responses:
         '200':
           description: Returns list of artists successfully
@@ -176,6 +190,8 @@ paths:
       description: Creates a new artist with deeper information
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       requestBody:
         required: true
         content:
@@ -200,6 +216,8 @@ paths:
       description: Return one artist with deeper information by _id 
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       parameters:
         - name: id
           in: path
@@ -223,6 +241,8 @@ paths:
       description: Update one artist by _id
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       parameters:
         - name: id
           in: path
@@ -252,6 +272,8 @@ paths:
       description: Delete one artist info by _id
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       parameters:
         - name: id
           in: path
@@ -279,6 +301,8 @@ paths:
       description: Returns one artist by name (deeper information)
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       parameters:
         - name: name
           in: path
@@ -303,6 +327,8 @@ paths:
       description: Adds a new tag to the artist with specified id
       security:
         - bearerAuth: []
+      tags:
+        - ArtistInfo
       parameters:
         - name: id
           in: path
@@ -333,6 +359,8 @@ paths:
       description: Returns a list of top albums list by artists
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       responses:
         '200':
           description: Returns list of top albums list successfully
@@ -352,6 +380,8 @@ paths:
       description: Creates a new top albums list
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       requestBody:
         required: true
         content:
@@ -376,6 +406,8 @@ paths:
       description: Returns top albums list by _id
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -399,6 +431,8 @@ paths:
       description: Update one top albums list by _id
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -428,6 +462,8 @@ paths:
       description: Delete top albums list by _id
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -454,6 +490,8 @@ paths:
       description: Adds one album to the toplist with specified id
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -484,6 +522,8 @@ paths:
       description: Returns top albums list by specified artist
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: artist
           in: path
@@ -510,6 +550,8 @@ paths:
       description: Updates one album in the list with specified id
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -540,6 +582,8 @@ paths:
       description: Deletes one album (with specified album id) in the list (with specified id)
       security:
         - bearerAuth: []
+      tags:
+        - Albums
       parameters:
         - name: id
           in: path
@@ -572,6 +616,8 @@ paths:
       description: Returns a list of albums with deeper information
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       responses:
         '200':
           description: Returns list of albums successfully
@@ -591,6 +637,8 @@ paths:
       description: Creates a new album with deeper information
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       requestBody:
         required: true
         content:
@@ -615,6 +663,8 @@ paths:
       description: Returns one album with deeper info
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       parameters:
         - name: id
           in: path
@@ -638,6 +688,8 @@ paths:
       description: Update one album info by _id
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       parameters:
         - name: id
           in: path
@@ -667,6 +719,8 @@ paths:
       description: Delete album info by _id
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       parameters:
         - name: id
           in: path
@@ -694,6 +748,8 @@ paths:
       description: Returns one album by name (deeper information)
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       parameters:
         - name: name
           in: path
@@ -718,6 +774,8 @@ paths:
       description: Adds a new tag to the album with specified id
       security:
         - bearerAuth: []
+      tags:
+        - AlbumInfo
       parameters:
         - name: id
           in: path
@@ -748,6 +806,8 @@ paths:
       description: Returns a list of description tags or music genres
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       responses:
         '200':
           description: Returns list of tags successfully
@@ -767,6 +827,8 @@ paths:
       description: Creates a new tag
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       requestBody:
         required: true
         content:
@@ -791,6 +853,8 @@ paths:
       description: Returns one tag by _id
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       parameters:
         - name: id
           in: path
@@ -814,6 +878,8 @@ paths:
       description: Update one tag by _id
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       parameters:
         - name: id
           in: path
@@ -843,6 +909,8 @@ paths:
       description: Delete one tag by _id
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       parameters:
         - name: id
           in: path
@@ -870,6 +938,8 @@ paths:
       description: Returns one tag by name
       security:
         - bearerAuth: []
+      tags:
+        - Tags
       parameters:
         - name: name
           in: path
@@ -892,6 +962,8 @@ paths:
   /login:
     post:
       description: Login request
+      tags:
+        - Authentication
       requestBody:
         required: true
         content:
@@ -928,6 +1000,8 @@ paths:
   /refresh:
     post:
       description: Request for new access token
+      tags:
+        - Authentication
       requestBody:
         required: true
         content:
@@ -962,6 +1036,8 @@ paths:
   /logout:
     post:
       description: Logout request
+      tags:
+        - Authentication
       requestBody:
         required: true
         content:
