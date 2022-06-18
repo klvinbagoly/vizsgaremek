@@ -3,9 +3,13 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
 
 const login = require('./auth/login')
 const authentication = require('./auth/authenticate')
+const swaggerDoc = YAML.load('./docs/swagger.yaml')
+console.log(swaggerDoc)
 
 const app = express()
 
@@ -38,6 +42,8 @@ app.use('/artistInfo', authentication, require('./controller/artist-info/artist-
 app.use('/albums', authentication, require('./controller/top-albums/top-albums.router'))
 app.use('/albumInfo', authentication, require('./controller/album-info/album-info.router'))
 app.use('/tags', authentication, require('./controller/tag/tag.router'))
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
 
 

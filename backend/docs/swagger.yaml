@@ -1,0 +1,1219 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: DiskHub server API
+  description: An API where you can get and create information about musical artists, albums, genres, and more.
+servers:
+  url: http://localhost:3000
+paths:
+  /artist:
+    get:
+      description: Returns a list of artists
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns list of artists successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artist'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new artist
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Artist'
+      responses:
+        '201':
+          description: Artist created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artist/{id}:
+    get:
+      description: Return one artist by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update one artist by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Artist'
+      responses:
+        '200':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete one artist by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artist/name/{name}:
+    get:
+      description: Returns one artist by name
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artistInfo:
+    get:
+      description: Returns a list of artists with deeper information
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns list of artists successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new artist with deeper information
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArtistInfo'
+      responses:
+        '201':
+          description: Artist created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artistInfo/{id}:
+    get:
+      description: Return one artist with deeper information by _id 
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update one artist by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArtistInfo'
+      responses:
+        '200':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete one artist info by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artistInfo/name/{name}:
+    get:
+      description: Returns one artist by name (deeper information)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artist data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /artistInfo/{id}/tag:
+    post:
+      description: Adds a new tag to the artist with specified id
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albums:
+    get:
+      description: Returns a list of top albums list by artists
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns list of top albums list successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopAlbums'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new top albums list
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopAlbums'
+      responses:
+        '201':
+          description: Top albums created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopAlbums'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albums/{id}:
+    get:
+      description: Returns top albums list by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Top albums returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopAlbums'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update one top albums list by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopAlbums'
+      responses:
+        '200':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopAlbums'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete top albums list by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Top albums deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Adds one album to the toplist with specified id
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+      responses:
+        '201':
+          description: Album added to toplist successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+  /albums/artist/{artist}:
+    get:
+      description: Returns top albums list by specified artist
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns top albums successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopAlbums'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'   
+  /albums/{id}/update:
+    put:
+      description: Updates one album in the list with specified id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Album'
+      responses:
+        '200':
+          description: Album updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albums/{id}/{albumid}:
+    delete:
+      description: Deletes one album (with specified album id) in the list (with specified id)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: albumid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Album deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'   
+  /albumInfo:
+    get:
+      description: Returns a list of albums with deeper information
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns list of albums successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlbumInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new album with deeper information
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumInfo'
+      responses:
+        '201':
+          description: Album created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albumInfo/{id}:
+    get:
+      description: Returns one album with deeper info
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Album info returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update one album info by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumInfo'
+      responses:
+        '200':
+          description: Album updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete album info by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Album deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    /albumInfo/name/{name}:
+    get:
+      description: Returns one album by name (deeper information)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Album data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albumInfo/{id}/tag:
+    post:
+      description: Adds a new tag to the album with specified id
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tags:
+    get:
+      description: Returns a list of description tags or music genres
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns list of tags successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new tag
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '201':
+          description: Tag created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tags/{id}:
+    get:
+      description: Returns one tag by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update one tag by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete one tag by _id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tags/name/{name}:
+    get:
+      description: Returns one tag by name
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /login:
+    post:
+      description: Login request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                items:
+                  email:
+                    type: string
+                  password:
+                    type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  accessToken:
+                    type: string
+        '404':
+          description: Email not found in the system
+          content:
+            text/html:
+              schema:
+                type: string
+        '401':
+          description: Authentication failed, invalid password
+          content:
+            text/html:
+              schema:
+                type: string  
+  /refresh:
+    post:
+      description: Request for new access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                items:
+                  refreshToken:
+                    type: string
+      responses:
+        '200':
+          description: Refresh successful
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  accessToken:
+                    type: string
+        '403':
+          description: Invalid refresh token, request rejected
+          content:
+            text/html:
+              schema:
+                type: string
+        '401':
+          description: No refresh token found, invalid request
+          content:
+            text/html:
+              schema:
+                type: string  
+  /logout:
+    post:
+      description: Logout request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                items:
+                  refreshToken:
+                    type: string
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  success:
+                    type: boolean
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Artist:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        playcount:
+          type: string
+        listeners:
+          type: string
+        mbid:
+          type: string
+        url:
+          type: string
+        streamable:
+          type: string
+        image:
+          type: array
+          items:
+            url:
+              type: string
+            size:
+              type: string
+    ArtistInfo:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        image:
+          type: array
+          items:
+            url:
+              type: string
+            size:
+              type: string
+        streamable:
+          type: string
+        ontour:
+          type: string
+        stats:
+          type: object
+          items:
+            listeners:
+              type: string
+            playcount:
+              type: string
+        similar:
+          type: object
+          items:
+            artist:
+              type: array
+              items:
+                name:
+                  type: string
+                url:
+                  type: string
+                image:
+                  type: array
+                  items:
+                    url:
+                      type: string
+                    size:
+                      type: string
+        tags:
+          type: object
+          items:
+            tag:
+              type: array
+              items:
+                name:
+                  type: string
+                url:
+                  type: string
+        bio:
+          type: object
+          items:
+            links:
+              type: object
+              items:
+                link:
+                  type: object
+                  items:
+                    rel:
+                      type: string
+                    href:
+                      type: string
+            published:
+              type: string
+            content:
+              type: string
+            summary:
+              type: string
+    TopAlbums:
+      type: object
+      required:
+        - name
+      properties:
+        album:
+          type: array
+          items:
+            $ref: '#/components/schemas/Album'
+        '@attr':
+          type: object
+          items:
+            artist:
+              type: string
+            page:
+              type: string
+            perPage:
+              type: string
+            totalPages:
+              type: string
+            total:
+              type: string              
+    Album:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        playcount:
+          type: string
+        mbid:
+          type: string
+        url:
+          type: string
+        image:
+          type: array
+          items:
+            url:
+              type: string
+            size:
+              type: string
+        artist:
+          type: object
+          items:
+            name:
+              type: string
+            mbid:
+              type: string
+            url:
+              type: string
+    AlbumInfo:
+      type: object
+      required:
+        - name
+        - artist
+      properties:
+        name:
+          type: string
+        artist:
+          type: string
+        url:
+          type: string
+        mbid:
+          type: string
+        listeners:
+          type: string
+        playcount:
+          type: string
+        image:
+          type: array
+          items:
+            url:
+              type: string
+            size:
+              type: string
+        tags:
+          type: object
+          items:
+            tag:
+              type: array
+              items:
+                name:
+                  type: string
+                url:
+                  type: string
+        tracks:
+          type: object
+          items:
+            track:
+              type: array
+              items:
+                type: object
+                items:
+                  streamable:
+                    type: object
+                    items:
+                      fulltrack:
+                        type: string
+                  duration:
+                    type: number
+                  url:
+                    type: string
+                  name:
+                    type: string
+                  '@attr':
+                    type: object
+                    items:
+                      rank:
+                        type: string
+                  artist:
+                    type: object
+                    items:
+                      url:
+                        type: string
+                      name:
+                        type: string
+                      mbid:
+                        type: string
+        wiki:
+          type: object
+          items:
+            published:
+              type: string
+            content:
+              type: string
+            summary:
+              type: string
+    Tag:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        total:
+          type: number
+        reach:
+          type: number
+        url:
+          type: string
+        wiki:
+          type: object
+          items:
+            summary:
+              type: string
+            content:
+              type: string
+    Error:
+      type: object
+      items:
+        hasError:
+          type: boolean
+        message:
+          type: string
+            
