@@ -26,5 +26,5 @@
     [mat-dialog-close]="{ formValue: form.value, _id: tagInfo._id }" color="primary" (click)="saveTag()">Save
     Changes</button>
   <button *ngIf="!editMode" [disabled]="!tagList.includes(search)" mat-raised-button
-    [mat-dialog-close]="{ tag: search, _id: tagInfo._id }" color="primary" (click)="addTag()">Add tag</button>
+    [mat-dialog-close]="{ tag: search, _id: tagInfo._id }" color="primary" (click)="getTag()">Add tag</button>
 </mat-dialog-actions>

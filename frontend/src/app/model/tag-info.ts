@@ -3,6 +3,7 @@ export class TagInfo {
   name: string = '';
   total: number = 0;
   reach: number = 0;
+  url?: string = '';
   wiki: Wiki = new Wiki();
 }
 

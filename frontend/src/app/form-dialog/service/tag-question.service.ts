@@ -21,6 +21,14 @@ export class TagQuestionService {
       validator: [Validators.required]
     }
 
+    const url: InputQuestion = {
+      value: tag?.url || '',
+      key: 'url',
+      label: 'Url:',
+      type: 'text',
+      controlType: 'input'
+    }
+
     const total: InputQuestion = {
       controlType: 'input',
       type: 'number',
@@ -46,6 +54,6 @@ export class TagQuestionService {
       label: 'Description'
     }
 
-    return [name, total, reach, description]
+    return [name, url, total, reach, description]
   }
 }

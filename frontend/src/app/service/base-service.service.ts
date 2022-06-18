@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TagInfo } from '../model/tag-info';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,9 @@ export class BaseServiceService<T extends { _id?: string, [key: string]: any }> 
     return this.http.delete<T>(
       `${this.apiUrl}${this.endString}/${id}`
     );
+  }
+
+  addTag(id: string, tag: TagInfo) {
+    return this.http.post(`${this.apiUrl}${this.endString}/${id}/tag`, tag)
   }
 }

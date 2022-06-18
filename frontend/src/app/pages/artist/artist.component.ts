@@ -86,6 +86,14 @@ export class ArtistComponent implements OnInit {
         new: true
       }
     })
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        console.log(response)
+        this.artistInfoService.getOneByName(this.artist?.name || '').subscribe(data => {
+          this.artist = data
+        })
+      }
+    })
   }
 
   onDeleteAlbum(albumid: string) {

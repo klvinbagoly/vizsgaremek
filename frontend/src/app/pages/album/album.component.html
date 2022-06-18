@@ -3,7 +3,7 @@
   <h1>
     <small class="text-muted">Album name:</small>
     {{ album.name }}
-    <sub class="small">
+    <sub class="small" *ngIf="album.url">
       <a class="outer-link" target="_blank" [href]="album.url">(link)</a>
     </sub>
     <div *ngIf="admin" class="p-3">
@@ -32,7 +32,7 @@
   <ul class="inline">
     <li class="inline" *ngFor="let tag of album.tags.tag">
       <a class="btn btn-link" [routerLink]="'/tag/' + tag.name">{{ tag.name }}</a>
-      <sub>
+      <sub *ngIf="tag.url">
         <a class="outer-link" target="_blank" [href]="tag.url">(link)</a>
       </sub>
     </li>

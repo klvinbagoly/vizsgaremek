@@ -8,6 +8,8 @@ import { QuestionControlService } from '../../service/question-control.service';
 import { TagService } from 'src/app/service/tag.service';
 import { FormGroup } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
+import { ArtistInfoService } from 'src/app/service/artist-info.service';
+import { AlbumInfoService } from 'src/app/service/album-info.service';
 
 @Component({
   selector: 'app-tag-editor',
@@ -34,7 +36,9 @@ export class TagEditorComponent implements OnInit {
     },
     private tagQuestionService: TagQuestionService,
     private qcService: QuestionControlService,
-    private tagService: TagService
+    private tagService: TagService,
+    private artistInfoService: ArtistInfoService,
+    private albumInfoService: AlbumInfoService,
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +71,7 @@ export class TagEditorComponent implements OnInit {
     this.tagInfo.name = this.form.value.name
     this.tagInfo.reach = this.form.value.reach
     this.tagInfo.total = this.form.value.total
+    this.tagInfo.url = this.form.value.url
     this.tagInfo.wiki.content = this.form.value.description
     this.tagInfo.wiki.published = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date())
 
@@ -76,13 +81,29 @@ export class TagEditorComponent implements OnInit {
 
     if (this.data.new) {
       this.tagService.create(this.tagInfo).subscribe(data => console.log(data))
+      this.addTag()
     } else {
       this.tagService.update(this.tagInfo).subscribe(data => console.log(data))
     }
   }
 
   addTag() {
+    if (this.data.artist) {
+      this.artistInfoService.addTag(this.data.artist._id || '', this.tagInfo).subscribe(data => console.log(data))
+    }
+    if (this.data.album) {
+      this.albumInfoService.addTag(this.data.album._id || '', this.tagInfo).subscribe(data => console.log(data))
+    }
+  }
 
+  getTag() {
+    this.tagService.getOneByName(this.search).subscribe({
+      next: (tag) => {
+        this.tagInfo = tag
+        this.addTag()
+      },
+      error: err => console.error(err)
+    })
   }
 
 }
