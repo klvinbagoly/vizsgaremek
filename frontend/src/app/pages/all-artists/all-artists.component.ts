@@ -40,7 +40,7 @@ export class AllArtistsComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data)
+      this.artists$ = this.artistService.getAll()
     })
   }
 

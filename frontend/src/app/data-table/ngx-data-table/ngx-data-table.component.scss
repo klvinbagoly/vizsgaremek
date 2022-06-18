@@ -35,3 +35,7 @@ th.mat-header-cell.cdk-header-cell {
 .search-field {
   margin-left: 3rem;
 }
+
+[mat-table] {
+  min-width: 100%;
+}
