@@ -71,6 +71,11 @@ export class ArtistComponent implements OnInit {
         top_id: this.topAlbumsId
       }
     })
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.albumService.getTopAlbumsByArtist(this.activeRoute.snapshot.params['name'])
+        .subscribe(albums => this.topAlbums = albums.album)
+    })
   }
 
   addTag() {

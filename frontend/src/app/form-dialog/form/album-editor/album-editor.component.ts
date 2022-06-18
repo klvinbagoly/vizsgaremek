@@ -11,6 +11,7 @@ import { QuestionControlService } from '../../service/question-control.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ArtistQuestionService } from '../../service/artist-question.service';
 import { ArtistInfoQuestionService } from '../../service/artist-info-question.service';
+import { Wiki } from 'src/app/model/tag-info';
 
 @Component({
   selector: 'app-album-editor',
@@ -122,5 +123,41 @@ export class AlbumEditorComponent implements OnInit {
     this.questionsInfo[2].value.splice(index, 1)
   }
 
-  saveAlbum() { }
+  saveAlbum() {
+    this.album = { ...this.album, ...this.form.value }
+    this.album.image = this.formImageArray.map(formControl => formControl.value)
+    this.album.artist.name = this.data.artist || this.album.artist.name
+
+    this.albumInfo.name = this.album.name
+    this.albumInfo.url = this.album.url
+    this.albumInfo.mbid = this.album.mbid
+    this.albumInfo.image = this.album.image
+    this.albumInfo.playcount = this.album.playcount.toString()
+    this.albumInfo.artist = this.data.artist || this.album.artist.name
+
+    this.albumInfo.listeners = this.formInfo.value.listeners
+    this.albumInfo.tags.tag = this.formTagsArray.map(formControl => formControl.value)
+    this.albumInfo.wiki = this.albumInfo.wiki || new Wiki()
+    this.albumInfo.wiki.content = this.formInfo.value.description
+    this.albumInfo.wiki.published = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date())
+
+    if (this.data.new) {
+      delete this.album._id
+      delete this.albumInfo._id
+    }
+
+    console.log(this.album, this.albumInfo)
+    if (this.data.new) {
+      this.albumService.addOneAlbum(this.data.top_id || '', this.album).subscribe(data => console.log(data))
+      this.albumInfoService.create(this.albumInfo).subscribe(data => console.log(data))
+    } else {
+      this.albumService.updateOneAlbum(this.data.top_id || '', this.album).subscribe(data => console.log(data))
+      if (this.albumInfo._id === '') {
+        delete this.albumInfo._id
+        this.albumInfoService.create(this.albumInfo).subscribe(data => console.log(data))
+      } else {
+        this.albumInfoService.update(this.albumInfo).subscribe(data => console.log(data))
+      }
+    }
+  }
 }
