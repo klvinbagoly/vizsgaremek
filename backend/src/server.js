@@ -11,7 +11,6 @@ const login = require('./auth/login')
 const authentication = require('./auth/authenticate')
 
 const swaggerDoc = YAML.load(join(__dirname, '../docs/swagger.yaml'))
-console.log(swaggerDoc)
 
 const app = express()
 
