@@ -5,10 +5,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
+const { join } = require('path')
 
 const login = require('./auth/login')
 const authentication = require('./auth/authenticate')
-const swaggerDoc = YAML.load('./docs/swagger.yaml')
+
+const swaggerDoc = YAML.load(join(__dirname, '../docs/swagger.yaml'))
 console.log(swaggerDoc)
 
 const app = express()
