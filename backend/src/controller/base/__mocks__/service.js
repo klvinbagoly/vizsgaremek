@@ -12,7 +12,7 @@ const mockService = ({
   findOne: jest.fn(async function (_id) {
     return mockService.mockData.find(item => item._id === _id)
   }),
-  findOneByName: jest.fn(async function (name) {
+  findByName: jest.fn(async function (name) {
     return mockService.mockData.find(item => item.name === name)
   }),
   create: jest.fn(async function (data) {
