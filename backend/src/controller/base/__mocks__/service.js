@@ -1,36 +1,38 @@
 // const baseService = jest.createMockFromModule('../service')
 
-module.exports = (model) => ({
+const mockService = ({
   mockData: [],
   __setMockData(data) {
-    this.mockData = data
-    console.log(this.mockData)
+    mockService.mockData = data
+    console.log(mockService.mockData)
   },
   findAll: jest.fn(async function () {
-    return this.mockData
+    return mockService.mockData
   }),
   findOne: jest.fn(async function (_id) {
-    return this.mockData.find(item => item._id === _id)
+    return mockService.mockData.find(item => item._id === _id)
   }),
   findOneByName: jest.fn(async function (name) {
-    return this.mockData.find(item => item.name === name)
+    return mockService.mockData.find(item => item.name === name)
   }),
   create: jest.fn(async function (data) {
-    this.mockData.push(data)
+    mockService.mockData.push(data)
     return data
   }),
   update: jest.fn(async function (id, data) {
-    const index = this.mockData.findIndex(item => item._id === id)
-    this.mockData[index] = data
+    const index = mockService.mockData.findIndex(item => item._id === id)
+    mockService.mockData[index] = data
     return data
   }),
   delete: jest.fn(async function (id) {
-    const index = this.mockData.findIndex(item => item._id === id)
-    return this.mockData.splice(index, 1)
+    const index = mockService.mockData.findIndex(item => item._id === id)
+    return mockService.mockData.splice(index, 1)
   }),
   addTag: jest.fn(async function (id, tag) {
-    const index = this.mockData.findIndex(item => item._id === id)
-    this.mockData[index].tags.tag.push(tag)
-    return this.mockData[index]
+    const index = mockService.mockData.findIndex(item => item._id === id)
+    mockService.mockData[index].tags.tag.push(tag)
+    return mockService.mockData[index]
   })
 })
+
+module.exports = () => mockService

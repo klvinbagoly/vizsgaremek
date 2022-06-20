@@ -39,7 +39,6 @@ describe('base controller', () => {
     ]
 
     baseService.__setMockData(mockData)
-    console.log(baseService.mockData)
     response = mockResponse()
   })
 
