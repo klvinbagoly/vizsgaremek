@@ -89,10 +89,12 @@ export class TagEditorComponent implements OnInit {
 
   addTag() {
     if (this.data.artist) {
-      this.artistInfoService.addTag(this.data.artist._id || '', this.tagInfo).subscribe(data => console.log(data))
+      this.artistInfoService.addTag(this.data.artist._id || '', this.tagInfo)
+        .subscribe(data => this.albumInfoService.saveEvent.next(null))
     }
     if (this.data.album) {
-      this.albumInfoService.addTag(this.data.album._id || '', this.tagInfo).subscribe(data => console.log(data))
+      this.albumInfoService.addTag(this.data.album._id || '', this.tagInfo)
+        .subscribe(data => this.albumInfoService.saveEvent.next(null))
     }
   }
 

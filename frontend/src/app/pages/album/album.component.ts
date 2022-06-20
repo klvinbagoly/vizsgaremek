@@ -61,9 +61,9 @@ export class AlbumComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(response => {
-      setTimeout(() => {
+      this.albumInfoService.saveEvent.subscribe(() => {
         this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
-      }, 200)
+      })
     })
 
   }
@@ -78,9 +78,9 @@ export class AlbumComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(response => {
-      setTimeout(() => {
+      this.albumInfoService.saveEvent.subscribe(() => {
         this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
-      }, 200)
+      })
     })
   }
 

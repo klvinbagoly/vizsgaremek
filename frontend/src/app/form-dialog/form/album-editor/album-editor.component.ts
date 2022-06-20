@@ -154,9 +154,9 @@ export class AlbumEditorComponent implements OnInit {
       this.albumService.updateOneAlbum(this.data.top_id || '', this.album).subscribe(data => console.log(data))
       if (this.albumInfo._id === '') {
         delete this.albumInfo._id
-        this.albumInfoService.create(this.albumInfo).subscribe(data => console.log(data))
+        this.albumInfoService.create(this.albumInfo).subscribe(data => this.albumInfoService.saveEvent.next(null))
       } else {
-        this.albumInfoService.update(this.albumInfo).subscribe(data => console.log(data))
+        this.albumInfoService.update(this.albumInfo).subscribe(data => this.albumInfoService.saveEvent.next(null))
       }
     }
   }

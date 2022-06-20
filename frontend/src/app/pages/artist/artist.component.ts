@@ -7,6 +7,7 @@ import { TagEditorComponent } from 'src/app/form-dialog/form/tag-editor/tag-edit
 import { Album } from 'src/app/model/album';
 import { ArtistInfo } from 'src/app/model/artist-info';
 import { TagInfo } from 'src/app/model/tag-info';
+import { AlbumInfoService } from 'src/app/service/album-info.service';
 import { AlbumService } from 'src/app/service/album.service';
 import { ArtistInfoService } from 'src/app/service/artist-info.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -29,7 +30,8 @@ export class ArtistComponent implements OnInit {
     private albumService: AlbumService,
     private activeRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private auth: AuthService
+    private auth: AuthService,
+    private albumInfoService: AlbumInfoService
   ) { }
 
   ngOnInit(): void {
@@ -88,11 +90,11 @@ export class ArtistComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        setTimeout(() => {
+        this.albumInfoService.saveEvent.subscribe(() => {
           this.artistInfoService.getOneByName(this.artist?.name || '').subscribe(data => {
             this.artist = data
           })
-        }, 200)
+        })
       }
     })
   }
