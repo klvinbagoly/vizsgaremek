@@ -59,6 +59,13 @@ export class AlbumComponent implements OnInit {
         artist: album.artist
       }
     })
+
+    dialogRef.afterClosed().subscribe(response => {
+      setTimeout(() => {
+        this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
+      }, 200)
+    })
+
   }
 
   addTag() {
@@ -68,6 +75,12 @@ export class AlbumComponent implements OnInit {
         tag: new TagInfo(),
         new: true
       }
+    })
+
+    dialogRef.afterClosed().subscribe(response => {
+      setTimeout(() => {
+        this.activeRoute.params.subscribe(params => this.findAlbum(params['name']))
+      }, 200)
     })
   }
 

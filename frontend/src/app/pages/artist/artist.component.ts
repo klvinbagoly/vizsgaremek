@@ -88,10 +88,11 @@ export class ArtistComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        console.log(response)
-        this.artistInfoService.getOneByName(this.artist?.name || '').subscribe(data => {
-          this.artist = data
-        })
+        setTimeout(() => {
+          this.artistInfoService.getOneByName(this.artist?.name || '').subscribe(data => {
+            this.artist = data
+          })
+        }, 200)
       }
     })
   }

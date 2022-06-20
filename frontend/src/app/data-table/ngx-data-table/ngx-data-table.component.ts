@@ -107,11 +107,8 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
         const index = this.dataSource.data.findIndex(item => item._id === response._id)
-        console.log(this.dataSource.data[index])
-        this.dataSource.data[index] = { ...this.dataSource.data[index + 1] }
-        this.table.renderRows()
-        this.changeDetectorRef.detectChanges()
-        console.log(this.dataSource.data) // dataSource has changed, but no changes are made in the table.
+        this.dataSource.data[index] = { ...this.dataSource.data[index], ...response.formValue }
+        this.ngOnChanges()
       }
     })
   }
@@ -127,6 +124,7 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
         this.deleteEvent.emit(item._id)
       }
     })
+    this.ngOnChanges()
   }
 
   applyFilter(event: Event) {
