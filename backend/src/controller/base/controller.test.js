@@ -1,15 +1,10 @@
 const { mockRequest, mockResponse } = require('jest-mock-req-res')
-const httpErrors = require('http-errors')
 
 const baseService = require('./service')()
-// const baseServiceFactory = require('./service')
 const baseController = require('./controller')()
 const jestConfig = require('../../../jest.config')
 
 jest.mock('./service')
-
-// const baseService = baseServiceFactory()
-
 
 describe('base controller', () => {
   const nextFunction = jest.fn()
@@ -134,6 +129,7 @@ describe('base controller', () => {
 
   test('delete', () => {
     const ID = '1'
+    const DELETED = baseService.mockData.find(item => item._id === ID)
     const request = mockRequest({
       params: {
         id: ID
@@ -143,7 +139,7 @@ describe('base controller', () => {
     return baseController.delete(request, response, nextFunction)
       .then(() => {
         expect(baseService.delete).toHaveBeenCalledWith(ID)
-        expect(response.json).toHaveBeenCalled()
+        expect(response.json).toHaveBeenCalledWith(DELETED)
         expect(baseService.mockData.length).toBe(1)
       })
   })

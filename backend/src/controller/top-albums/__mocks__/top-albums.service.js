@@ -27,3 +27,5 @@ topAlbumsService.deleteOneAlbum = jest.fn((id, albumid) => {
   topAlbumsService.mockData[index].album.splice(albumIndex, 1)
   return Promise.resolve(topAlbumsService.mockData[index])
 })
+
+module.exports = topAlbumsService

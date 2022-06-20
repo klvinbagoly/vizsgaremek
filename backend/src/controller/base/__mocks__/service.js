@@ -4,7 +4,6 @@ const mockService = ({
   mockData: [],
   __setMockData(data) {
     mockService.mockData = data
-    console.log(mockService.mockData)
   },
   findAll: jest.fn(async function () {
     return mockService.mockData
@@ -26,7 +25,7 @@ const mockService = ({
   }),
   delete: jest.fn(async function (id) {
     const index = mockService.mockData.findIndex(item => item._id === id)
-    return mockService.mockData.splice(index, 1)
+    return mockService.mockData.splice(index, 1)[0]
   }),
   addTag: jest.fn(async function (id, tag) {
     const index = mockService.mockData.findIndex(item => item._id === id)
