@@ -53,7 +53,6 @@ exports.refresh = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
   const { refreshToken } = req.body
-  console.log(refreshTokenArray, refreshToken)
   // if (!refreshTokenArray.includes(refreshToken)) {
   //   return res.sendStatus(403)
   // }
