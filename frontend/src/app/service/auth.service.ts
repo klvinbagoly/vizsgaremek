@@ -45,7 +45,7 @@ export class AuthService {
     const refresh = sessionStorage.getItem('refresh')
     if (refresh) {
       this.lastRefreshToken.next(refresh)
-      setTimeout(() => this.refresh(), 60000)
+      setTimeout(() => this.refresh(), 1.78e6)
     }
   }
 
@@ -53,7 +53,7 @@ export class AuthService {
     return this.http.post<IAuthResponse>(this.loginUrl, user)
       .pipe(switchMap(response => {
         if (response.accessToken) {
-          setTimeout(() => this.refresh(), 60000)
+          setTimeout(() => this.refresh(), 1.78e6)
           this.lastUser.next(response.user)
           this.lastAccessToken.next(response.accessToken)
           this.lastRefreshToken.next(response.refreshToken)
@@ -92,7 +92,7 @@ export class AuthService {
   }
 
   refresh() {
-    setTimeout(() => this.refresh(), 60000)
+    setTimeout(() => this.refresh(), 1.78e6)
     const refreshToken = this.lastRefreshToken.getValue()
     this.http.post<{ accessToken: string }>(this.refreshUrl, { refreshToken })
       .subscribe({
