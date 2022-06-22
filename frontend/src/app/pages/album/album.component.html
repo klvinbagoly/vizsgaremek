@@ -54,7 +54,7 @@
 
   <div *ngIf="tracks">
     <div *ngIf="admin" class="p-3">
-      <button mat-raised-button color="accent">
+      <button mat-raised-button color="accent" (click)="addTrack()">
         <mat-icon>add</mat-icon>
         Add new track
       </button>
@@ -91,10 +91,10 @@
         <th mat-header-cell *matHeaderCellDef aria-label="row actions">Actions</th>
         <td mat-cell *matCellDef="let track">
           <div class="btn-group">
-            <button title="Edit" mat-raised-button color="primary" aria-label="edit" (click)="0">
+            <button title="Edit" mat-raised-button color="primary" aria-label="edit" (click)="updateTrack(track)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button title="Delete" mat-raised-button color="warn" aria-label="delete" (click)="0">
+            <button title="Delete" mat-raised-button color="warn" aria-label="delete" (click)="deleteTrack(track)">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </div>

@@ -1,0 +1,12 @@
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div *ngFor="let question of questions">
+      <app-form-input [form]="form" [question]="question"></app-form-input>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button [disabled]="!form.valid" mat-raised-button [mat-dialog-close]="{ formValue: form.value, _id: data.track._id }"
+    color="primary" (click)="saveTrack(form)">Save Changes</button>
+</mat-dialog-actions>

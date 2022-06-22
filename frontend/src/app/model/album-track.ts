@@ -1,6 +1,7 @@
 import { AlbumArtist } from "./album";
 
 export class AlbumTrack {
+  _id?: string = ''
   streamable: Streamable = new Streamable();
   duration: number = 0;
   url: string = '';

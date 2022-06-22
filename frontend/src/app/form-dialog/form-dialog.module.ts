@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { TrackEditorComponent } from './form/track-editor/track-editor.component';
 
 
 
@@ -22,7 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
     ArtistEditorComponent,
     AlbumEditorComponent,
     TagEditorComponent,
-    FormInputComponent
+    FormInputComponent,
+    TrackEditorComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
     ArtistEditorComponent,
     AlbumEditorComponent,
     TagEditorComponent,
+    TrackEditorComponent
   ]
 })
 export class FormDialogModule { }
