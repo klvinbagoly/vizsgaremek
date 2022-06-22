@@ -1,5 +1,3 @@
-// To run all tests, turn off authentication for all paths in server.js, rows 41-45.
-// Sometimes tests may break due to MongoDB Server error.
 require('dotenv').config()
 
 const config = require('config')
