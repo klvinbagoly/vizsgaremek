@@ -12,6 +12,7 @@ const ArtistInfoModel = require('./models/artistInfo.model')
 const TagModel = require('./models/tag.model')
 const UserModel = require('./models/user.model')
 let token
+let user_exists = false
 
 beforeEach(done => {
   const { username, password, host } = config.get('database')
@@ -21,19 +22,21 @@ beforeEach(done => {
   })
     .then(async () => {
       const user = new UserModel({ "name": "Kristin Jzak", "email": "kjzak1@chronoengine.com", "password": "pass123", "role": 3 })
-      // await user.save().then(() => console.log('User created')).catch(err => console.log(err))
-      // return supertest(app)
-      //   .post('/login')
-      //   .set('Content-Type', 'application/json')
-      //   .set('Accept', 'application/json')
-      //   .send(user)
-      //   .expect(200)
-      //   .then((response) => {
-      //     console.log(response.body)
-      //     if (err) return done()
-      //     token = response.body.accessToken
-      //     done()
-      //   })
+      if (!user_exists) await user.save().then(() => console.log('User created')).catch(err => console.log(err))
+      user_exists = true
+      console.log(user)
+      return supertest(app)
+        .post('/login')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .send({ "email": "kjzak1@chronoengine.com", "password": "pass123" })
+        .expect(200)
+        .then((response) => {
+          console.log(response.body)
+          if (err) return done()
+          token = response.body.accessToken
+          done()
+        })
       done()
     })
     .catch(err => {
