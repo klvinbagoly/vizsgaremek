@@ -801,6 +801,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /albumInfo/add-track/{id}:
+    patch:
+      description: Adds a new track to the album with specified id
+      security:
+        - bearerAuth: []
+      tags:
+        - AlbumInfo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '200':
+          description: Track added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /albumInfo/update-track/{id}:
+    patch:
+      description: Updates a track on the album with specified id
+      security:
+        - bearerAuth: []
+      tags:
+        - AlbumInfo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '200':
+          description: Track updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumInfo'
+        '501':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /tags:
     get:
       description: Returns a list of description tags or music genres
@@ -1269,6 +1333,7 @@ components:
             track:
               type: array
               items:
+                $ref: '#/components/schemas/Album'
                 type: object
                 properties:
                   streamable:
@@ -1324,6 +1389,34 @@ components:
             summary:
               type: string
             content:
+              type: string
+    Track:
+      type: object
+      properties:
+        streamable:
+          type: object
+          properties:
+            fulltrack:
+              type: string
+        duration:
+          type: number
+        url:
+          type: string
+        name:
+          type: string
+        '@attr':
+          type: object
+          properties:
+            rank:
+              type: number
+        artist:
+          type: object
+          properties:
+            url:
+              type: string
+            name:
+              type: string
+            mbid:
               type: string
     Error:
       type: object
