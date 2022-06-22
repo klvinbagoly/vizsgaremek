@@ -36,7 +36,7 @@ const AlbumInfoSchema = mongoose.Schema({
         url: String,
         name: String,
         '@attr': {
-          rank: String
+          rank: Number
         },
         artist: {
           url: String,
