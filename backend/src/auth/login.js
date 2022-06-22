@@ -5,7 +5,6 @@ const refreshTokenArray = []
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body
-  console.log(email)
   const user = await User.findOne({ email })
   if (!user) return res.sendStatus(404)
 
