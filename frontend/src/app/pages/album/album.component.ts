@@ -92,7 +92,7 @@ export class AlbumComponent implements OnInit {
         track: new AlbumTrack(),
         album: this.album,
         new: true,
-        rank: this.tracks ? Number(this.tracks[this.tracks?.length - 1]['@attr'].rank) + 1 : 1
+        rank: this.tracks?.length ? Number(this.tracks[this.tracks?.length - 1]['@attr'].rank) + 1 : 1
       }
     })
     dialogRef.afterClosed().subscribe(response => {
