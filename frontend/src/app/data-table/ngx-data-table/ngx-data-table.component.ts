@@ -9,6 +9,7 @@ import { AlbumEditorComponent } from 'src/app/form-dialog/form/album-editor/albu
 import { ArtistEditorComponent } from 'src/app/form-dialog/form/artist-editor/artist-editor.component';
 import { Album } from 'src/app/model/album';
 import { Artist } from 'src/app/model/artist';
+import { SortPipe } from 'src/app/pipe/sort.pipe';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ConfigService, INgxTableColumn } from 'src/app/service/config.service';
@@ -130,6 +131,16 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
+  }
+
+  sortDir: number = -1
+
+  sortRows(key: string, type: string) {
+    this.sortDir = - this.sortDir
+    const sorter = new SortPipe()
+    let keys = type === 'array' ? ['image', '0', 'url'] : type === 'artist' ? ['artist', 'name'] : [key]
+    this.dataArray = sorter.transform(this.dataArray, this.sortDir, ...keys)
+    this.generateTable(this.dataArray)
   }
 
   ngOnDestroy(): void {
