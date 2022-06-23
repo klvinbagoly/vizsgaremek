@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { AlbumInfo } from 'src/app/model/album-info';
 import { InputQuestion } from '../model/input-question';
 import { TextareaQuestion } from '../model/textarea-question';
@@ -31,7 +32,10 @@ export class AlbumInfoQuestionService {
       cols: 100,
       value: album.wiki?.content || '',
       key: 'description',
-      label: 'Description'
+      label: 'Description',
+      validator: [Validators.pattern(/[ A-Űa-ű0-9,;$\-\.!?+'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/)],
+      errorMessage: 'The wiki of the album can contain at most 60000 characters. That\'s an awful lot!',
+      pattern: /[ A-Űa-ű0-9,;$\-\.!?+\'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/
     }
 
     return [listeners, description, {

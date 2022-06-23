@@ -6,12 +6,8 @@
     <select class="form-control" *ngSwitchCase="'select'" [id]="question.key" [formControlName]="question.key">
       <option *ngFor="let option of question['options']" [value]="option.key">{{option.value}}</option>
     </select>
-    <textarea
-     *ngSwitchCase="'textarea'"
-     [formControlName]="question.key" 
-     id="question.key" 
-     [cols]="question['cols']" 
-     [rows]="question['rows']">{{ question.value }}</textarea>
+    <textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" id="question.key" [cols]="question['cols']"
+      [rows]="question['rows']">{{ question.value }}</textarea>
   </div>
-  <div class="error-message" *ngIf="!IsValid">{{question.label | titlecase}} is required.</div>
+  <div class="error-message" *ngIf="!IsValid()">{{question.errorMessage}}</div>
 </div>

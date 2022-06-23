@@ -18,7 +18,8 @@ export class TagQuestionService {
       label: 'Tag name:',
       type: 'text',
       controlType: 'input',
-      validator: [Validators.required]
+      validator: [Validators.required, Validators.pattern(/^[ A-Za-z0-9\-]{1,30}$/)],
+      errorMessage: 'The tagname must be between 1 and 30 characters.'
     }
 
     const url: InputQuestion = {
@@ -26,7 +27,9 @@ export class TagQuestionService {
       key: 'url',
       label: 'Url:',
       type: 'text',
-      controlType: 'input'
+      controlType: 'input',
+      validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+      errorMessage: 'The home page of the tag must be a valid url.'
     }
 
     const total: InputQuestion = {
@@ -51,7 +54,10 @@ export class TagQuestionService {
       cols: 100,
       value: tag.wiki?.content || '',
       key: 'description',
-      label: 'Description'
+      label: 'Description',
+      validator: [Validators.pattern(/[ A-Űa-ű0-9,;$\-\.!?+'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/)],
+      errorMessage: 'The wiki of the tag can contain at most 60000 characters. That\'s an awful lot!',
+      pattern: /[ A-Űa-ű0-9,;$\-\.!?+\'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/
     }
 
     return [name, url, total, reach, description]

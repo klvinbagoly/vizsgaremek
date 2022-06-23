@@ -22,8 +22,8 @@ export class ArtistInfoQuestionService {
       key: 'ontour',
       label: 'On tour',
       options: [
-        { key: '0', value: '0' },
-        { key: '1', value: '1' },
+        { key: '0', value: 'No' },
+        { key: '1', value: 'Yes' },
       ]
     }
 
@@ -40,7 +40,10 @@ export class ArtistInfoQuestionService {
       cols: 100,
       value: artist.bio.content,
       key: 'bio',
-      label: 'Bio'
+      label: 'Bio',
+      validator: [Validators.pattern(/[ A-Űa-ű0-9,;$\-\.!?+'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/)],
+      errorMessage: 'The biography of the artist can contain at most 60000 characters. That\'s an awful lot!',
+      pattern: /[ A-Űa-ű0-9,;$\-\.!?+\'"’“,”&@#\(\)<>\/=:…*—–Ǝ]{0,60000}/
     }
 
     return [
@@ -61,14 +64,17 @@ export class ArtistInfoQuestionService {
         label: 'Artist name:',
         type: 'text',
         controlType: 'input',
-        validator: [Validators.required]
+        validator: [Validators.required, Validators.pattern(/^[ A-Űa-ű0-9,$\-\.!?+'"&@#]{1,30}$/)],
+        errorMessage: 'The name of the artist must be between 1 and 30 characters.'
       },
       {
         value: artist?.url || '',
         key: 'url',
         label: 'Url:',
         type: 'text',
-        controlType: 'input'
+        controlType: 'input',
+        validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+        errorMessage: 'The home page of the artist must be a valid url.'
       },
       {
         key: 'image',
@@ -86,14 +92,17 @@ export class ArtistInfoQuestionService {
         label: 'Tag name:',
         type: 'text',
         controlType: 'input',
-        validator: [Validators.required]
+        validator: [Validators.required, Validators.pattern(/[ A-Za-z0-9\-]{1,30}/)],
+        errorMessage: 'The tagname must be between 1 and 30 characters.'
       },
       {
         value: tag?.url || '',
         key: 'url',
         label: 'Url:',
         type: 'text',
-        controlType: 'input'
+        controlType: 'input',
+        validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+        errorMessage: 'The home page of the tag must be a valid url.'
       }
     ])
   }

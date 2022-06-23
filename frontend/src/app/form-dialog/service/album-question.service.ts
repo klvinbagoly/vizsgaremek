@@ -21,7 +21,8 @@ export class AlbumQuestionService {
       label: 'Album title:',
       type: 'text',
       controlType: 'input',
-      validator: [Validators.required]
+      validator: [Validators.required, Validators.pattern(/^[ A-Űa-ű0-9,$\-\.!?+'"&@#()"]{1,100}$/)],
+      errorMessage: 'The album title must be between 1 and 100 characters.'
     }
 
     const url: InputQuestion = {
@@ -29,7 +30,9 @@ export class AlbumQuestionService {
       key: 'url',
       label: 'Url:',
       type: 'text',
-      controlType: 'input'
+      controlType: 'input',
+      validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+      errorMessage: 'The home page of the album must be a valid url.'
     }
 
     const images = album?.image || [{ url: '', size: '' }]
@@ -49,7 +52,8 @@ export class AlbumQuestionService {
       value: album?.mbid || '',
       key: 'mbid',
       label: 'Music Brainz Identifier',
-      validator: [Validators.pattern(/^[0-9a-z\-]{36}$/)]
+      validator: [Validators.pattern(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/)],
+      errorMessage: 'Must be a 36 character hexadecimal number in the format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
     }
 
     return [

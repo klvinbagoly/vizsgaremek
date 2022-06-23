@@ -16,8 +16,12 @@ export class FormInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get IsValid() {
-    return true
+  IsValid() {
+    const control = this.form.controls[this.question.key]
+    const pattern = this.question.pattern
+    let valid = true
+    if (pattern) valid = pattern.test(this.form.value[this.question.key])
+    return (control.valid || control.untouched) && valid
   }
 
 }

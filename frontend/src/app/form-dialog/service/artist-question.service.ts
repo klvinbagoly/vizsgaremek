@@ -24,7 +24,8 @@ export class ArtistQuestionService {
       label: 'Artist name:',
       type: 'text',
       controlType: 'input',
-      validator: [Validators.required]
+      validator: [Validators.required, Validators.pattern(/^[ A-Űa-ű0-9,$\-\.!?+'"&@#]{1,30}$/)],
+      errorMessage: 'The name of the artist must be between 1 and 30 characters.'
     }
 
     const url: InputQuestion = {
@@ -32,7 +33,9 @@ export class ArtistQuestionService {
       key: 'url',
       label: 'Url:',
       type: 'text',
-      controlType: 'input'
+      controlType: 'input',
+      validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+      errorMessage: 'The home page of the artist must be a valid url.'
     }
 
     const images = artist?.image || [{ url: '', size: '' }]
@@ -41,8 +44,8 @@ export class ArtistQuestionService {
     const streamable: SelectQuestion = {
       controlType: 'select',
       options: [
-        { key: '0', value: '0' },
-        { key: '1', value: '1' },
+        { key: '0', value: 'No' },
+        { key: '1', value: 'Yes' },
       ],
       value: artist?.streamable || '',
       key: 'streamable',
@@ -68,7 +71,8 @@ export class ArtistQuestionService {
       value: artist?.mbid || '',
       key: 'mbid',
       label: 'Music Brainz Identifier',
-      validator: [Validators.pattern(/^[0-9a-z\-]{36}$/)]
+      validator: [Validators.pattern(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/)],
+      errorMessage: 'Must be a 36 character hexadecimal number in the format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
     }
 
     return [
@@ -86,7 +90,9 @@ export class ArtistQuestionService {
         key: 'url',
         label: 'Image url',
         type: 'text',
-        controlType: 'input'
+        controlType: 'input',
+        validator: [Validators.pattern(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)],
+        errorMessage: 'The image must come from a valid url.'
       },
       {
         value: image.size || '',

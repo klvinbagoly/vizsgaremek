@@ -8,6 +8,8 @@ export class Question<T> {
   required?: boolean;
   validator?: ValidatorFn[] | null;
   controlType!: string;
+  errorMessage?: string
+  pattern?: RegExp
 
   constructor(options: {
     [key: string]: any;
