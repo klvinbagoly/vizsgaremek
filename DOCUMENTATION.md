@@ -11,7 +11,7 @@
   ```sh
   git clone https://github.com/klvinbagoly/vizsgaremek.git
   ```
-  - Telepíteni kell az alkalmazás függőségeit:
+- Telepíteni kell az alkalmazás függőségeit:
   - Be kell lépni a vizsgaremek/backend mappába, és ki kell adni az `npm i` parancsot:
   ```sh
   cd vizsgaremek/backend
