@@ -86,3 +86,7 @@ Adminisztrációs rendszer legyen (sablon használható)
 - Rákeresés, szűrés lehetősége
 - Adatok rendezése mezők szerint
 - Regisztráció lehetősége
+
+## _Dokumentáció_
+
+[A dokumentáció itt érhető el.](https://github.com/klvinbagoly/vizsgaremek/blob/main/DOCUMENTATION.md)
