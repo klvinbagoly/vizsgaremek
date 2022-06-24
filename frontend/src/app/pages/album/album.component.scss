@@ -1,7 +1,7 @@
 @use '../../../assets/scss/colors' as *;
-table[mat-table] {
-  width: 100%;
-}
+@use '../../../assets/scss/pages';
+@use '../../../assets/scss/tables';
+
 
 a.artist-name {
   color: inherit;

@@ -39,6 +39,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { JwtHandlerInterceptor } from './service/jwt-handler.interceptor';
 import { AuthService } from './service/auth.service';
 import { ConfirmDeleteComponent } from './common/confirm-delete/confirm-delete.component';
+import { FooterComponent } from './common/footer/footer.component';
 registerLocaleData(localeHU)
 
 
@@ -58,6 +59,7 @@ registerLocaleData(localeHU)
     SortPipe,
     LoginComponent,
     ConfirmDeleteComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

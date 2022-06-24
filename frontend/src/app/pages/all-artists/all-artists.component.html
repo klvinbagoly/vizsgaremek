@@ -4,7 +4,11 @@
     Add new artist
   </button>
 </div>
-<h1 class="table-caption">All artists</h1>
+<h1 class="table-caption">
+  <img src="../../../assets/disk2.svg" height=100 alt="DiskHub Logo"><br>
+  All artists
+</h1>
 <div *ngIf="artists$ | async as list">
   <ngx-data-table [dataArray]="list" type="artist" (deleteEvent)="onDelete($event)"></ngx-data-table>
 </div>
+<app-footer link="https://www.last.fm/music/+recommended/artists" linkText="Check out recommended artists"></app-footer>

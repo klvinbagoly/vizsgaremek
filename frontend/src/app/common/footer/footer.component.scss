@@ -1,0 +1,14 @@
+@use '../../../assets/scss/colors' as *;
+
+footer {
+  background-color: $nav-color;
+}
+a {
+  color: crimson;
+  text-decoration: none;
+  display: inline-block;
+  &:hover {
+    color: red;
+    transform: scaleY(1.1);
+  }
+}

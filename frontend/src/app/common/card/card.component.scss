@@ -1,17 +1,61 @@
 @use '../../../assets/scss/colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 .home__card {
   height: 100%;
   margin: 20px 0;
+  background-color: $card-color;
+  color: $main-background;
+  border: 5px solid $nav-color;
+  border-radius: 1em;
+  transition: transform 0.5s ease-in;
+
+  & mat-card-title {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    padding: 1.5em 0;
+    // background-color: aquamarine;
+    // color: darkslategray;
+    // border-radius: 5%;
+  }
+
+  & mat-card-subtitle {
+    color: #fff;
+  }
 
   &:hover {
     cursor: pointer;
     box-shadow: 5px 5px 10px $table-border-color;
+    transform: scale(1.1);
+  }
+
+  & .tag {
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    border-radius: 2em;
+    margin: 0.5em;
+    border: 1px solid $button-color;
+    background-color: inherit;
+    color: inherit;
+    transition: all 0.5s ease-in-out;
+    
+    &:hover {
+      background-color: $button-color;
+      color: $nav-color;
+    }
   }
 
   & .footer {
     position: absolute;
     right: 30px;
     bottom: 30px;
+
+    & a {
+      color: $link-color-secondary;
+    }
+  }
+
+  & img {
+    width: 100%;
   }
 }
