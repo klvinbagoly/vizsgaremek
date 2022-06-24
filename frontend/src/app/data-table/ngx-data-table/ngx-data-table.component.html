@@ -16,9 +16,13 @@
 
       <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.type">
         <div *ngSwitchCase="'mbid'">
+          <mat-icon (click)="sortRows(col.key, col.type || '')">swap_vert</mat-icon>
           <a href="https://musicbrainz.org/doc/MusicBrainz_Identifier" target="_blank" class="mbid">Mbid</a>
         </div>
-        <div *ngSwitchDefault>{{ col.title }}</div>
+        <div *ngSwitchDefault>
+          <mat-icon *ngIf="col.type !== 'actions'" (click)="sortRows(col.key, col.type || '')">swap_vert</mat-icon>
+          {{ col.title }}
+        </div>
       </th>
 
       <td mat-cell *matCellDef="let item" [ngSwitch]="col.type"
