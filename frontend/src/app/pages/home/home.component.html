@@ -1,13 +1,14 @@
 <div class="container">
-  <h1 class="display-4">
-    <img src="../../../assets/disk2.svg" height=100 alt="">
-    Welcome to DiskHub, the greatest musical database!
+  <h1 class="display-4 text-center">
+    <img src="../../../assets/disk2.svg" height=100 alt="DiskHub Logo"><br>
+    Welcome to <span class="title">DiskHub</span>, the greatest musical database!
   </h1>
-  <h2>Most popular artists:</h2>
+  <h2 class="text-center">Most popular artists:</h2>
   <div class="row">
     <div *ngFor="let artist of artists$ | async | sort:-1:'stats':'listeners' | slice:0:12"
       class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-        <app-card [artist]="artist"></app-card>
+      <app-card [artist]="artist"></app-card>
     </div>
   </div>
 </div>
+<app-footer link="https://www.last.fm/music" linkText="Check out last.fm music"></app-footer>

@@ -1,0 +1,43 @@
+@use './colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
+h1, h2 {
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+h1, .table-caption {
+  font-family: 'Lobster Two', cursive;
+  font-size: 3em;
+
+  & .title {
+    font-size: 1.2em;
+    color: $link-color-secondary;
+  }
+}
+
+.table-caption {
+  margin: 2em;
+  text-align: center;
+}
+
+img {
+  margin: 1em 0;
+  height: 150px;
+  @media screen and (min-width: 500px) {
+    height: 200px;
+  }
+}
+
+button[mat-raised-button]:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+}
+
+a, .btn-link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-color;
+  }
+}

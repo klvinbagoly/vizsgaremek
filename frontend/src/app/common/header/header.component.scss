@@ -6,16 +6,26 @@ mat-toolbar.header {
   top: 0;
   z-index: 1000;
   width: 100vw;
+  background-color: lighten($nav-color, 10%);
 
-  & a.toolbar-link {
-    color: #fff;
+  & .toolbar-link {
     text-decoration: none;
-    padding: 10px;
     font-size: inherit;
-    
+
     &:hover {
-      background-color: $table-border-color;
-      border-radius: 5px;
+      color: inherit;
+    }
+    
+    
+  &--wrapper {
+    color: #fff;
+    padding: 10px;
+
+    &:hover {
+      background-color: darken($nav-color, 10%);
+      border-radius: 10px;
+      color: $name-hover-color;
     }
   }
  }
+}

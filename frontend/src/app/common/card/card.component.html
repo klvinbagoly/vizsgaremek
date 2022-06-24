@@ -1,12 +1,14 @@
 <mat-card class="home__card" [routerLink]="['/', 'artist', artist.name]">
+  <img *ngIf="artist.image[0].url" [src]="artist.image[0].url" [alt]="'Image of ' + artist.name">
   <mat-card-title>{{ artist.name }}</mat-card-title>
   <mat-card-subtitle>Playcount: {{ artist.stats.playcount | number }}</mat-card-subtitle>
   <mat-card-subtitle>Listeners: {{ artist.stats.listeners | number }}</mat-card-subtitle>
   <mat-card-content>
     <span *ngIf="artist.tags.tag" class="inline mb-3">
-      <span *ngFor="let tag of artist.tags.tag | slice:0:3" class="inline mat-body-strong">
+      <a [routerLink]="['/', 'tag', tag.name]" *ngFor="let tag of artist.tags.tag | slice:0:3"
+        class="tag inline mat-body-strong">
         {{ tag.name }}
-      </span>
+      </a>
     </span>
     <p class="long-info">{{ artist.bio.summary | textoverflow:100 }}</p>
   </mat-card-content>

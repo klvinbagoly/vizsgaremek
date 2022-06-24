@@ -1,5 +1,5 @@
 <div *ngIf="album; else noAlbum" class="container">
-
+  <img [src]="album.image[1].url || '../../../assets/disk2.svg'" [alt]="'Image of ' + album.name">
   <h1>
     <small class="text-muted">Album name:</small>
     {{ album.name }}
@@ -115,3 +115,4 @@
     </button>
   </div>
 </ng-template>
+<app-footer link="https://www.last.fm/music/+recommended/tracks" linkText="Check out recommended tracks"></app-footer>
