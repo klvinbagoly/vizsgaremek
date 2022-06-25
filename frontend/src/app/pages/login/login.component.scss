@@ -1,0 +1,43 @@
+@use '../../../assets/scss/colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
+
+.mat-card {
+  border-radius: 2em;
+  background-color: $nav-color;
+  color: $card-text;
+
+  &-title {
+    padding-top: .5em;
+    padding-bottom: 1em;
+    font-family: 'Lobster Two', cursive;
+    font-size: 3em;
+  }
+
+  & mat-form-field {
+    background-color: $main-background;
+    border-radius: 2em;
+    margin: 1em 0;
+    padding: 0.5em;
+    color: $nav-color;
+
+    & [mat-icon-button] {
+      color: $nav-color;
+    }
+  }
+
+  & [mat-stroked-button] {
+    background-color: $main-background;
+    color: $nav-color;
+    font-size: 1.3em;
+    padding: 0.2em;
+    transition: all 0.5s ease;
+
+    &:disabled {
+      color: $card-text;
+    }
+
+    &:hover:not(:disabled) {
+      transform: scale(1.1);
+    }
+  }
+}

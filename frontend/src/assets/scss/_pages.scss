@@ -1,11 +1,14 @@
 @use './colors' as *;
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
-h1, h2 {
+
+h1,
+h2 {
   font-weight: bold;
   margin: 1em 0;
 }
 
-h1, .table-caption {
+h1,
+.table-caption {
   font-family: 'Lobster Two', cursive;
   font-size: 3em;
 
@@ -23,6 +26,7 @@ h1, .table-caption {
 img {
   margin: 1em 0;
   height: 150px;
+
   @media screen and (min-width: 500px) {
     height: 200px;
   }
@@ -33,11 +37,24 @@ button[mat-raised-button]:hover {
   transition: all 0.5s ease-in-out;
 }
 
-a, .btn-link {
-  color: inherit;
+
+.btn-link {
+  padding: 0.25em 0.5em;
   text-decoration: none;
+  border-radius: 2em;
+  margin: 0.5em;
+  border: 1px solid $button-color;
+  background-color: $card-color;
+  color: $main-background;
+  transition: all 0.5s ease-in-out;
 
   &:hover {
-    color: $link-color;
+    background-color: $button-color;
+    color: $nav-color;
+    box-shadow: inset 0 2px 5px $link-color-secondary;
   }
+}
+
+sub a:not(:hover) {
+  color: inherit
 }

@@ -38,3 +38,8 @@ sub.small {
   line-height: 1.6em;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+.mat-dialog-container {
+  background-color: $main-background;
+  min-width: 50vw;
+}

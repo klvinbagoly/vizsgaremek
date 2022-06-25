@@ -4,11 +4,18 @@ footer {
   background-color: $nav-color;
 }
 a {
-  color: crimson;
+  color: $link-color-secondary;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.2s ease;
   &:hover {
-    color: red;
-    transform: scaleY(1.1);
+    color: lighten($link-color-secondary, 15%);
+    font-size: 1.1em;
   }
+}
+
+.btn-warning:hover {
+  transform: scale(1.1);
+  color: $link-color-secondary;
+  transition: all 0.2s ease;
 }

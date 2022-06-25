@@ -1,0 +1,28 @@
+@use './colors' as *;
+
+.error-message {
+  color: $link-color-secondary;
+  font-style: italic;
+  animation: fadein 0.5s ease-in-out forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+input:not(.input-group input), select:not(.input-group select), textarea {
+  border-radius: 1em;
+  margin: .5em 0;
+}
+
+[mat-raised-button], [mat-mini-fab] {
+  &:hover:not(:disabled) {
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+  }
+}

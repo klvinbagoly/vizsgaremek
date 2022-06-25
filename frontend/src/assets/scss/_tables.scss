@@ -3,9 +3,11 @@
 .inner-link {
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: darken($main-background, 20%);
+    background-color: lighten($nav-color, 20%);
+    color: lighten($main-background, 10%)
   }
 }
 
@@ -19,6 +21,12 @@ th.mat-header-cell.cdk-header-cell {
   font-size: 1rem;
   text-transform: capitalize;
   border-right: 1px solid $table-border-color;
+  color: $main-background;
+
+  &[ng-reflect-ng-switch]:hover {
+    color: darken($link-color-secondary, 10%);
+    cursor: pointer;
+  }
 }
 
 .mbid {
@@ -27,30 +35,59 @@ th.mat-header-cell.cdk-header-cell {
 
   &:hover {
     text-decoration: underline;
-    color: $link-color;
     cursor: help;
   }
 }
 
-.search-field {
-  margin-left: 3rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  background-color: #ffffff99;
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-field {
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    background-color: #ffffff99;
+    border: 2px solid $nav-color;
+    
+    &:first-child {
+      max-width: 10rem;
+    }
+
+    &:last-child {
+      width: 40rem;
+      max-width: 80%;
+    }
+  }
+}
+
+.table-responsive {
+  border: 3px solid $nav-color;
+  border-radius: 2rem;
+
 }
 
 [mat-table] {
   min-width: 100%;
   overflow-x: auto;
   background-color: lighten($main-background, 10%);
-
   
   & tr:nth-child(odd) {
     background-color: lighten($main-background, 5%);
   }
   & tr[mat-header-row] {
-    background-color: darken($main-background, 10%);
+    background-color: lighten($nav-color, 10%);
+    color: $main-background;
+  }
+}
+
+::-webkit-scrollbar {
+  height: 2px;
+
+  &-thumb {
+    background-color: $nav-color;
   }
 }
 

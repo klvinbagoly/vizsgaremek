@@ -29,7 +29,7 @@
   <h2>Similar artists:</h2>
   <ul class="inline">
     <li class="inline" *ngFor="let artist of artist.similar.artist">
-      <a [routerLink]="'/artist/' + artist.name">{{ artist.name }}</a>
+      <a class="btn-link" [routerLink]="'/artist/' + artist.name">{{ artist.name }}</a>
     </li>
   </ul>
 

@@ -1,26 +1,28 @@
-<mat-form-field class="search-field">
-  <mat-label>Search by:</mat-label>
-  <mat-select [(ngModel)]="currentFilterKey">
-    <mat-option value="name">{{ type === 'artist' ? 'name' : 'title' }}</mat-option>
-    <mat-option value="mbid">mbid</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field class="search-field">
-  <mat-label>Search {{ type }}</mat-label>
-  <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search...">
-</mat-form-field>
+<div class="search">
+  <mat-form-field class="search-field">
+    <mat-label>Type of search:</mat-label>
+    <mat-select [(ngModel)]="currentFilterKey">
+      <mat-option value="name">{{ type === 'artist' ? 'name' : 'title' }}</mat-option>
+      <mat-option value="mbid">mbid</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="search-field">
+    <mat-label>Search {{ type }} by {{currentFilterKey }}</mat-label>
+    <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search...">
+  </mat-form-field>
+</div>
 
-<div class="table-responsive">
+<div class="table-responsive mx-md-3 mx-lg-4">
   <table mat-table [dataSource]="dataSource" class="table">
     <ng-container *ngFor="let col of columns" [ngSwitch]="col.type" [matColumnDef]="col.key">
 
-      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.type">
+      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.type" (click)="sortRows(col.key, col.type || '')">
         <div *ngSwitchCase="'mbid'">
-          <mat-icon (click)="sortRows(col.key, col.type || '')">swap_vert</mat-icon>
+          <mat-icon>swap_vert</mat-icon>
           <a href="https://musicbrainz.org/doc/MusicBrainz_Identifier" target="_blank" class="mbid">Mbid</a>
         </div>
         <div *ngSwitchDefault>
-          <mat-icon *ngIf="col.type !== 'actions'" (click)="sortRows(col.key, col.type || '')">swap_vert</mat-icon>
+          <mat-icon *ngIf="col.type !== 'actions'">swap_vert</mat-icon>
           {{ col.title }}
         </div>
       </th>
