@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +16,6 @@ import { NgxDataTableComponent } from './ngx-data-table/ngx-data-table.component
 import { DeepPipe } from './pipe/deep.pipe';
 import { TextoverflowPipe } from './pipe/textoverflow.pipe';
 import { LinkPipe } from './pipe/link.pipe';
-import { RouterModule } from '@angular/router';
 
 
 

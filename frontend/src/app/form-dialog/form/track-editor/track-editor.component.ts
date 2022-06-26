@@ -1,13 +1,13 @@
-import { AlbumInfoService } from 'src/app/service/album-info.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { AlbumTrack } from 'src/app/model/album-track';
 import { AlbumInfo } from 'src/app/model/album-info';
-import { FormGroup } from '@angular/forms';
 import { QuestionControlService } from '../../service/question-control.service';
 import { InputQuestion } from '../../model/input-question';
 import { TrackQuestionService } from '../../service/track-question.service';
 import { ArtistService } from 'src/app/service/artist.service';
+import { AlbumInfoService } from 'src/app/service/album-info.service';
 
 @Component({
   selector: 'app-track-editor',

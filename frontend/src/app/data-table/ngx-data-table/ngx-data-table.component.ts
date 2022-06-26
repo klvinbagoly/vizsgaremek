@@ -1,4 +1,3 @@
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,7 +27,6 @@ export class NgxDataTableComponent<T extends { _id: string, name: string }> impl
     private config: ConfigService,
     public dialog: MatDialog,
     private auth: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   @Input() type!: string // artist or album

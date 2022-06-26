@@ -51,7 +51,7 @@ export class ArtistComponent implements OnInit {
       if (data) {
         this.topAlbums = data.album
         this.topAlbumsId = data._id || ''
-      }
+      } else this.topAlbums = undefined
     })
   }
 

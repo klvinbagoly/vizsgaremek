@@ -9,18 +9,26 @@
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
 
 body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $main-background;
 }
 
 .inline {
-  @media screen and (min-width: 500px){
+  @media screen and (min-width: 500px) {
     display: inline-block;
+    margin-right: 20px;
   }
-  margin-right: 20px;
+
+  list-style: none;
+  margin-top: 10px;
+
 }
 
 .outer-link {

@@ -1,13 +1,13 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { TagInfo } from 'src/app/model/tag-info';
 import { ArtistInfo } from 'src/app/model/artist-info';
 import { AlbumInfo } from 'src/app/model/album-info';
 import { TagQuestionService } from '../../service/tag-question.service';
 import { QuestionControlService } from '../../service/question-control.service';
 import { TagService } from 'src/app/service/tag.service';
-import { FormGroup } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
 import { ArtistInfoService } from 'src/app/service/artist-info.service';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
 
@@ -60,7 +60,6 @@ export class TagEditorComponent implements OnInit {
 
   onSearch() {
     this.shownTags = this.tagList.filter(item => item.includes(this.search))
-    console.log(this.shownTags)
   }
 
   onSelect(event: MatSelectChange) {
@@ -75,15 +74,14 @@ export class TagEditorComponent implements OnInit {
     this.tagInfo.wiki.content = this.form.value.description
     this.tagInfo.wiki.published = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' }).format(new Date())
 
-    console.log(this.tagInfo)
 
     if (this.tagInfo._id === '') delete this.tagInfo._id
 
     if (this.data.new) {
-      this.tagService.create(this.tagInfo).subscribe(data => console.log(data))
+      this.tagService.create(this.tagInfo).subscribe(data => null)
       this.addTag()
     } else {
-      this.tagService.update(this.tagInfo).subscribe(data => console.log(data))
+      this.tagService.update(this.tagInfo).subscribe(data => null)
     }
   }
 

@@ -1,14 +1,13 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlbumInfo } from 'src/app/model/album-info';
 import { Album } from 'src/app/model/album';
 import { AlbumService } from 'src/app/service/album.service';
 import { AlbumInfoService } from 'src/app/service/album-info.service';
-import { ArtistInfo } from 'src/app/model/artist-info';
 import { AlbumQuestionService } from '../../service/album-question.service';
 import { AlbumInfoQuestionService } from '../../service/album-info-question.service';
 import { QuestionControlService } from '../../service/question-control.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ArtistQuestionService } from '../../service/artist-question.service';
 import { ArtistInfoQuestionService } from '../../service/artist-info-question.service';
 import { Wiki } from 'src/app/model/tag-info';
@@ -146,12 +145,11 @@ export class AlbumEditorComponent implements OnInit {
       delete this.albumInfo._id
     }
 
-    console.log(this.album, this.albumInfo)
     if (this.data.new) {
-      this.albumService.addOneAlbum(this.data.top_id || '', this.album).subscribe(data => console.log(data))
-      this.albumInfoService.create(this.albumInfo).subscribe(data => console.log(data))
+      this.albumService.addOneAlbum(this.data.top_id || '', this.album).subscribe(data => null)
+      this.albumInfoService.create(this.albumInfo).subscribe(data => null)
     } else {
-      this.albumService.updateOneAlbum(this.data.top_id || '', this.album).subscribe(data => console.log(data))
+      this.albumService.updateOneAlbum(this.data.top_id || '', this.album).subscribe(data => null)
       if (this.albumInfo._id === '') {
         delete this.albumInfo._id
         this.albumInfoService.create(this.albumInfo).subscribe(data => this.albumInfoService.saveEvent.next(null))

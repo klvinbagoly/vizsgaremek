@@ -14,9 +14,6 @@
     text-align: center;
     font-family: 'Pacifico', cursive;
     padding: 1.5em 0;
-    // background-color: aquamarine;
-    // color: darkslategray;
-    // border-radius: 5%;
   }
 
   & mat-card-subtitle {
@@ -38,7 +35,7 @@
     background-color: inherit;
     color: inherit;
     transition: all 0.5s ease-in-out;
-    
+
     &:hover {
       background-color: $button-color;
       color: $nav-color;

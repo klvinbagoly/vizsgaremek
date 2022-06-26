@@ -1,13 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Artist } from 'src/app/model/artist';
 import { ArtistInfo } from 'src/app/model/artist-info';
 import { ArtistInfoService } from 'src/app/service/artist-info.service';
 import { ArtistService } from 'src/app/service/artist.service';
-import { InputQuestion } from '../../model/input-question';
-import { Question } from '../../model/question';
-import { SelectQuestion } from '../../model/select-question';
 import { ArtistInfoQuestionService } from '../../service/artist-info-question.service';
 import { ArtistQuestionService } from '../../service/artist-question.service';
 import { QuestionControlService } from '../../service/question-control.service';
@@ -164,11 +161,11 @@ export class ArtistEditorComponent implements OnInit {
 
 
     if (this.data.new) {
-      this.artistService.create(this.artist).subscribe(data => console.log(data))
-      this.artistInfoService.create(this.artistInfo).subscribe(data => console.log(data))
+      this.artistService.create(this.artist).subscribe(data => null)
+      this.artistInfoService.create(this.artistInfo).subscribe(data => null)
     } else {
-      this.artistService.update(this.artist).subscribe(data => console.log(data))
-      this.artistInfoService.update(this.artistInfo).subscribe(data => console.log(data))
+      this.artistService.update(this.artist).subscribe(data => null)
+      this.artistInfoService.update(this.artistInfo).subscribe(data => null)
     }
   }
 

@@ -66,7 +66,7 @@
 <ng-template #noAlbums>
   <h1>Sorry, there are no albums with this artist in our database.</h1>
   <div *ngIf="admin" class="p-3">
-    <button mat-raised-button color="accent">
+    <button *ngIf="artist" (click)="addAlbum()" mat-raised-button color="accent">
       <mat-icon>add</mat-icon>
       Add album for this artist
     </button>

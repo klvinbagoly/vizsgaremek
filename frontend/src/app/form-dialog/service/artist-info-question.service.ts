@@ -1,9 +1,8 @@
-import { Question } from './../model/question';
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ArtistInfo } from 'src/app/model/artist-info';
 import { SelectQuestion } from '../model/select-question';
 import { ArtistQuestionService } from './artist-question.service';
-import { Validators } from '@angular/forms';
 import { TextareaQuestion } from '../model/textarea-question';
 
 @Injectable({

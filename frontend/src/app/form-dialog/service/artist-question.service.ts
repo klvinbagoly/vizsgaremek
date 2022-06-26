@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Artist } from 'src/app/model/artist';
-import { Image } from 'src/app/model/image';
 import { InputQuestion } from '../model/input-question';
 import { Question } from '../model/question';
 import { SelectQuestion } from '../model/select-question';
-import { QuestionControlService } from './question-control.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +11,6 @@ import { QuestionControlService } from './question-control.service';
 export class ArtistQuestionService {
 
   constructor(
-    private qService: QuestionControlService
   ) { }
 
 

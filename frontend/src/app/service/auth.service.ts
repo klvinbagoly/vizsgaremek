@@ -73,7 +73,6 @@ export class AuthService {
     const refreshToken = this.lastRefreshToken.getValue()
     this.http.post(this.logoutUrl, { refreshToken }).subscribe({
       next: response => {
-        console.log(response)
         this.lastUser.next(null)
         this.lastAccessToken.next('')
         this.lastRefreshToken.next('')
