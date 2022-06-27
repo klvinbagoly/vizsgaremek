@@ -16,7 +16,8 @@
   <table mat-table [dataSource]="dataSource" class="table">
     <ng-container *ngFor="let col of columns" [ngSwitch]="col.type" [matColumnDef]="col.key">
 
-      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.type" (click)="sortRows(col.key, col.type || '')">
+      <th class="th-sort" mat-header-cell *matHeaderCellDef [ngSwitch]="col.type"
+        (click)="sortRows(col.key, col.type || '')">
         <div *ngSwitchCase="'mbid'">
           <mat-icon>swap_vert</mat-icon>
           <a href="https://musicbrainz.org/doc/MusicBrainz_Identifier" target="_blank" class="mbid">Mbid</a>

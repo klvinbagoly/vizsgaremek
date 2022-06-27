@@ -23,7 +23,7 @@ th.mat-header-cell.cdk-header-cell {
   border-right: 1px solid $table-border-color;
   color: $main-background;
 
-  &[ng-reflect-ng-switch]:hover {
+  &.th-sort:hover {
     color: darken($link-color-secondary, 10%);
     cursor: pointer;
   }
@@ -51,7 +51,7 @@ th.mat-header-cell.cdk-header-cell {
     border-radius: 2rem;
     background-color: #ffffff99;
     border: 2px solid $nav-color;
-    
+
     &:first-child {
       max-width: 10rem;
     }
@@ -73,10 +73,11 @@ th.mat-header-cell.cdk-header-cell {
   min-width: 100%;
   overflow-x: auto;
   background-color: lighten($main-background, 10%);
-  
+
   & tr:nth-child(odd) {
     background-color: lighten($main-background, 5%);
   }
+
   & tr[mat-header-row] {
     background-color: lighten($nav-color, 10%);
     color: $main-background;
