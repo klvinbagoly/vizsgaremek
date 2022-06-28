@@ -2,8 +2,13 @@
   <h2>Album Info</h2>
   <label for="name">Title</label>
   <input name="name" type="text" class="form-control" [(ngModel)]="name" required
+    pattern="^[ A-Űa-ű0-9,$\-\.!?+'&@#]{1,100}$">
+  <div *ngIf="!isNameValid()" class="error-message">The title of the album must be between 1 and 100 characters.</div>
+  <label for="artist">Artist</label>
+  <input name="artist" type="text" class="form-control" [(ngModel)]="artist" required
     pattern="^[ A-Űa-ű0-9,$\-\.!?+'&@#]{1,30}$">
-  <div *ngIf="!isNameValid()" class="error-message">The title of the album must be between 1 and 30 characters.</div>
+  <div *ngIf="!isArtistValid()" class="error-message">The artist of the album must be between 1 and 30 characters.
+  </div>
   <form [formGroup]="formInfo">
     <app-form-input [form]="formInfo" [question]="questionsInfo[0]"></app-form-input>
     <app-form-input [form]="formInfo" [question]="questionsInfo[1]"></app-form-input>

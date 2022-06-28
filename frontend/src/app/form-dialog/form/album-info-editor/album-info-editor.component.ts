@@ -21,6 +21,7 @@ export class AlbumInfoEditorComponent implements OnInit {
   formTagsArray: Array<FormGroup> = []
 
   name: string = ''
+  artist: string = ''
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { albumInfo: AlbumInfo, new: boolean },
@@ -44,6 +45,7 @@ export class AlbumInfoEditorComponent implements OnInit {
     }
 
     this.name = this.data.albumInfo.name
+    this.artist = this.data.albumInfo.artist
   }
 
   addTag() {
@@ -60,13 +62,18 @@ export class AlbumInfoEditorComponent implements OnInit {
   }
 
   isNameValid() {
-    return /^[ A-Űa-ű0-9,$\-\.!?+"'&@#]{1,30}$/.test(this.name)
+    return /^[ A-Űa-ű0-9,$\-\.!?+"'&@#]{1,100}$/.test(this.name)
+  }
+
+  isArtistValid() {
+    return /^[ A-Űa-ű0-9,$\-\.!?+"'&@#]{1,30}$/.test(this.artist)
   }
 
   saveAlbum() {
     this.albumInfo = this.data.albumInfo
 
     this.albumInfo.name = this.name
+    this.albumInfo.artist = this.artist
     this.albumInfo.listeners = this.formInfo.value.listeners
     this.albumInfo.tags.tag = this.formTagsArray.map(formControl => formControl.value)
     this.albumInfo.wiki = this.albumInfo.wiki || new Wiki()
