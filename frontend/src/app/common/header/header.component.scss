@@ -15,17 +15,56 @@ mat-toolbar.header {
     &:hover {
       color: inherit;
     }
-    
-    
-  &--wrapper {
-    color: #fff;
-    padding: 10px;
 
-    &:hover {
-      background-color: darken($nav-color, 10%);
-      border-radius: 10px;
-      color: $name-hover-color;
+
+    &--wrapper {
+      color: #fff;
+      padding: 10px;
+
+      &:hover {
+        background-color: darken($nav-color, 10%);
+        border-radius: 10px;
+        color: $name-hover-color;
+      }
     }
   }
- }
+}
+
+.mat-expansion-panel {
+  background-color: lighten($nav-color, 10%);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+  color: #fff;
+
+  &-header-title {
+    flex-grow: 0;
+  }
+
+  & * {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  & .toolbar-link {
+    text-decoration: none;
+    font-size: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+
+
+    &--wrapper {
+      color: #fff;
+      padding: 10px;
+
+      &:hover {
+        background-color: darken($nav-color, 10%);
+        border-radius: 10px;
+        color: $name-hover-color;
+      }
+    }
+  }
 }

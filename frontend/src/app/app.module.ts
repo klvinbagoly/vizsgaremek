@@ -19,6 +19,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -47,6 +49,7 @@ import { AlbumInfoComponent } from './pages/album-info/album-info.component';
 import { TagInfoComponent } from './pages/tag-info/tag-info.component';
 import { LinkPipe } from './pipe/link.pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AllAlbumsComponent } from './pages/all-albums/all-albums.component';
 registerLocaleData(localeHU)
 
 
@@ -71,6 +74,7 @@ registerLocaleData(localeHU)
     AlbumInfoComponent,
     TagInfoComponent,
     LinkPipe,
+    AllAlbumsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ registerLocaleData(localeHU)
     FormDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   providers: [
     {

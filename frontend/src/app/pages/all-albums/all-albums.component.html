@@ -1,17 +1,12 @@
-<h1>Tag list - deeper information</h1>
+<h1>All albums</h1>
 
-<div *ngIf="admin" class="p-3">
-  <button mat-raised-button color="accent" (click)="addTag()">
-    <mat-icon>add</mat-icon>
-    Add new tagInfo
-  </button>
-</div>
 <div class="search">
   <mat-form-field class="search-field">
-    <mat-label>Search tag by name</mat-label>
+    <mat-label>Search album by title</mat-label>
     <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search...">
   </mat-form-field>
 </div>
+
 
 <div class="table-responsive mx-md-3 mx-lg-4">
   <table mat-table [dataSource]="dataSource" class="table">

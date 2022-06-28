@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllAlbumsComponent } from './pages/all-albums/all-albums.component';
 import { AlbumInfoComponent } from './pages/album-info/album-info.component';
 import { AlbumComponent } from './pages/album/album.component';
 import { AllArtistsComponent } from './pages/all-artists/all-artists.component';
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: 'tagInfo',
     component: TagInfoComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'all-albums',
+    component: AllAlbumsComponent,
     canActivate: [AuthGuardService]
   },
   {

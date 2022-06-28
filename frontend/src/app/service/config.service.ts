@@ -6,10 +6,37 @@ export interface INgxTableColumn {
   type?: string
 }
 
+export interface IMenuItem {
+  title: string,
+  link: string,
+  icon: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
+
+  mainMenu: IMenuItem[] = [
+    {
+      title: 'Home Page', link: '/', icon: 'home'
+    },
+    {
+      title: 'All artists', link: '/all-artists', icon: 'queue_music'
+    },
+    {
+      title: 'Artist info', link: '/artistInfo', icon: 'lyrics'
+    },
+    {
+      title: 'Album info', link: '/albumInfo', icon: 'album'
+    },
+    {
+      title: 'Tag info', link: '/tagInfo', icon: 'audio_file'
+    },
+    {
+      title: 'All albums', link: '/all-albums', icon: 'headphones'
+    },
+  ]
 
   artistColumns: INgxTableColumn[] = [
     {

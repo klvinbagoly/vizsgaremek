@@ -1,52 +1,12 @@
 <p>
-  <mat-toolbar class="justify-content-between header" color="primary">
+  <mat-toolbar class="justify-content-between header d-none d-xl-flex" color="primary">
     <div>
-      <span class="toolbar-link--wrapper">
-        <button routerLink="/" mat-icon-button class="toolbar-link" aria-label="Home page">
-          <mat-icon>home</mat-icon>
+      <span *ngFor="let item of mainMenu" class="toolbar-link--wrapper">
+        <button [routerLink]="item.link" mat-icon-button class="toolbar-link" [attr.aria-label]="item.title">
+          <mat-icon>{{ item.icon }}</mat-icon>
         </button>
-        <span class="d-none d-sm-inline">
-          <a mat-button class="toolbar-link" routerLink="/">Home Page</a>
-        </span>
-      </span>
-      <span class="toolbar-link--wrapper">
-        <button routerLink="/all-artists" mat-icon-button class="toolbar-link" aria-label="All artists">
-          <mat-icon>
-            queue_music
-          </mat-icon>
-        </button>
-        <span class="d-none d-sm-inline">
-          <a mat-button class="toolbar-link" routerLink="/all-artists">All artists</a>
-        </span>
-      </span>
-      <span class="toolbar-link--wrapper">
-        <button routerLink="/artistInfo" mat-icon-button class="toolbar-link" aria-label="Artist info">
-          <mat-icon>
-            lyrics
-          </mat-icon>
-        </button>
-        <span class="d-none d-sm-inline">
-          <a mat-button class="toolbar-link" routerLink="/artistInfo">Artist info</a>
-        </span>
-      </span>
-      <span class="toolbar-link--wrapper">
-        <button routerLink="/albumInfo" mat-icon-button class="toolbar-link" aria-label="Album info">
-          <mat-icon>
-            album
-          </mat-icon>
-        </button>
-        <span class="d-none d-sm-inline">
-          <a mat-button class="toolbar-link" routerLink="/albumInfo">Album info</a>
-        </span>
-      </span>
-      <span class="toolbar-link--wrapper">
-        <button routerLink="/tagInfo" mat-icon-button class="toolbar-link" aria-label="Tag info">
-          <mat-icon>
-            audio_file
-          </mat-icon>
-        </button>
-        <span class="d-none d-sm-inline">
-          <a mat-button class="toolbar-link" routerLink="/tagInfo">Tag info</a>
+        <span class="d-none d-md-inline">
+          <a mat-button class="toolbar-link" [routerLink]="item.link">{{ item.title }}</a>
         </span>
       </span>
     </div>
@@ -68,4 +28,40 @@
       </span>
     </div>
   </mat-toolbar>
+  <mat-accordion class="d-xl-none">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>menu</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          Main menu
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p class="toolbar-link--wrapper" *ngFor="let item of mainMenu">
+        <button [routerLink]="item.link" mat-icon-button class="toolbar-link" [attr.aria-label]="item.title">
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </button>
+        <span>
+          <a mat-button class="toolbar-link" [routerLink]="item.link">{{ item.title }}</a>
+        </span>
+      </p>
+      <div *ngIf="!(user | async)" class="toolbar-link--wrapper">
+        <button mat-icon-button aria-label="Login" routerLink="/login">
+          <mat-icon>person</mat-icon>
+        </button>
+        <span>
+          <a mat-button class="toolbar-link" routerLink="/login">Login</a>
+        </span>
+      </div>
+      <div *ngIf="user | async" class="toolbar-link--wrapper">
+        <button mat-icon-button aria-label="Logout" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+        <span>
+          <button mat-button class="toolbar-link" (click)="onLogout()">Logout</button>
+        </span>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </p>
