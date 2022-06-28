@@ -42,6 +42,11 @@ import { SortPipe } from './pipe/sort.pipe';
 
 import { JwtHandlerInterceptor } from './service/jwt-handler.interceptor';
 import { AuthService } from './service/auth.service';
+import { ArtistInfoComponent } from './pages/artist-info/artist-info.component';
+import { AlbumInfoComponent } from './pages/album-info/album-info.component';
+import { TagInfoComponent } from './pages/tag-info/tag-info.component';
+import { LinkPipe } from './pipe/link.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
 registerLocaleData(localeHU)
 
 
@@ -62,6 +67,10 @@ registerLocaleData(localeHU)
     LoginComponent,
     ConfirmDeleteComponent,
     FooterComponent,
+    ArtistInfoComponent,
+    AlbumInfoComponent,
+    TagInfoComponent,
+    LinkPipe,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +88,8 @@ registerLocaleData(localeHU)
     FormsModule,
     FormDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [
     {

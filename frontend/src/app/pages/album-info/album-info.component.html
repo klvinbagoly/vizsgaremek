@@ -1,0 +1,53 @@
+<h1>Album list - deeper information</h1>
+
+<div *ngIf="admin" class="p-3">
+  <button mat-raised-button color="accent" (click)="addAlbum()">
+    <mat-icon>add</mat-icon>
+    Add new albumInfo
+  </button>
+</div>
+
+<div class="table-responsive">
+  <div class="table-responsive mx-md-3 mx-lg-4">
+    <table mat-table [dataSource]="dataSource" class="table">
+      <ng-container *ngFor="let col of columns" [matColumnDef]="col.key">
+
+        <th class="th-sort" mat-header-cell *matHeaderCellDef [ngSwitch]="col.type"
+          (click)="sortRows(col.key, col.type || '')">
+          <div *ngSwitchCase="'mbid'">
+            <mat-icon>swap_vert</mat-icon>
+            <a href="https://musicbrainz.org/doc/MusicBrainz_Identifier" target="_blank" class="mbid">Mbid</a>
+          </div>
+          <div *ngSwitchDefault>
+            <mat-icon *ngIf="col.type !== 'actions'">swap_vert</mat-icon>
+            {{ col.title }}
+          </div>
+        </th>
+
+        <td mat-cell *matCellDef="let item" [ngSwitch]="col.type">
+          <div *ngSwitchCase="'number'">{{item[col.key] | number }}</div>
+          <div *ngSwitchCase="'outer-link'" [innerHTML]="item[col.key] | link"></div>
+          <div *ngSwitchCase="'artist'">{{ item[col.key]['name'] }}</div>
+          <div *ngSwitchCase="'boolean'" [textContent]="item[col.key] == '0' ? 'No': 'Yes'"></div>
+          <div *ngSwitchCase="'actions'">
+            <div *ngIf="admin; else noAdmin" class="btn-group">
+              <button title="Edit" mat-raised-button color="primary" aria-label="edit" (click)="onEdit(item)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button title="Delete" mat-raised-button color="warn" aria-label="delete" (click)="onDelete(item)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>
+            <ng-template #noAdmin>(only admins)</ng-template>
+          </div>
+          <div *ngSwitchDefault [title]="item[col.key] | deep">{{item[col.key] | deep | textoverflow:60 }}</div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<mat-paginator class="mat-elevation-z8" [pageSize]="10" [pageSizeOptions]="pageSizes" showFirstLastButtons>
+</mat-paginator>

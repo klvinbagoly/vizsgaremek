@@ -19,6 +19,36 @@
           <a mat-button class="toolbar-link" routerLink="/all-artists">All artists</a>
         </span>
       </span>
+      <span class="toolbar-link--wrapper">
+        <button routerLink="/artistInfo" mat-icon-button class="toolbar-link" aria-label="Artist info">
+          <mat-icon>
+            lyrics
+          </mat-icon>
+        </button>
+        <span class="d-none d-sm-inline">
+          <a mat-button class="toolbar-link" routerLink="/artistInfo">Artist info</a>
+        </span>
+      </span>
+      <span class="toolbar-link--wrapper">
+        <button routerLink="/albumInfo" mat-icon-button class="toolbar-link" aria-label="Album info">
+          <mat-icon>
+            album
+          </mat-icon>
+        </button>
+        <span class="d-none d-sm-inline">
+          <a mat-button class="toolbar-link" routerLink="/albumInfo">Album info</a>
+        </span>
+      </span>
+      <span class="toolbar-link--wrapper">
+        <button routerLink="/tagInfo" mat-icon-button class="toolbar-link" aria-label="Tag info">
+          <mat-icon>
+            audio_file
+          </mat-icon>
+        </button>
+        <span class="d-none d-sm-inline">
+          <a mat-button class="toolbar-link" routerLink="/tagInfo">Tag info</a>
+        </span>
+      </span>
     </div>
 
     <div *ngIf="!(user | async)" class="toolbar-link--wrapper">
