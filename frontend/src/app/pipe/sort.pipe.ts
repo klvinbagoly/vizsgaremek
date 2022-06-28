@@ -12,7 +12,13 @@ export class SortPipe implements PipeTransform {
   }
 
   findValue(obj: any, keys: string[]): any {
-    keys.forEach(key => obj = obj[key])
+    keys.forEach(key => {
+      if (obj.hasOwnProperty(key)) {
+        obj = obj[key]
+      } else {
+        obj = ''
+      }
+    })
     return obj
   }
 

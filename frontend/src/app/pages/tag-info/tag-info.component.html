@@ -6,6 +6,12 @@
     Add new tagInfo
   </button>
 </div>
+<div class="search">
+  <mat-form-field class="search-field">
+    <mat-label>Search tag by name</mat-label>
+    <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search...">
+  </mat-form-field>
+</div>
 <div class="table-responsive">
   <div class="table-responsive mx-md-3 mx-lg-4">
     <table mat-table [dataSource]="dataSource" class="table">

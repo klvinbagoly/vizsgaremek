@@ -48,6 +48,10 @@ export class TagInfoComponent implements OnInit {
       }
     })
 
+    this.dataSource.filterPredicate = (data: { [key: string]: any }, filter: string) => {
+      return String(data['name']).toLowerCase().includes(filter.toLowerCase())
+    }
+
     this.auth.lastUser.subscribe((user) => {
       if (user && user.role === 3) {
         this.admin = true
@@ -70,6 +74,11 @@ export class TagInfoComponent implements OnInit {
     let keys = type === 'array' ? ['image', '0', 'url'] : type === 'artist' ? ['artist', 'name'] : [key]
     this.dataArray = sorter.transform(this.dataArray, this.sortDir, ...keys)
     this.generateTable(this.dataArray)
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   onEdit(tag: TagInfo) {

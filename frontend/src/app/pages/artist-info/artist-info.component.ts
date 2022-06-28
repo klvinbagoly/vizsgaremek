@@ -45,6 +45,9 @@ export class ArtistInfoComponent implements OnInit {
         this.generateTable(this.dataArray)
       }
     })
+    this.dataSource.filterPredicate = (data: { [key: string]: any }, filter: string) => {
+      return String(data['name']).toLowerCase().includes(filter.toLowerCase())
+    }
 
     this.auth.lastUser.subscribe((user) => {
       if (user && user.role === 3) {
@@ -65,9 +68,14 @@ export class ArtistInfoComponent implements OnInit {
   sortRows(key: string, type: string) {
     this.sortDir = - this.sortDir
     const sorter = new SortPipe()
-    let keys = type === 'array' ? ['image', '0', 'url'] : type === 'artist' ? ['artist', 'name'] : [key]
+    let keys = key === 'tags' ? ['tags', 'tag', '0', 'name'] : key === 'bio' ? ['bio', 'summary'] : [key]
     this.dataArray = sorter.transform(this.dataArray, this.sortDir, ...keys)
     this.generateTable(this.dataArray)
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   onEdit(artist: ArtistInfo) {
